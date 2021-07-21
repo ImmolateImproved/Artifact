@@ -5,6 +5,7 @@ using Latios;
 using Unity.Collections;
 using Unity.Mathematics;
 using Unity.Transforms;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class UnitSelectionViewSystem : SubSystem
 {
@@ -26,58 +27,78 @@ public class UnitSelectionViewSystem : SubSystem
 
             }).Run();
 
-        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
-
-        var neighbors = new NativeArray<int2>(6, Allocator.Temp)
-        {
-            [0] = new int2(-1, 0),
-            [1] = new int2(-1, 1),
-            [2] = new int2(0, 1),
-            [3] = new int2(1, 0),
-            [4] = new int2(0, -1),
-            [5] = new int2(-1, -1)
-        };
-
-        var pathPrefab = sceneBlackboardEntity.GetComponentData<PathPrefab>().prefab;
-
-        var nodes = new NativeList<int2>(15, Allocator.Temp);
-
-        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
-                    .ForEach((in IndexInGrid indexInGrid) =>
-                    {
-                        for (int i = 0; i < neighbors.Length; i++)
-                        {
-                            for (int j = 1; j < 8; j++)
-                            {
-                                var neighborNode = GetNeightbor(indexInGrid.value, neighbors[i] * j);
-                                
-                                if (!grid.IndexInRange(neighborNode))
-                                    continue;
-
-                                nodes.Add(neighborNode);
-                            }
-                        }
-
-                    }).Run();
-
-        if (nodes.Length == 0)
-            return;
-
-        var tiles = EntityManager.Instantiate(pathPrefab, nodes.Length, Allocator.Temp);
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            var node = grid[nodes[i]];
-            var pos = new float3(node.x, 0.4f, node.y);
-
-            EntityManager.SetComponentData(tiles[i], new Translation { Value = pos });
-        }
+        CalculateMoveRange();
     }
 
-    private static int2 GetNeightbor(int2 currentNode, int2 neighborOffset)
+    private void CalculateMoveRange()
     {
-        //for hex grid, if we on odd row - change the sign of a neighborOffset
-        neighborOffset = math.select(neighborOffset, -neighborOffset, currentNode.y % 2 == 1);
+        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        return currentNode + neighborOffset;
+        var queue = new NativeQueue<int2>(Allocator.Temp);
+
+        var hashSet = default(NativeHashSet<int2>);
+
+        var neighbors = HexTileNeighbors.Neighbors;
+
+        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
+            .ForEach((Entity e) =>
+            {
+                hashSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e).moveRangeHashSet;
+
+            }).WithoutBurst().Run();
+
+        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
+            .ForEach((in IndexInGrid indexInGrid, in MoveRange moveRange) =>
+            {
+                hashSet.Clear();
+
+                queue.Enqueue(indexInGrid.value);
+                hashSet.Add(indexInGrid.value);
+
+                var currentRange = 0;
+
+                var range = HexTileNeighbors.CalculateTilesCount(moveRange.value, neighbors.Length);
+
+                while (queue.Count > 0)
+                {
+                    if (currentRange++ >= range)
+                        break;
+
+                    var node = queue.Dequeue();
+
+                    for (int i = 0; i < neighbors.Length; i++)
+                    {
+                        var neighborNode = HexTileNeighbors.GetNeightbor(node, neighbors[i]);
+
+                        if (!grid.IndexInRange(neighborNode) || hashSet.Contains(neighborNode))
+                            continue;
+
+                        queue.Enqueue(neighborNode);
+                        hashSet.Add(neighborNode);
+                    }
+                }
+
+            }).Run();
+
+        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
+            .ForEach((Entity e) =>
+            {
+                var nodes = hashSet.ToNativeArray(Allocator.Temp);
+
+                if (nodes.Length == 0)
+                    return;
+
+                var pathPrefab = sceneBlackboardEntity.GetComponentData<MoveRangePrefab>().prefab;
+
+                var tiles = EntityManager.Instantiate(pathPrefab, nodes.Length, Allocator.Temp);
+                for (int i = 0; i < tiles.Length; i++)
+                {
+                    var node = grid[nodes[i]];
+                    var pos = new float3(node.x, 0.4f, node.y);
+
+                    EntityManager.SetComponentData(tiles[i], new Translation { Value = pos });
+                }
+
+            }).WithStructuralChanges().Run();
     }
 }

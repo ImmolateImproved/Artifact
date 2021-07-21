@@ -42,6 +42,13 @@ public struct Grid : ICollectionComponent
         units = new NativeArray<Entity>(rows * columns, allocator);
     }
 
+    public JobHandle Dispose(JobHandle inputDeps)
+    {
+        return JobHandle.CombineDependencies(units.Dispose(inputDeps), nodePositions.Dispose(inputDeps));
+    }
+
+    public Type AssociatedComponentType => typeof(GridTag);
+
     public float2 this[int x, int y]
     {
         get => nodePositions[y * columns + x];
@@ -92,12 +99,5 @@ public struct Grid : ICollectionComponent
     public bool IndexInRange(int2 index)
     {
         return index.x >= 0 && index.x < columns && index.y >= 0 && index.y < rows;
-    }
-
-    public Type AssociatedComponentType => typeof(GridTag);
-
-    public JobHandle Dispose(JobHandle inputDeps)
-    {
-        return JobHandle.CombineDependencies(units.Dispose(inputDeps), nodePositions.Dispose(inputDeps));
     }
 }

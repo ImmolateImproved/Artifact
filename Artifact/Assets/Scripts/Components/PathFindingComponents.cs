@@ -1,6 +1,11 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 
+public struct MoveRangePrefab : IComponentData
+{
+    public Entity prefab;
+}
+
 public struct PathPrefab : IComponentData
 {
     public Entity prefab;

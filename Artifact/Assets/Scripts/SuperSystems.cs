@@ -26,6 +26,7 @@ namespace Dragons
         protected override void CreateSystems()
         {
             GetOrCreateAndAddSystem<BuildGridSystem>();
+            GetOrCreateAndAddSystem<UnitInitializationSystem>();
 
             GetOrCreateAndAddSystem<MouseHoverSystem>();
 
@@ -42,8 +43,8 @@ namespace Dragons
             GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
 
             GetOrCreateAndAddSystem<MouseHoverViewSystem>();
-            GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
             GetOrCreateAndAddSystem<PathfindingViewSystem>();
+            GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
         }
     }
 

@@ -49,15 +49,7 @@ public class PathfindingSystem : SubSystem
     public struct FindPathData
     {
         //neighbors for hex tile (even rows)
-        public static readonly int2[] neighbors =
-        {
-            new int2(-1, 0),
-            new int2(-1, 1),
-            new int2(0, 1),
-            new int2(1, 0),
-            new int2(0, -1),
-            new int2(-1, -1)
-        };
+        public readonly NativeArray<int2> neighbors;
 
         private readonly Grid grid;
 
@@ -80,6 +72,8 @@ public class PathfindingSystem : SubSystem
             pathTrack = new NativeHashMap<int2, int2>(64, Allocator.Persistent);
 
             openSet = new NativeMinHeap(grid.columns * grid.rows * 5, Allocator.Persistent);
+
+            neighbors = HexTileNeighbors.Neighbors;
         }
 
         public void Dispose()
@@ -122,7 +116,7 @@ public class PathfindingSystem : SubSystem
 
                 for (int i = 0; i < neighbors.Length; i++)
                 {
-                    var neighborIndex = GetNeightbor(currentNode, neighbors[i]);
+                    var neighborIndex = HexTileNeighbors.GetNeightbor(currentNode, neighbors[i]);
 
                     if (!grid.IndexInRange(neighborIndex))
                         continue;
@@ -166,14 +160,6 @@ public class PathfindingSystem : SubSystem
             {
                 path.RemoveAt(path.Length - 1);
             }
-        }
-
-        private int2 GetNeightbor(int2 currentNode, int2 neighborOffset)
-        {
-            //for hex grid, if we on odd row - change the sign of a neighborOffset
-            neighborOffset = math.select(neighborOffset, -neighborOffset, currentNode.y % 2 == 1);
-
-            return currentNode + neighborOffset;
         }
 
         private int GetDistance(int2 p0, int2 p1)

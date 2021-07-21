@@ -12,6 +12,7 @@ namespace Dragons
 
         public GameObject tilePrefab0;
         public GameObject pathPrefab;
+        public GameObject moveRangePrefab;
 
         public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
         {
@@ -23,12 +24,14 @@ namespace Dragons
             });
 
             dstManager.AddComponentData(entity, new PathPrefab { prefab = conversionSystem.GetPrimaryEntity(pathPrefab) });
+            dstManager.AddComponentData(entity, new MoveRangePrefab { prefab = conversionSystem.GetPrimaryEntity(moveRangePrefab) });
         }
 
         public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
         {
             referencedPrefabs.Add(tilePrefab0);
             referencedPrefabs.Add(pathPrefab);
+            referencedPrefabs.Add(moveRangePrefab);
         }
     }
 }

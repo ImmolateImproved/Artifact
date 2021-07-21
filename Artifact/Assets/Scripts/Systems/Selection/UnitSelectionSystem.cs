@@ -8,7 +8,7 @@ public class UnitSelectionSystem : SubSystem
 {
     private EntityQuery selectedQuery;
 
-    protected override void OnStartRunning()
+    protected override void OnCreate()
     {
         selectedQuery = GetEntityQuery(typeof(Selected));
     }

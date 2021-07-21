@@ -24,7 +24,13 @@ public class TargetSelectionSystem : SubSystem
         Entities.WithAll<Selected>()
             .ForEach((Entity e, ref PathRequestData pathRequest) =>
             {
-                pathRequest.target = clickedTileQuery.GetSingleton<IndexInGrid>().value;
+                var clickedTileIndex = clickedTileQuery.GetSingleton<IndexInGrid>().value;
+
+                var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e, true);
+                if (!moveRangeSet.moveRangeHashSet.Contains(clickedTileIndex))
+                    return;
+
+                pathRequest.target = clickedTileIndex;
 
                 EntityManager.AddComponent<ExecutionRequest>(selectedQuery);
                 ecb.RemoveComponent<ExecutionRequest>(selectedQuery);

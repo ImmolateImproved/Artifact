@@ -397,7 +397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.63
+      value: 4.92
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.69
+      value: 4.58
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -447,6 +447,10 @@ PrefabInstance:
       propertyPath: Value.z
       value: 0.145098
       objectReference: {fileID: 0}
+    - target: {fileID: 4851757422368061680, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: moveRange
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061683, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_Name
       value: Unit (1)
@@ -486,6 +490,7 @@ MonoBehaviour:
   gridWidth: 11
   tilePrefab0: {fileID: 5459842120788319182, guid: 61f06477d5b3da34bae6c7529e801b06, type: 3}
   pathPrefab: {fileID: 7469562289596992864, guid: d08b7079eaa180b4796584979acda044, type: 3}
+  moveRangePrefab: {fileID: 7469562289596992864, guid: 58c92eb0361abec49ab174192cf9b7dc, type: 3}
 --- !u!114 &1283734557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,9 +617,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4851757422368061680, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: moveRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061683, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_Name
       value: Unit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851757422368061683, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
