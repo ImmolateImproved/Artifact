@@ -27,3 +27,8 @@ public struct SelectionColors : IComponentData
     public Color hoveredColor;
     public Color selectedColor;
 }
+
+public struct CalculateMoveRange : IComponentData
+{
+    
+}
