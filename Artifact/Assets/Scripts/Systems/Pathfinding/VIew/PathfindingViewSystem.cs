@@ -13,7 +13,7 @@ public class PathfindingViewSystem : SubSystem
     {
         pathTileQuery = GetEntityQuery(typeof(PathTile));
     }
-    
+
     protected override void OnUpdate()
     {
         Entities.WithAll<ExecutionRequest>()
@@ -39,18 +39,12 @@ public class PathfindingViewSystem : SubSystem
 
             }).WithStructuralChanges().Run();
 
-        var destroyPath = false;
-
         Entities.WithAll<SelectedInternal>().WithNone<Selected>()
             .ForEach((Entity e) =>
             {
-                destroyPath = true;
+                EntityManager.DestroyEntity(pathTileQuery);
 
-            }).Run();
+            }).WithStructuralChanges().Run();
 
-        if (destroyPath)
-        {
-            EntityManager.DestroyEntity(pathTileQuery);
-        }
     }
 }

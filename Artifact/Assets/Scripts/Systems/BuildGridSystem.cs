@@ -28,37 +28,30 @@ public class BuildGridSystem : SubSystem
 
         EntityManager.RemoveComponent<GridConfiguration>(m_query);
 
-        var grid = new Grid(config.cellsPerRow, config.rows, Allocator.Persistent);
+        var grid = new Grid(config.columns, config.rows, Allocator.Persistent);
         sceneBlackboardEntity.AddCollectionComponent(grid);
 
         var icb = new InstantiateCommandBuffer<Translation, IndexInGrid>(Allocator.TempJob);
 
         new InitializeTiles
         {
-            gridConfig = config,
+            config = config,
             grid = grid,
             icb = icb.AsParallelWriter()
 
-        }.ScheduleParallel(config.cellsPerRow * config.rows, 32, default).Complete();
+        }.ScheduleParallel(config.columns * config.rows, 32, default).Complete();
 
-        var tileText = this.GetSingleton<TileText>();
-        if (tileText.showTileIndices)
-        {
-            var parent = new GameObject("Text").transform;
-
-            for (int index = 0; index < config.cellsPerRow * config.rows; index++)
-            {
-                int x = index % config.cellsPerRow;
-                int y = index / config.cellsPerRow;
-
-                var pos = grid[new int2(x, y)];
-                var text = GameObject.Instantiate(tileText.textPrefab, new float3(pos.x, 0.3f, pos.y), Quaternion.Euler(90, 0, 0), parent);
-                text.text = $"{x} {y}";
-            }
-        }
+        SpawnTileText(config, grid);
 
         icb.Playback(EntityManager);
         Dependency = icb.Dispose(default);
+
+        Entities.WithAll<TileTag>()
+            .ForEach((Entity entity, in IndexInGrid gridIndex) =>
+            {
+                grid.InitTile(gridIndex.value, entity);
+
+            }).Schedule();
 
         Entities.WithNone<TileTag>()
             .ForEach((Entity entity, ref Translation translation, in IndexInGrid gridIndex) =>
@@ -71,10 +64,29 @@ public class BuildGridSystem : SubSystem
             }).Schedule();
     }
 
+    private void SpawnTileText(GridConfiguration config, Grid grid)
+    {
+        var tileText = this.GetSingleton<TileText>();
+        if (tileText.showTileIndices)
+        {
+            var parent = new GameObject("Text").transform;
+
+            for (int index = 0; index < config.columns * config.rows; index++)
+            {
+                int x = index % config.columns;
+                int y = index / config.columns;
+
+                var pos = grid[new int2(x, y)];
+                var text = GameObject.Instantiate(tileText.textPrefab, new float3(pos.x, 0.3f, pos.y), Quaternion.Euler(90, 0, 0), parent);
+                text.text = $"{x} {y}";
+            }
+        }
+    }
+
     [BurstCompile]
     struct InitializeTiles : IJobFor
     {
-        public GridConfiguration gridConfig;
+        public GridConfiguration config;
 
         public Grid grid;
 
@@ -85,29 +97,29 @@ public class BuildGridSystem : SubSystem
 
         public void Execute(int index)
         {
-            int x = index % gridConfig.cellsPerRow;
-            int y = index / gridConfig.cellsPerRow;
+            int x = index % config.columns;
+            int y = index / config.columns;
 
             var gridPosition = new IndexInGrid
             {
                 value = new int2(x, y)
             };
 
-            float xPos = x * xOffset;
-            float yPos = y * zOffset;
+            float xPos = (x * xOffset) - (config.columns / 2);
+            float yPos = (y * zOffset) - (config.rows / 2);
 
             if (y % 2 == 1)
             {
                 xPos += xOffset / 2;
             }
+
             var translation = new Translation
             {
                 Value = new float3(xPos, 0f, yPos)
-
             };
 
-            icb.Add(gridConfig.tilePrefab, translation, gridPosition, index);
-            grid[new int2(x, y)] = new float2(xPos, yPos);
+            icb.Add(config.tilePrefab, translation, gridPosition, index);
+            grid[gridPosition.value] = new float2(xPos, yPos);
         }
     }
 }

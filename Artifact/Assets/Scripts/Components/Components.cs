@@ -17,6 +17,16 @@ public struct ExecutionRequest : IComponentData
 
 }
 
+public struct AttackTile : IComponentData
+{
+    
+}
+
+public struct MousePosition : IComponentData
+{
+    public float2 value;
+}
+
 public struct EntityColors : IComponentData
 {
     public Color defaultColor;

@@ -6,8 +6,7 @@ public struct Movinginternal : ISystemStateComponentData
 
 }
 
-
-public class EndMovementReactionSystem : SubSystem
+public class MovementReactionSystem : SubSystem
 {
     protected override void OnUpdate()
     {

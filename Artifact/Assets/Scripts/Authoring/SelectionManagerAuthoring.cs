@@ -12,6 +12,8 @@ public class SelectionManagerAuthoring : MonoBehaviour, IConvertGameObjectToEnti
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
+        dstManager.AddComponentData(entity, new MousePosition());
+
         var collisionFilter = new CollisionFilter
         {
             BelongsTo = belongsTo.Value,

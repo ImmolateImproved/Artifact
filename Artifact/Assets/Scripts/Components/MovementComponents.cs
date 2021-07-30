@@ -5,6 +5,11 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 
+public struct MoveRangeTile : IComponentData
+{
+    
+}
+
 public struct Moving : IComponentData
 {
     

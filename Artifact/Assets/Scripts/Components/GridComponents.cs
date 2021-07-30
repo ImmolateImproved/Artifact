@@ -8,7 +8,7 @@ using Unity.Mathematics;
 public struct GridConfiguration : IComponentData
 {
     public int rows;
-    public int cellsPerRow;
+    public int columns;
 
     public Entity tilePrefab;
 }
@@ -31,6 +31,9 @@ public struct Grid : ICollectionComponent
 
     private NativeArray<Entity> units;
 
+    [NativeDisableParallelForRestriction]
+    private NativeHashMap<int2, Entity> nodeToTile;
+
     public readonly int columns;
     public readonly int rows;
 
@@ -40,11 +43,12 @@ public struct Grid : ICollectionComponent
         this.rows = rows;
         nodePositions = new NativeArray<float2>(rows * columns, allocator);
         units = new NativeArray<Entity>(rows * columns, allocator);
+        nodeToTile = new NativeHashMap<int2, Entity>(rows * columns, allocator);
     }
 
     public JobHandle Dispose(JobHandle inputDeps)
     {
-        return JobHandle.CombineDependencies(units.Dispose(inputDeps), nodePositions.Dispose(inputDeps));
+        return JobHandle.CombineDependencies(units.Dispose(inputDeps), nodePositions.Dispose(inputDeps), nodeToTile.Dispose(inputDeps));
     }
 
     public Type AssociatedComponentType => typeof(GridTag);
@@ -61,6 +65,16 @@ public struct Grid : ICollectionComponent
         set => this[index.x, index.y] = value;
     }
 
+    public void InitTile(int2 nodeIndex, Entity tile)
+    {
+        nodeToTile.Add(nodeIndex, tile);
+    }
+
+    public Entity GetTile(int2 index)
+    {
+        return nodeToTile.TryGetValue(index, out var tile) ? tile : Entity.Null;
+    }
+
     public void SetUnit(int2 index, Entity unit)
     {
         units[From2DIndex(index)] = unit;
@@ -74,6 +88,11 @@ public struct Grid : ICollectionComponent
     public Entity GetUnit(int2 index)
     {
         return units[From2DIndex(index)];
+    }
+
+    public bool HasUnit(int2 index)
+    {
+        return GetUnit(index) != Entity.Null;
     }
 
     public bool IsWalkable(int2 index)

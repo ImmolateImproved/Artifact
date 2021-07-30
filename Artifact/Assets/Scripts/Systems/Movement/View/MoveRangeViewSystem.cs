@@ -3,12 +3,36 @@ using Latios;
 using Unity.Collections;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
+using Unity.Rendering;
 
 public class MoveRangeViewSystem : SubSystem
 {
+    private EntityQuery moveRangeTileQuery;
+    private EntityQuery calculateMoveRangeQuery;
+
+    protected override void OnCreate()
+    {
+        moveRangeTileQuery = GetEntityQuery(typeof(MoveRangeTile));
+    }
+
     protected override void OnUpdate()
     {
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
+
+        Entities.WithChangeFilter<Moving>()
+             .ForEach((Entity e) =>
+             {
+                 EntityManager.DestroyEntity(moveRangeTileQuery);
+
+             }).WithStructuralChanges().Run();
+
+        Entities.WithAll<SelectedInternal>().WithNone<Selected>()
+            .ForEach((Entity e) =>
+            {
+                EntityManager.DestroyEntity(moveRangeTileQuery);
+
+            }).WithStructuralChanges().Run();
 
         Entities.WithAll<Selected>().WithNone<SelectedInternal>()
             .ForEach((Entity e) =>
@@ -31,6 +55,9 @@ public class MoveRangeViewSystem : SubSystem
 
     private void CalculateMoveRange()
     {
+        if (calculateMoveRangeQuery.IsEmpty)
+            return;
+
         var moveRangeSet = default(NativeHashSet<int2>);
 
         Entities.WithAll<CalculateMoveRange>()
@@ -38,7 +65,7 @@ public class MoveRangeViewSystem : SubSystem
             {
                 moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e).moveRangeHashSet;
 
-            }).WithoutBurst().Run();
+            }).WithStoreEntityQueryInField(ref calculateMoveRangeQuery).WithoutBurst().Run();
 
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
@@ -85,12 +112,18 @@ public class MoveRangeViewSystem : SubSystem
             }).Run();
 
         Entities.WithAll<CalculateMoveRange>()
-            .ForEach((Entity e) =>
+            .ForEach((Entity e, in IndexInGrid indexInGrid) =>
             {
                 var nodes = moveRangeSet.ToNativeArray(Allocator.Temp);
 
                 if (nodes.Length == 0)
                     return;
+
+                //for (int i = 0; i < neighbors.Length; i++)
+                //{
+                //    var neighborNode = HexTileNeighbors.GetNeightbor(indexInGrid.value, neighbors[i]);
+                //    EntityManager.SetComponentData(grid.GetTile(neighborNode), new URPMaterialPropertyBaseColor { Value = (Vector4)Color.gray }); 
+                //}
 
                 var pathPrefab = sceneBlackboardEntity.GetComponentData<MoveRangePrefab>().prefab;
 
@@ -98,7 +131,7 @@ public class MoveRangeViewSystem : SubSystem
                 for (int i = 0; i < tiles.Length; i++)
                 {
                     var node = grid[nodes[i]];
-                    var pos = new float3(node.x, 0.4f, node.y);
+                    var pos = new float3(node.x, 0.1f, node.y);
 
                     EntityManager.SetComponentData(tiles[i], new Translation { Value = pos });
                 }

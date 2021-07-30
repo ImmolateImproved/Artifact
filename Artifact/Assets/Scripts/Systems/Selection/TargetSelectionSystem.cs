@@ -1,6 +1,7 @@
 ﻿using Unity.Entities;
 using Latios;
 using Unity.Mathematics;
+using Unity.Transforms;
 
 public class TargetSelectionSystem : SubSystem
 {
@@ -22,7 +23,7 @@ public class TargetSelectionSystem : SubSystem
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
 
         Entities.WithAll<Selected>()
-            .ForEach((Entity e, ref PathRequestData pathRequest) =>
+            .ForEach((Entity e, ref PathRequestData pathRequest, ref AttackTarget attackTarget) =>
             {
                 var clickedTileIndex = clickedTileQuery.GetSingleton<IndexInGrid>().value;
 
@@ -30,7 +31,14 @@ public class TargetSelectionSystem : SubSystem
                 if (!moveRangeSet.moveRangeHashSet.Contains(clickedTileIndex))
                     return;
 
-                pathRequest.target = clickedTileIndex;
+                var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
+                var attackTileData = sceneBlackboardEntity.GetComponentData<AttackNodeData>();
+
+                pathRequest.target = grid.HasUnit(clickedTileIndex)
+                ? attackTileData.index
+                : clickedTileIndex;
+
+                attackTarget.node = clickedTileIndex;
 
                 EntityManager.AddComponent<ExecutionRequest>(selectedQuery);
                 ecb.RemoveComponent<ExecutionRequest>(selectedQuery);

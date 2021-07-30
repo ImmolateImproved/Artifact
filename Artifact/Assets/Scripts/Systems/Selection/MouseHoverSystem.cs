@@ -5,21 +5,21 @@ using Unity.Physics;
 using Unity.Physics.Systems;
 using Unity.Collections;
 using Unity.Rendering;
+using Unity.Transforms;
+using Unity.Mathematics;
 
 public class MouseHoverSystem : SubSystem
 {
-    private EntityQuery hoverQuery;
     private BuildPhysicsWorld physicsWorld;
 
     protected override void OnCreate()
     {
-        hoverQuery = GetEntityQuery(typeof(Hover));
         physicsWorld = World.GetOrCreateSystem<BuildPhysicsWorld>();
     }
 
     protected override void OnUpdate()
     {
-        Entities.ForEach((in SelectionManager selectionManager) =>
+        Entities.ForEach((ref MousePosition mousePosition, in SelectionManager selectionManager) =>
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -32,7 +32,7 @@ public class MouseHoverSystem : SubSystem
 
             if (physicsWorld.PhysicsWorld.CollisionWorld.CastRay(rayInput, out var raycastHit))
             {
-                var isHoverEntityExisting = TryGetSingletonEntity<Hover>(out var hoverEntity);//hoverQuery.ToEntityArray(Allocator.Temp);
+                var isHoverEntityExisting = TryGetSingletonEntity<Hover>(out var hoverEntity);
 
                 if (hoverEntity != raycastHit.Entity)
                 {
@@ -43,6 +43,8 @@ public class MouseHoverSystem : SubSystem
 
                     EntityManager.AddComponentData(raycastHit.Entity, new Hover());
                 }
+
+                mousePosition.value = new float2(raycastHit.Position.x, raycastHit.Position.z);
             }
 
         }).WithStructuralChanges().Run();

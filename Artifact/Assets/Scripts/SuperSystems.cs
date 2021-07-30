@@ -29,6 +29,7 @@ namespace Dragons
             GetOrCreateAndAddSystem<UnitInitializationSystem>();
 
             GetOrCreateAndAddSystem<MouseHoverSystem>();
+            GetOrCreateAndAddSystem<AttackTargetSelectionSystem>();
 
             GetOrCreateAndAddSystem<WaypointsMovementSystem>();
             GetOrCreateAndAddSystem<UpdateGridSystem>();
@@ -41,9 +42,10 @@ namespace Dragons
         {
             GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
             GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
-            GetOrCreateAndAddSystem<EndMovementReactionSystem>();
+            GetOrCreateAndAddSystem<MovementReactionSystem>();
 
             GetOrCreateAndAddSystem<MouseHoverViewSystem>();
+            GetOrCreateAndAddSystem<AttackNodeViewSystem>();
             GetOrCreateAndAddSystem<PathfindingViewSystem>();
             GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
             GetOrCreateAndAddSystem<MoveRangeViewSystem>();
