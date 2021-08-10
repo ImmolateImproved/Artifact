@@ -8,20 +8,19 @@ public class AttackNodeViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
-
         if (!TryGetSingletonEntity<Hover>(out var hoverTile))
             return;
 
         Entities.ForEach((ref AttackNodeView attackNodeView, in AttackNodeData attackNodeData) =>
         {
-            var hoverNode = GetComponent<IndexInGrid>(hoverTile).value;
-
-            if (!grid.HasUnit(hoverNode))
+            if (attackNodeData.index.Equals(-1))
             {
                 EntityManager.DestroyEntity(attackNodeView.attackTileEntity);
+                attackNodeView.attackNode = -1;
                 return;
             }
+
+            var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
             var newAttackNode = attackNodeData.index;
 

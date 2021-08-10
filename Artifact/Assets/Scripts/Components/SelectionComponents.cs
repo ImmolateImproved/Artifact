@@ -2,7 +2,12 @@
 using Unity.Mathematics;
 using Unity.Physics;
 
-public struct SelectionManager : IComponentData
+public struct SelectedUnit : IComponentData
+{
+    public Entity value;
+}
+
+public struct SelectionFilter : IComponentData
 {
     public CollisionFilter collisionFilter;
 }

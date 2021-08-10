@@ -1,4 +1,5 @@
 ﻿using Latios;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 
@@ -6,38 +7,56 @@ public class AttackTargetSelectionSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
-        var mousePosition = GetSingleton<MousePosition>().value;
-        var neighbors = HexTileNeighbors.Neighbors;
-
         if (!TryGetSingletonEntity<Hover>(out var hoverTile))
             return;
 
-        Entities.ForEach((ref AttackNodeData attackTile) =>
+        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
+        var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>();
+        var mousePosition = GetSingleton<MousePosition>().value;
+        var neighbors = HexTileNeighbors.Neighbors;
+
+        var moveRangeSet = default(NativeHashSet<int2>);
+
+        if (selectedUnit.value != Entity.Null)
+        {
+            moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(selectedUnit.value, true).moveRangeHashSet;
+        }
+
+        Entities.ForEach((ref AttackNodeData attackNode) =>
+        {
+            var hoverNode = GetComponent<IndexInGrid>(hoverTile).value;
+
+            attackNode.index = -1;
+
+            var targetIsInvalid =
+            selectedUnit.value == Entity.Null
+            || !grid.HasUnit(hoverNode)
+            || selectedUnit.value == grid.GetUnit(hoverNode);
+
+            if (targetIsInvalid)
+                return;
+
+            var minDistance = float.MaxValue;
+            var closetNode = new int2();
+
+            for (int i = 0; i < neighbors.Length; i++)
             {
-                var minDistance = float.MaxValue;
-                var closetNode = new int2();
+                var neighborNode = HexTileNeighbors.GetNeightbor(hoverNode, neighbors[i]);
+                if (!grid.IndexInRange(neighborNode))
+                    continue;
 
-                var currentTile = GetComponent<IndexInGrid>(hoverTile).value;
+                var tilePos = grid[neighborNode];
 
-                for (int i = 0; i < neighbors.Length; i++)
+                var distance = math.distancesq(mousePosition, tilePos);
+                if (distance < minDistance)
                 {
-                    var neighborNode = HexTileNeighbors.GetNeightbor(currentTile, neighbors[i]);
-                    if (!grid.IndexInRange(neighborNode))
-                        continue;
-
-                    var tilePos = grid[neighborNode];
-
-                    var distance = math.distancesq(mousePosition, tilePos);
-                    if (distance < minDistance)
-                    {
-                        minDistance = distance;
-                        closetNode = neighborNode;
-                    }
+                    minDistance = distance;
+                    closetNode = neighborNode;
                 }
+            }
 
-                attackTile.index = closetNode;
+            attackNode.index = moveRangeSet.Contains(closetNode) ? closetNode : -1;
 
-            }).Run();
+        }).Run();
     }
 }

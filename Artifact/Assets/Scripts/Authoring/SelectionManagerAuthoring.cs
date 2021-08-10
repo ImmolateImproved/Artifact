@@ -20,10 +20,12 @@ public class SelectionManagerAuthoring : MonoBehaviour, IConvertGameObjectToEnti
             CollidesWith = collidesWith.Value
         };
 
-        dstManager.AddComponentData(entity, new SelectionManager
+        dstManager.AddComponentData(entity, new SelectionFilter
         {
             collisionFilter = collisionFilter
 
         });
+
+        dstManager.AddComponentData(entity, new SelectedUnit());
     }
 }

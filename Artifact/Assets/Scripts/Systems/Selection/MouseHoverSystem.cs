@@ -3,9 +3,6 @@ using Latios;
 using UnityEngine;
 using Unity.Physics;
 using Unity.Physics.Systems;
-using Unity.Collections;
-using Unity.Rendering;
-using Unity.Transforms;
 using Unity.Mathematics;
 
 public class MouseHoverSystem : SubSystem
@@ -19,7 +16,7 @@ public class MouseHoverSystem : SubSystem
 
     protected override void OnUpdate()
     {
-        Entities.ForEach((ref MousePosition mousePosition, in SelectionManager selectionManager) =>
+        Entities.ForEach((ref MousePosition mousePosition, in SelectionFilter selectionManager) =>
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 

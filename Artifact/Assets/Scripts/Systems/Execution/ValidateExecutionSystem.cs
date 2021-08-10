@@ -13,7 +13,5 @@ public class ValidateExecutionSystem : SubSystem
     protected override void OnUpdate()
     {
         EntityManager.RemoveComponent<ExecutionRequest>(validateExecutionQuery);
-
-
     }
 }

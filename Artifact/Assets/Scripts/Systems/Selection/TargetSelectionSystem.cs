@@ -25,18 +25,21 @@ public class TargetSelectionSystem : SubSystem
         Entities.WithAll<Selected>()
             .ForEach((Entity e, ref PathRequestData pathRequest, ref AttackTarget attackTarget) =>
             {
-                var clickedTileIndex = clickedTileQuery.GetSingleton<IndexInGrid>().value;
-
-                var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e, true);
-                if (!moveRangeSet.moveRangeHashSet.Contains(clickedTileIndex))
-                    return;
-
                 var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
                 var attackTileData = sceneBlackboardEntity.GetComponentData<AttackNodeData>();
 
-                pathRequest.target = grid.HasUnit(clickedTileIndex)
+                var clickedTileIndex = clickedTileQuery.GetSingleton<IndexInGrid>().value;
+
+                var destinationNode = grid.HasUnit(clickedTileIndex)
                 ? attackTileData.index
                 : clickedTileIndex;
+
+                var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e, true);
+
+                if (!moveRangeSet.moveRangeHashSet.Contains(destinationNode))
+                    return;
+
+                pathRequest.target = destinationNode;
 
                 attackTarget.node = clickedTileIndex;
 
