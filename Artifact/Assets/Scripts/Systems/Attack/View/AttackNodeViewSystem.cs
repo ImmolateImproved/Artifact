@@ -8,12 +8,9 @@ public class AttackNodeViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        if (!TryGetSingletonEntity<Hover>(out var hoverTile))
-            return;
-
-        Entities.ForEach((ref AttackNodeView attackNodeView, in AttackNodeData attackNodeData) =>
+        Entities.ForEach((ref AttackNodeView attackNodeView, in AttackNodeManager attackNodeData) =>
         {
-            if (attackNodeData.index.Equals(-1))
+            if (attackNodeData.node.Equals(-1))
             {
                 EntityManager.DestroyEntity(attackNodeView.attackTileEntity);
                 attackNodeView.attackNode = -1;
@@ -22,7 +19,7 @@ public class AttackNodeViewSystem : SubSystem
 
             var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-            var newAttackNode = attackNodeData.index;
+            var newAttackNode = attackNodeData.node;
 
             if (!attackNodeView.attackNode.Equals(newAttackNode))
             {

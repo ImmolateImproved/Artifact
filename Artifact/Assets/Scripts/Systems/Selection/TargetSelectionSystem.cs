@@ -26,14 +26,14 @@ public class TargetSelectionSystem : SubSystem
             .ForEach((Entity e, ref PathRequestData pathRequest, ref AttackTarget attackTarget) =>
             {
                 var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
-                var attackTileData = sceneBlackboardEntity.GetComponentData<AttackNodeData>();
+                var attackTileData = sceneBlackboardEntity.GetComponentData<AttackNodeManager>();
 
                 var clickedTileIndex = clickedTileQuery.GetSingleton<IndexInGrid>().value;
 
                 var destinationNode = grid.HasUnit(clickedTileIndex)
-                ? attackTileData.index
+                ? attackTileData.node
                 : clickedTileIndex;
-
+                
                 var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e, true);
 
                 if (!moveRangeSet.moveRangeHashSet.Contains(destinationNode))

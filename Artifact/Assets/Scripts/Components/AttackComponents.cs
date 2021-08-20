@@ -2,9 +2,9 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public struct AttackNodeData : IComponentData
+public struct AttackNodeManager : IComponentData
 {
-    public int2 index;
+    public int2 node;
 }
 
 public struct AttackNodeView : IComponentData

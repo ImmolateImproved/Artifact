@@ -3,7 +3,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 
-public class AttackTargetSelectionSystem : SubSystem
+public class AttackNodeSelectionSystem : SubSystem
 {
     protected override void OnUpdate()
     {
@@ -22,18 +22,18 @@ public class AttackTargetSelectionSystem : SubSystem
             moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(selectedUnit.value, true).moveRangeHashSet;
         }
 
-        Entities.ForEach((ref AttackNodeData attackNode) =>
+        Entities.ForEach((ref AttackNodeManager attackNode) =>
         {
             var hoverNode = GetComponent<IndexInGrid>(hoverTile).value;
 
-            attackNode.index = -1;
+            attackNode.node = -1;
 
-            var targetIsInvalid =
-            selectedUnit.value == Entity.Null
-            || !grid.HasUnit(hoverNode)
-            || selectedUnit.value == grid.GetUnit(hoverNode);
+            var targetIsValid =
+            selectedUnit.value != Entity.Null
+            && grid.HasUnit(hoverNode)
+            && selectedUnit.value != grid.GetUnit(hoverNode);
 
-            if (targetIsInvalid)
+            if (!targetIsValid)
                 return;
 
             var minDistance = float.MaxValue;
@@ -55,7 +55,7 @@ public class AttackTargetSelectionSystem : SubSystem
                 }
             }
 
-            attackNode.index = moveRangeSet.Contains(closetNode) ? closetNode : -1;
+            attackNode.node = moveRangeSet.Contains(closetNode) ? closetNode : -1;
 
         }).Run();
     }

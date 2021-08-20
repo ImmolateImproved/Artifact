@@ -8,7 +8,7 @@ public class AttackNodeViewAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        dstManager.AddComponentData(entity, new AttackNodeData());
+        dstManager.AddComponentData(entity, new AttackNodeManager());
 
         dstManager.AddComponentData(entity, new AttackNodeView 
         {
