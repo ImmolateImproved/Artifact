@@ -379,6 +379,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 353557148002461739, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: m_Name
+      value: SelectionPointer
+      objectReference: {fileID: 0}
+    - target: {fileID: 353557148002461739, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061670, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: defaultColor.b
       value: 0.145098
@@ -401,11 +409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.56
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -448,14 +456,19 @@ PrefabInstance:
       value: 0.145098
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061680, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
-      propertyPath: moveRange
-      value: 3
+      propertyPath: combatBehaviour.armor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851757422368061680, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: combatBehaviour.health
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061683, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_Name
       value: Unit (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
 --- !u!1 &1079018807
 GameObject:
@@ -501,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0e07c9f62227841ad60429df46e7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTilePrefab: {fileID: 7469562289596992864, guid: 8ef68c98f6936be40b6092ac3de360d9, type: 3}
+  attackPoiterPrefab: {fileID: 6337983806764259017, guid: 234ecc89e5276f94d84fbe25f6fbc49a, type: 3}
 --- !u!114 &1079018810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,21 +647,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 353557148002461739, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1
+      value: 1.686
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.68
+      value: -1.538
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -680,15 +697,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061680, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: moveRange
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851757422368061680, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: combatBehaviour.armor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851757422368061680, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
+      propertyPath: combatBehaviour.attack
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061683, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_Name
       value: Unit
-      objectReference: {fileID: 0}
-    - target: {fileID: 4851757422368061683, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}

@@ -31,13 +31,16 @@ public class PathfindingSystem : SubSystem
     {
         var findPathData = this.findPathData;
 
-        Entities.WithAll<ExecutionRequest>()
-            .ForEach((ref DynamicBuffer<UnitPath> pathBuffer, in ExecutionRequest executing, in IndexInGrid gridPosition, in PathRequestData pathRequest) =>
+        Entities.WithAll<DecisionRequest>()
+            .ForEach((ref DynamicBuffer<UnitPath> pathBuffer, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
             {
+                if (gridPosition.value.Equals(pathfindingTarget.node))
+                    return;
+
                 pathBuffer.Clear();
 
                 var start = gridPosition.value;
-                var end = pathRequest.target;
+                var end = pathfindingTarget.node;
 
                 var path = pathBuffer.Reinterpret<int2>();
 

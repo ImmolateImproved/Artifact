@@ -1,7 +1,5 @@
 ﻿using Unity.Entities;
 using Latios;
-using Unity.Mathematics;
-using Unity.Transforms;
 
 public class TargetSelectionSystem : SubSystem
 {
@@ -22,29 +20,32 @@ public class TargetSelectionSystem : SubSystem
     {
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
 
-        Entities.WithAll<Selected>()
-            .ForEach((Entity e, ref PathRequestData pathRequest, ref AttackTarget attackTarget) =>
+        Entities.WithAll<Selected>().WithNone<Moving>()
+            .ForEach((Entity e, ref PathfindingTarget pathFindingTarget, ref AttackTarget attackTarget, ref AttackState attackState) =>
             {
                 var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
                 var attackTileData = sceneBlackboardEntity.GetComponentData<AttackNodeManager>();
 
                 var clickedTileIndex = clickedTileQuery.GetSingleton<IndexInGrid>().value;
 
-                var destinationNode = grid.HasUnit(clickedTileIndex)
+                var hasUnit = grid.HasUnit(clickedTileIndex);
+
+                var destinationNode = hasUnit
                 ? attackTileData.node
                 : clickedTileIndex;
-                
+
                 var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e, true);
 
                 if (!moveRangeSet.moveRangeHashSet.Contains(destinationNode))
                     return;
 
-                pathRequest.target = destinationNode;
+                pathFindingTarget.node = destinationNode;
 
+                attackState.attack = hasUnit;
                 attackTarget.node = clickedTileIndex;
 
-                EntityManager.AddComponent<ExecutionRequest>(selectedQuery);
-                ecb.RemoveComponent<ExecutionRequest>(selectedQuery);
+                EntityManager.AddComponent<DecisionRequest>(selectedQuery);
+                ecb.RemoveComponentForEntityQuery<DecisionRequest>(selectedQuery);
 
             }).WithStoreEntityQueryInField(ref selectedQuery)
             .WithStructuralChanges().Run();

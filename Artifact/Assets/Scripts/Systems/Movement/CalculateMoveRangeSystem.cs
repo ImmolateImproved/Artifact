@@ -58,6 +58,7 @@ public class CalculateMoveRangeSystem : SubSystem
                 moveRangeSet.Clear();
 
                 queue.Enqueue(indexInGrid.value);
+                moveRangeSet.Add(indexInGrid.value);
                 set.Add(indexInGrid.value);
 
                 var currentRange = 0;

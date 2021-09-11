@@ -26,6 +26,7 @@ public class UnitSelectionSystem : SubSystem
                 var grid = latiosWorld.sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
                 var unit = grid.GetUnit(gridPosition.value);
+                sceneBlackboardEntity.SetComponentData(new SelectedUnit { value = unit });
 
                 EntityManager.RemoveComponent<Selected>(selectedQuery.ToEntityArray(Allocator.Temp));
 
@@ -33,7 +34,6 @@ public class UnitSelectionSystem : SubSystem
                 {
                     EntityManager.AddComponentData(unit, new Selected());
                 }
-
 
             }).WithStructuralChanges().Run();
     }

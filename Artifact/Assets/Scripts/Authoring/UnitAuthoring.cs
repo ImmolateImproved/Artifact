@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -7,10 +9,19 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 {
     public int moveRange;
 
+    public UnitCombatBehaviour combatBehaviour;
+
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
         dstManager.AddComponentData(entity, new MoveRange { value = moveRange });
 
+        dstManager.AddComponentObject(entity, new UnitCombat
+        {
+            combatBehaviour = combatBehaviour
+
+        });
+
+        dstManager.AddComponent<AttackState>(entity);
         dstManager.AddComponent<Selectable>(entity);
         dstManager.AddComponent<AttackTarget>(entity);
     }

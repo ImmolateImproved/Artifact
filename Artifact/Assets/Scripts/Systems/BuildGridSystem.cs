@@ -77,8 +77,8 @@ public class BuildGridSystem : SubSystem
                 int y = index / config.columns;
 
                 var pos = grid[new int2(x, y)];
-                var text = GameObject.Instantiate(tileText.textPrefab, new float3(pos.x, 0.3f, pos.y), Quaternion.Euler(90, 0, 0), parent);
-                text.text = $"{x} {y}";
+                var text = GameObject.Instantiate(tileText.textPrefab, new float3(pos.x, 0.201f, pos.y), Quaternion.Euler(90, 0, 0), parent);
+                text.text = $"{x}.{y}";
             }
         }
     }

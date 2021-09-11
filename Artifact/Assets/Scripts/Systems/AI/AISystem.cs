@@ -32,10 +32,10 @@ public class AISystem : SubSystem
 
             var unit = aIUnits[0].entity;
 
-            EntityManager.SetComponentData(unit, new PathRequestData { target = gridPos });
+            EntityManager.SetComponentData(unit, new PathfindingTarget { node = gridPos });
 
-            EntityManager.AddComponentData(unit, new ExecutionRequest());
-            ecb.RemoveComponent<ExecutionRequest>(unit);
+            EntityManager.AddComponentData(unit, new DecisionRequest());
+            ecb.RemoveComponent<DecisionRequest>(unit);
 
         }).WithStructuralChanges().Run();
     }

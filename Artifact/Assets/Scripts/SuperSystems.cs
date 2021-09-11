@@ -8,46 +8,8 @@ public class GameplayRootSuperSystem : RootSuperSystem
 {
     protected override void CreateSystems()
     {
-        //GetOrCreateAndAddSystem<AISystem>();
-
         GetOrCreateAndAddSystem<PlayerInputSuperSystem>();
-
-        GetOrCreateAndAddSystem<ExecutionSuperSystem>();
-
         GetOrCreateAndAddSystem<PerFrameSuperSystem>();
-        GetOrCreateAndAddSystem<ReactiveSuperSystem>();
-    }
-}
-
-public class PerFrameSuperSystem : SuperSystem
-{
-    protected override void CreateSystems()
-    {
-        GetOrCreateAndAddSystem<BuildGridSystem>();
-        GetOrCreateAndAddSystem<UnitInitializationSystem>();
-
-        GetOrCreateAndAddSystem<MouseHoverSystem>();
-        GetOrCreateAndAddSystem<AttackNodeSelectionSystem>();
-
-        GetOrCreateAndAddSystem<WaypointsMovementSystem>();
-        GetOrCreateAndAddSystem<UpdateGridSystem>();
-    }
-}
-
-public class ReactiveSuperSystem : SuperSystem
-{
-    protected override void CreateSystems()
-    {
-        GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
-        GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
-        GetOrCreateAndAddSystem<MovementReactionSystem>();
-
-        GetOrCreateAndAddSystem<MouseHoverViewSystem>();
-        GetOrCreateAndAddSystem<AttackNodeViewSystem>();
-        GetOrCreateAndAddSystem<PathfindingViewSystem>();
-        GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
-        GetOrCreateAndAddSystem<CalculateMoveRangeSystem>();
-        GetOrCreateAndAddSystem<MoveRangeViewSystem>();
     }
 }
 
@@ -63,15 +25,44 @@ public class PlayerInputSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<ClickSystem>();
 
         GetOrCreateAndAddSystem<UnitSelectionSystem>();
+        GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
+
         GetOrCreateAndAddSystem<TargetSelectionSystem>();
     }
 }
 
-public class ExecutionSuperSystem : SuperSystem
+public class PerFrameSuperSystem : SuperSystem
 {
     protected override void CreateSystems()
     {
-        GetOrCreateAndAddSystem<ValidateExecutionSystem>();
+        //Initialization
+        GetOrCreateAndAddSystem<BuildGridSystem>();
+        GetOrCreateAndAddSystem<UnitInitializationSystem>();
+        //
+
+        GetOrCreateAndAddSystem<MouseHoverSystem>();
+        GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
+
+        GetOrCreateAndAddSystem<AttackNodeSelectionSystem>();
+
+        //Movement
         GetOrCreateAndAddSystem<PathfindingSystem>();
+        GetOrCreateAndAddSystem<WaypointsMovementSystem>();
+        GetOrCreateAndAddSystem<MovementReactionSystem>();
+        GetOrCreateAndAddSystem<UpdateGridSystem>();
+        //
+
+        GetOrCreateAndAddSystem<AttackSystem>();
+
+        #region ViewSystems
+        //View
+        GetOrCreateAndAddSystem<MouseHoverViewSystem>();
+        GetOrCreateAndAddSystem<AttackNodeViewSystem>();
+        GetOrCreateAndAddSystem<PathfindingViewSystem>();
+        GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
+        GetOrCreateAndAddSystem<CalculateMoveRangeSystem>();
+        GetOrCreateAndAddSystem<MoveRangeViewSystem>();
+
+        #endregion
     }
 }

@@ -12,6 +12,11 @@ public struct SelectionFilter : IComponentData
     public CollisionFilter collisionFilter;
 }
 
+public struct UnitSelectionPointer : IComponentData
+{
+    public Entity value;
+}
+
 public struct Hover : IComponentData
 {
 

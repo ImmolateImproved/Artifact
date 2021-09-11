@@ -21,6 +21,19 @@ public static class HexTileNeighbors
         return currentNode + neighborOffset;
     }
 
+    public static bool IsNeightbors(int2 nodeA, int2 nodeB)
+    {
+        for (int i = 0; i < Neighbors.Length; i++)
+        {
+            if (GetNeightbor(nodeA, Neighbors[i]).Equals(nodeB))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static int CalculateTilesCount(int moveRange, int neighborCount)
     {
         var count = moveRange == 0 ? 0 : 1;

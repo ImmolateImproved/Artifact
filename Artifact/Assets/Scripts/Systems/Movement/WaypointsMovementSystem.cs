@@ -13,16 +13,16 @@ public class WaypointsMovementSystem : SubSystem
 
         var grid = latiosWorld.sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        Entities.WithAll<ExecutionRequest>()
-             .ForEach((Entity e, ref WaypointsMovement waypointsMovement, in DynamicBuffer<UnitPath> path) =>
-             {
-                 if (path.Length == 0)
-                     return;
+        Entities.WithAll<DecisionRequest>()
+           .ForEach((Entity e, ref WaypointsMovement waypointsMovement, in DynamicBuffer<UnitPath> path) =>
+           {
+               if (path.Length == 0)
+                   return;
 
-                 EntityManager.AddComponentData(e, new Moving());
-                 waypointsMovement.currentWaypointIndex = 0;
+               EntityManager.AddComponentData(e, new Moving());
+               waypointsMovement.currentWaypointIndex = 0;
 
-             }).WithStructuralChanges().Run();
+           }).WithStructuralChanges().Run();
 
         Entities.WithAll<Moving>()
             .ForEach((Entity e, ref Translation translation, ref WaypointsMovement waypointsMovement, ref IndexInGrid indexInGrid, in MoveSpeed moveSpeed, in DynamicBuffer<UnitPath> path) =>

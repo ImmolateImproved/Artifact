@@ -15,7 +15,7 @@ public class PathFinderAuthoring : MonoBehaviour, IConvertGameObjectToEntity
             dstManager.AddComponentData(entity, new MoveSpeed { value = moveSpeed });
         }
 
-        dstManager.AddComponentData(entity, new PathRequestData());
+        dstManager.AddComponentData(entity, new PathfindingTarget());
 
         dstManager.AddBuffer<UnitPath>(entity);
     }

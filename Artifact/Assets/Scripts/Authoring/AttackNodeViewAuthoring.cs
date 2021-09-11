@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackNodeViewAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs
 {
-    public GameObject attackTilePrefab;
+    public GameObject attackPoiterPrefab;
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
@@ -12,12 +12,12 @@ public class AttackNodeViewAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 
         dstManager.AddComponentData(entity, new AttackNodeView 
         {
-            attackTilePrefab = conversionSystem.GetPrimaryEntity(attackTilePrefab)
+            attackPointerPrefab = conversionSystem.GetPrimaryEntity(attackPoiterPrefab)
         });
     }
 
     public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
     {
-        referencedPrefabs.Add(attackTilePrefab);
+        referencedPrefabs.Add(attackPoiterPrefab);
     }
 }

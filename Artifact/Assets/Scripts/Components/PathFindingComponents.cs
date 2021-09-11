@@ -17,7 +17,7 @@ public struct UnitPath : IBufferElementData
     public int2 nodeIndex;
 }
 
-public struct PathRequestData : IComponentData
+public struct PathfindingTarget : IComponentData
 {
-    public int2 target;
+    public int2 node;
 }

@@ -12,7 +12,7 @@ public class AttackNodeViewSystem : SubSystem
         {
             if (attackNodeData.node.Equals(-1))
             {
-                EntityManager.DestroyEntity(attackNodeView.attackTileEntity);
+                EntityManager.DestroyEntity(attackNodeView.attackPointerEntity);
                 attackNodeView.attackNode = -1;
                 return;
             }
@@ -24,12 +24,35 @@ public class AttackNodeViewSystem : SubSystem
             if (!attackNodeView.attackNode.Equals(newAttackNode))
             {
                 attackNodeView.attackNode = newAttackNode;
-                EntityManager.DestroyEntity(attackNodeView.attackTileEntity);
+                EntityManager.DestroyEntity(attackNodeView.attackPointerEntity);
 
-                attackNodeView.attackTileEntity = EntityManager.Instantiate(attackNodeView.attackTilePrefab);
+                attackNodeView.attackPointerEntity = EntityManager.Instantiate(attackNodeView.attackPointerPrefab);
 
-                var pos = grid[attackNodeView.attackNode];
-                EntityManager.SetComponentData(attackNodeView.attackTileEntity, new Translation { Value = new float3(pos.x, 0.3f, pos.y) });
+                //rotation
+                var selectedTile = GetSingletonEntity<Hover>();
+                var selectedNodeIndex = EntityManager.GetComponentData<IndexInGrid>(selectedTile).value;
+                var direction2D = grid[selectedNodeIndex] - grid[attackNodeView.attackNode];
+                var attackTileRotation = quaternion.LookRotationSafe(new float3(direction2D.x, 0, direction2D.y), new float3(0, 1, 0));
+
+                EntityManager.SetComponentData(attackNodeView.attackPointerEntity, new Rotation { Value = attackTileRotation });
+
+                //position
+                var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>().value;
+                var selectedUnitGridPos = EntityManager.GetComponentData<IndexInGrid>(selectedUnit).value;
+                var attackNodeIsPlayerNode = selectedUnitGridPos.Equals(newAttackNode);
+
+                var position2D = attackNodeIsPlayerNode ? grid[selectedNodeIndex] : grid[attackNodeView.attackNode];
+
+                var position = new float3(position2D.x, 0.5f, position2D.y);
+                var direction = new float3(direction2D.x, 0, direction2D.y);
+
+                if (attackNodeIsPlayerNode)
+                {
+                    position.y = 1.5f;
+                    position -= direction/2;
+                }
+
+                EntityManager.SetComponentData(attackNodeView.attackPointerEntity, new Translation { Value = position });
             }
 
         }).WithStructuralChanges().Run();

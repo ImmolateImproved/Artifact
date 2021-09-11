@@ -12,7 +12,7 @@ public struct PathTile : IComponentData
     
 }
 
-public struct ExecutionRequest : IComponentData
+public struct DecisionRequest : IComponentData
 {
 
 }

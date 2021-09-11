@@ -2,6 +2,7 @@
 using UnityEngine;
 using Unity.Rendering;
 using Latios;
+using Unity.Transforms;
 
 public class UnitSelectionViewSystem : SubSystem
 {
@@ -9,18 +10,24 @@ public class UnitSelectionViewSystem : SubSystem
     {
         var unitColors = sceneBlackboardEntity.GetComponentData<SelectionColors>();
 
-        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
-            .ForEach((ref URPMaterialPropertyBaseColor color) =>
-            {
-                color.Value = (Vector4)unitColors.selectedColor;
+        var unitUi = this.GetSingleton<UnitUi>();
 
-            }).Run();
+        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
+            .ForEach((UnitCombat unitCombat, in UnitSelectionPointer selectionPointer) =>
+            {
+                EntityManager.SetEnabled(selectionPointer.value, true);
+
+                unitUi.Init(unitCombat);
+
+            }).WithStructuralChanges().Run();
 
         Entities.WithAll<SelectedInternal>().WithNone<Selected>()
-            .ForEach((ref URPMaterialPropertyBaseColor color, in EntityColors defaultColor) =>
+            .ForEach((UnitCombat unitCombat, in UnitSelectionPointer selectionPointer) =>
             {
-                color.Value = (Vector4)defaultColor.defaultColor;
+                EntityManager.SetEnabled(selectionPointer.value, false);
 
-            }).Run();
+                unitUi.Reset(unitCombat);
+
+            }).WithStructuralChanges().Run();
     }
 }
