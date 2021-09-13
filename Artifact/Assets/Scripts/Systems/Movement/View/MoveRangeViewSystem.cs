@@ -3,6 +3,7 @@ using Latios;
 using Unity.Collections;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 public class MoveRangeViewSystem : SubSystem
 {
@@ -35,8 +36,11 @@ public class MoveRangeViewSystem : SubSystem
             .ForEach((Entity e, in IndexInGrid indexInGrid) =>
             {
                 var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e).moveRangeHashSet;
+                moveRangeSet.Remove(indexInGrid.value);//remove the player's tile so that it is not displayed
 
-                var nodes = moveRangeSet.ToNativeArray(Allocator.Temp);
+                var nodes = moveRangeSet.ToNativeArray(Allocator.Temp);//copy the nodes into an array without a player node
+
+                moveRangeSet.Add(indexInGrid.value);//return player node back to set
 
                 if (nodes.Length == 0)
                     return;

@@ -12,11 +12,15 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
     public float tileScale;
 
     public GameObject tilePrefab;
-    public GameObject pathPrefab;
     public GameObject moveRangePrefab;
+    public GameObject pathPrefab;
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
+        var moveRangeTileScale = tileScale * 0.8f;
+        moveRangePrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
+        pathPrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
+
         dstManager.AddComponentData(entity, new GridConfiguration
         {
             rows = height,

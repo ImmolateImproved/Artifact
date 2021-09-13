@@ -22,6 +22,11 @@ public struct PathfindingTarget : IComponentData
     public int2 node;
 }
 
+public struct CalculateMoveRange : IComponentData
+{
+
+}
+
 public struct DrawPath : IComponentData
 {
     

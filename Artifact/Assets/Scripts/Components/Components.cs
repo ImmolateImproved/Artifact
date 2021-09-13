@@ -36,8 +36,3 @@ public struct HoverColor : IComponentData
 {
     public Color value;
 }
-
-public struct CalculateMoveRange : IComponentData
-{
-    
-}

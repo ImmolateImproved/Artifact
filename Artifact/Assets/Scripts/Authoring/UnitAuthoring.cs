@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using TMPro;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -35,40 +32,5 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclare
     public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
     {
         referencedPrefabs.Add(selectionPointer);
-    }
-}
-
-public class UnitGridPositionConversionSystem : GameObjectConversionSystem
-{
-    protected override void OnUpdate()
-    {
-        //Entities.ForEach((GridAuthoring gridAuthoring) =>
-        //{
-        //    Entities.ForEach((Transform transform, UnitAuthoring unitAuthoring) =>
-        //    {
-        //        var ray = new Ray(transform.position, -transform.up);
-
-        //        if (Physics.Raycast(ray, out var hit, 10, LayerMask.NameToLayer("Tile")))
-        //        {
-        //            var tile = hit.transform.gameObject.GetComponent<TileAuthoring>();
-        //            if (tile)
-        //            {
-        //                var indexInGrid = tile.indexInGrid;
-
-        //                var entity = GetPrimaryEntity(transform);
-
-        //                DstEntityManager.AddComponentData(entity, new IndexInGrid
-        //                {
-        //                    value = indexInGrid
-        //                });
-
-        //                DstEntityManager.AddComponentData(entity, new PreviousGridIndex
-        //                {
-        //                    value = indexInGrid
-        //                });
-        //            }
-        //        }
-        //    });
-        //});
     }
 }
