@@ -16,7 +16,7 @@ public class MouseHoverSystem : SubSystem
 
     protected override void OnUpdate()
     {
-        Entities.ForEach((ref MousePosition mousePosition, in SelectionFilter selectionManager) =>
+        Entities.ForEach((ref MousePosition mousePosition, in SelectionFilter selectionFilter) =>
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -24,7 +24,7 @@ public class MouseHoverSystem : SubSystem
             {
                 Start = ray.origin,
                 End = ray.origin + ray.direction * 100,
-                Filter = selectionManager.collisionFilter
+                Filter = selectionFilter.collisionFilter
             };
 
             if (physicsWorld.PhysicsWorld.CollisionWorld.CastRay(rayInput, out var raycastHit))

@@ -10,6 +10,8 @@ public struct GridConfiguration : IComponentData
     public int rows;
     public int columns;
 
+    public float tileScale;
+
     public Entity tilePrefab;
 }
 

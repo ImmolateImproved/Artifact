@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 4275720309948794292}
   - component: {fileID: 4090545526943049286}
   - component: {fileID: 7465062186832369059}
-  - component: {fileID: 4500278449099019359}
   - component: {fileID: 1795711321973003432}
+  - component: {fileID: 4500278449099019359}
   - component: {fileID: -5930234372545784341}
   - component: {fileID: -143492353757404258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,18 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4500278449099019359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5459842120788319182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a65444525e381724993d493a8d145aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1795711321973003432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +228,21 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
+--- !u!114 &4500278449099019359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5459842120788319182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a65444525e381724993d493a8d145aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexInGrid:
+    x: 0
+    y: 0
 --- !u!114 &-5930234372545784341
 MonoBehaviour:
   m_ObjectHideFlags: 0

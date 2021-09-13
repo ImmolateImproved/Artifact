@@ -2,6 +2,11 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
+public struct UnitTag : IComponentData
+{
+    
+}
+
 public struct TileTag : IComponentData
 {
     
@@ -17,25 +22,19 @@ public struct DecisionRequest : IComponentData
 
 }
 
-public struct AttackTile : IComponentData
-{
-    
-}
-
 public struct MousePosition : IComponentData
 {
     public float2 value;
 }
 
-public struct EntityColors : IComponentData
+public struct DefaultColor : IComponentData
 {
     public Color defaultColor;
 }
 
-public struct SelectionColors : IComponentData
+public struct HoverColor : IComponentData
 {
-    public Color hoveredColor;
-    public Color selectedColor;
+    public Color value;
 }
 
 public struct CalculateMoveRange : IComponentData

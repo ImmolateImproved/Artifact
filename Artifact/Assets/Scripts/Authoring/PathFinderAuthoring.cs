@@ -7,8 +7,15 @@ public class PathFinderAuthoring : MonoBehaviour, IConvertGameObjectToEntity
     public float moveSpeed;
     public bool addMovementComponents;
 
+    public bool drawPath;
+
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
+        if (drawPath)
+        {
+            dstManager.AddComponentData(entity, new DrawPath());
+        }
+
         if (addMovementComponents)
         {
             dstManager.AddComponentData(entity, new WaypointsMovement());

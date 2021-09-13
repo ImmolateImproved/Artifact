@@ -47,7 +47,7 @@ public class MoveRangeViewSystem : SubSystem
                 for (int i = 0; i < tiles.Length; i++)
                 {
                     var node = grid[nodes[i]];
-                    var pos = new float3(node.x, 0.1f, node.y);
+                    var pos = new float3(node.x, 0.05f, node.y);
 
                     EntityManager.SetComponentData(tiles[i], new Translation { Value = pos });
                 }

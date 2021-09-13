@@ -21,3 +21,8 @@ public struct PathfindingTarget : IComponentData
 {
     public int2 node;
 }
+
+public struct DrawPath : IComponentData
+{
+    
+}

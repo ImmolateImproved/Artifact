@@ -7,25 +7,19 @@ public class MouseHoverViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var unitColors = sceneBlackboardEntity.GetComponentData<SelectionColors>();
+        var unitColors = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
         Entities.WithAll<Hover>().WithNone<HoverInternal>()
             .ForEach((ref URPMaterialPropertyBaseColor color) =>
             {
-                color.Value = (Vector4)unitColors.hoveredColor;
+                color.Value = (Vector4)unitColors.value;
 
             }).Run();
 
         Entities.WithAll<HoverInternal>().WithNone<Hover>()
-            .ForEach((Entity e, ref URPMaterialPropertyBaseColor color, in EntityColors entityColors) =>
+            .ForEach((Entity e, ref URPMaterialPropertyBaseColor color, in DefaultColor entityColors) =>
             {
-                var newColor = (Vector4)entityColors.defaultColor;
-
-                if (HasComponent<Selected>(e))
-                    newColor = unitColors.selectedColor;
-
-                color.Value = newColor;
-
+                color.Value = (Vector4)entityColors.defaultColor;
 
             }).Run();
     }

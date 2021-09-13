@@ -1,13 +1,16 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity
+public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs
 {
     public int moveRange;
+
+    public GameObject selectionPointer;
 
     public UnitCombatBehaviour combatBehaviour;
 
@@ -21,9 +24,17 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 
         });
 
-        dstManager.AddComponent<AttackState>(entity);
+        dstManager.AddComponent<UnitTag>(entity);
         dstManager.AddComponent<Selectable>(entity);
+        dstManager.AddComponent<AttackState>(entity);
         dstManager.AddComponent<AttackTarget>(entity);
+
+        dstManager.AddComponentData(entity, new UnitSelectionPointer { value = conversionSystem.GetPrimaryEntity(selectionPointer) });
+    }
+
+    public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
+    {
+        referencedPrefabs.Add(selectionPointer);
     }
 }
 
@@ -31,28 +42,33 @@ public class UnitGridPositionConversionSystem : GameObjectConversionSystem
 {
     protected override void OnUpdate()
     {
-        Entities.ForEach((GridAuthoring gridAuthoring) =>
-        {
-            Entities.ForEach((Transform transform, UnitAuthoring unitAuthoring) =>
-            {
-                var xPos = (int)((transform.position.x) + (gridAuthoring.width) / 2);
-                var yPos = (int)((transform.position.z) + (gridAuthoring.height) / 2);
+        //Entities.ForEach((GridAuthoring gridAuthoring) =>
+        //{
+        //    Entities.ForEach((Transform transform, UnitAuthoring unitAuthoring) =>
+        //    {
+        //        var ray = new Ray(transform.position, -transform.up);
 
-                var indexInGrid = new int2(xPos, yPos);
+        //        if (Physics.Raycast(ray, out var hit, 10, LayerMask.NameToLayer("Tile")))
+        //        {
+        //            var tile = hit.transform.gameObject.GetComponent<TileAuthoring>();
+        //            if (tile)
+        //            {
+        //                var indexInGrid = tile.indexInGrid;
 
-                var entity = GetPrimaryEntity(transform);
+        //                var entity = GetPrimaryEntity(transform);
 
-                DstEntityManager.AddComponentData(entity, new IndexInGrid
-                {
-                    value = indexInGrid
-                });
+        //                DstEntityManager.AddComponentData(entity, new IndexInGrid
+        //                {
+        //                    value = indexInGrid
+        //                });
 
-                DstEntityManager.AddComponentData(entity, new PreviousGridIndex
-                {
-                    value = indexInGrid
-                });
-
-            });
-        });
+        //                DstEntityManager.AddComponentData(entity, new PreviousGridIndex
+        //                {
+        //                    value = indexInGrid
+        //                });
+        //            }
+        //        }
+        //    });
+        //});
     }
 }

@@ -34,10 +34,9 @@ public class PathfindingSystem : SubSystem
         Entities.WithAll<DecisionRequest>()
             .ForEach((ref DynamicBuffer<UnitPath> pathBuffer, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
             {
+                pathBuffer.Clear();
                 if (gridPosition.value.Equals(pathfindingTarget.node))
                     return;
-
-                pathBuffer.Clear();
 
                 var start = gridPosition.value;
                 var end = pathfindingTarget.node;

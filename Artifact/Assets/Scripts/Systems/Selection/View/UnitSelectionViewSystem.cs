@@ -8,7 +8,7 @@ public class UnitSelectionViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var unitColors = sceneBlackboardEntity.GetComponentData<SelectionColors>();
+        var unitColors = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
         var unitUi = this.GetSingleton<UnitUi>();
 
