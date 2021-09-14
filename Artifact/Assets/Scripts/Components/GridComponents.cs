@@ -94,7 +94,7 @@ public struct Grid : ICollectionComponent
 
     public bool HasUnit(int2 index)
     {
-        return GetUnit(index) != Entity.Null;
+        return IndexInRange(index) && (GetUnit(index) != Entity.Null);
     }
 
     public bool IsWalkable(int2 index)

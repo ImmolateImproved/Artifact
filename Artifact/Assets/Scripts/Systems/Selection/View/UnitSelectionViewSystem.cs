@@ -1,8 +1,5 @@
 ﻿using Unity.Entities;
-using UnityEngine;
-using Unity.Rendering;
 using Latios;
-using Unity.Transforms;
 
 public class UnitSelectionViewSystem : SubSystem
 {

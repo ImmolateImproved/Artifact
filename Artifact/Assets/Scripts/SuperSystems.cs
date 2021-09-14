@@ -43,7 +43,7 @@ public class PerFrameSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<MouseHoverSystem>();
         GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
 
-        GetOrCreateAndAddSystem<AttackNodeSelectionSystem>();
+        GetOrCreateAndAddSystem<AttackTargetSelectionSystem>();
 
         //Movement
         GetOrCreateAndAddSystem<PathfindingSystem>();
@@ -57,7 +57,7 @@ public class PerFrameSuperSystem : SuperSystem
         #region ViewSystems
         //View
         GetOrCreateAndAddSystem<MouseHoverViewSystem>();
-        GetOrCreateAndAddSystem<AttackNodeViewSystem>();
+        GetOrCreateAndAddSystem<AttackTargetSelectionViewSystem>();
         GetOrCreateAndAddSystem<PathfindingViewSystem>();
         GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
         GetOrCreateAndAddSystem<CalculateMoveRangeSystem>();

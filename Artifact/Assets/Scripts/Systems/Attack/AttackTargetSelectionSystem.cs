@@ -3,7 +3,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 
-public class AttackNodeSelectionSystem : SubSystem
+public class AttackTargetSelectionSystem : SubSystem
 {
     protected override void OnUpdate()
     {
@@ -22,16 +22,16 @@ public class AttackNodeSelectionSystem : SubSystem
             moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(selectedUnit.value, true).moveRangeHashSet;
         }
 
-        Entities.ForEach((ref AttackNodeManager attackNode) =>
+        Entities.ForEach((ref AttackTargetManager attackNode) =>
         {
-            var hoverNode = GetComponent<IndexInGrid>(hoverTile).value;
+            var currentNode = GetComponent<IndexInGrid>(hoverTile).value;
 
-            attackNode.node = -1;
+            attackNode.attackNode = -1;
+            attackNode.attackTarget = -1;
 
             var targetIsValid =
             selectedUnit.value != Entity.Null
-            && grid.HasUnit(hoverNode)
-            && selectedUnit.value != grid.GetUnit(hoverNode);
+            && selectedUnit.value != grid.GetUnit(currentNode);
 
             if (!targetIsValid)
                 return;
@@ -41,7 +41,7 @@ public class AttackNodeSelectionSystem : SubSystem
 
             for (int i = 0; i < neighbors.Length; i++)
             {
-                var neighborNode = HexTileNeighbors.GetNeightbor(hoverNode, neighbors[i]);
+                var neighborNode = HexTileNeighbors.GetNeightbor(currentNode, neighbors[i]);
                 if (!grid.IndexInRange(neighborNode))
                     continue;
 
@@ -55,7 +55,20 @@ public class AttackNodeSelectionSystem : SubSystem
                 }
             }
 
-            attackNode.node = moveRangeSet.Contains(closetNode) ? closetNode : -1;
+            if (grid.HasUnit(currentNode))
+            {
+                var isValid = moveRangeSet.Contains(closetNode);
+
+                attackNode.attackNode = isValid ? closetNode : -1;
+                attackNode.attackTarget = currentNode;
+            }
+            else if (grid.HasUnit(closetNode))
+            {
+                var isValid = (grid.GetUnit(closetNode) != selectedUnit.value) && moveRangeSet.Contains(currentNode);
+
+                attackNode.attackNode = isValid ? currentNode : -1;
+                attackNode.attackTarget = isValid ? closetNode : -1;
+            }
 
         }).Run();
     }

@@ -24,14 +24,14 @@ public class TargetSelectionSystem : SubSystem
             .ForEach((Entity e, ref PathfindingTarget pathFindingTarget, ref AttackTarget attackTarget, ref AttackState attackState) =>
             {
                 var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
-                var attackTileData = sceneBlackboardEntity.GetComponentData<AttackNodeManager>();
+                var attackTileData = sceneBlackboardEntity.GetComponentData<AttackTargetManager>();
 
                 var clickedTileIndex = clickedTileQuery.GetSingleton<IndexInGrid>().value;
 
                 var hasUnit = grid.HasUnit(clickedTileIndex);
 
                 var destinationNode = hasUnit
-                ? attackTileData.node
+                ? attackTileData.attackNode
                 : clickedTileIndex;
 
                 var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e, true);
@@ -41,8 +41,8 @@ public class TargetSelectionSystem : SubSystem
 
                 pathFindingTarget.node = destinationNode;
 
-                attackState.attack = hasUnit;
-                attackTarget.node = clickedTileIndex;
+                attackState.attack = grid.HasUnit(attackTileData.attackTarget);
+                attackTarget.node =  attackTileData.attackTarget;
 
                 EntityManager.AddComponent<DecisionRequest>(selectedQuery);
                 ecb.RemoveComponentForEntityQuery<DecisionRequest>(selectedQuery);

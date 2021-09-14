@@ -2,15 +2,21 @@
 using Unity.Entities;
 using UnityEngine;
 
-public class AttackNodeViewAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs
+public class AttackNodeManagerAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs
 {
     public GameObject attackPoiterPrefab;
 
+    public GridAuthoring gridAuthoring;
+
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        dstManager.AddComponentData(entity, new AttackNodeManager());
+        var scale = gridAuthoring.tileScale * 0.8f;
 
-        dstManager.AddComponentData(entity, new AttackNodeView 
+        attackPoiterPrefab.transform.localScale = new Vector3(scale, scale, scale);
+
+        dstManager.AddComponentData(entity, new AttackTargetManager());
+
+        dstManager.AddComponentData(entity, new AttackNodeView
         {
             attackPointerPrefab = conversionSystem.GetPrimaryEntity(attackPoiterPrefab)
         });
