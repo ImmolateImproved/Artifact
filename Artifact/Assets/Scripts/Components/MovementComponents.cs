@@ -25,6 +25,16 @@ public struct WaypointsMovement : IComponentData
     public int currentWaypointIndex;
 }
 
+public struct MoveRangePrefab : IComponentData
+{
+    public Entity prefab;
+}
+
+public struct CalculateMoveRange : IComponentData
+{
+
+}
+
 public struct MoveRange : IComponentData
 {
     public int value;

@@ -50,7 +50,6 @@ public class CalculateMoveRangeSystem : SubSystem
 
         var neighbors = HexTileNeighbors.Neighbors;
         var queue = new NativeQueue<int2>(Allocator.Temp);
-        var set = new NativeHashSet<int2>(moveRangeSet.Capacity, Allocator.Temp);
 
         Entities.WithAll<CalculateMoveRange>()
             .ForEach((in IndexInGrid indexInGrid, in MoveRange moveRange) =>
@@ -59,7 +58,6 @@ public class CalculateMoveRangeSystem : SubSystem
 
                 queue.Enqueue(indexInGrid.value);
                 moveRangeSet.Add(indexInGrid.value);
-                set.Add(indexInGrid.value);
 
                 var currentRange = 0;
 
@@ -76,14 +74,9 @@ public class CalculateMoveRangeSystem : SubSystem
                     {
                         var neighborNode = HexTileNeighbors.GetNeightbor(node, neighbors[i]);
 
-                        if (set.Contains(neighborNode))
-                            continue;
-
-                        queue.Enqueue(neighborNode);
-                        set.Add(neighborNode);
-
-                        if (grid.IndexInRange(neighborNode))
+                        if (grid.IndexInRange(neighborNode) && !grid.HasUnit(neighborNode))
                         {
+                            queue.Enqueue(neighborNode);
                             moveRangeSet.Add(neighborNode);
                         }
                     }
