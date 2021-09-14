@@ -89,7 +89,7 @@ public struct Grid : ICollectionComponent
 
     public Entity GetUnit(int2 index)
     {
-        return units[From2DIndex(index)];
+        return IndexInRange(index) ? units[From2DIndex(index)] : Entity.Null;
     }
 
     public bool HasUnit(int2 index)

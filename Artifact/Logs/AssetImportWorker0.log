@@ -15,11 +15,11 @@ D:/UnityProjects/Repos/Artifact/Artifact
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-61815
+62838
 Successfully changed project path to: D:/UnityProjects/Repos/Artifact/Artifact
 D:/UnityProjects/Repos/Artifact/Artifact
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 100.40 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 98.76 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.11f1 (99c7afb366b3)
 [Subsystems] Discovering subsystems at path E:/Programs/2020.3.11f1/Editor/Data/Resources/UnitySubsystems
@@ -36,39 +36,39 @@ Initialize mono
 Mono path[0] = 'E:/Programs/2020.3.11f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Programs/2020.3.11f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'E:/Programs/2020.3.11f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56304
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56936
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Programs/2020.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001144 seconds.
+Registered in 0.001133 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 100.49 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 98.93 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.229 seconds
+- Completed reload, in  1.199 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.006714 seconds.
+Registered in 0.006838 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 114.74 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 120.00 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 320ms
+TypeManager.Initialize took: 308ms
 Mono: successfully reloaded assembly
-- Completed reload, in  3.671 seconds
+- Completed reload, in  3.563 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 1.23 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.18 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5101 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 210.3 MB.
 System memory in use after: 210.7 MB.
 
 Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 5534.
-Total: 5.385800 ms (FindLiveObjects: 0.553300 ms CreateObjectMapping: 0.301700 ms MarkObjects: 4.327000 ms  DeleteObjects: 0.202100 ms)
+Total: 6.107700 ms (FindLiveObjects: 0.604700 ms CreateObjectMapping: 0.362000 ms MarkObjects: 5.033400 ms  DeleteObjects: 0.106200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -151,15 +151,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -249,6 +249,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -665,7 +666,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -861,11 +861,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -1218,7 +1218,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/Unity.Rendering.RootLODWorldReferencePoint: 52dc7da50b87318452dc7da50b873184 -> 
   custom:DOTSType/Unity.Entities.WorldTimeQueue: e9cbb96adca0937ee9cbb96adca0937e -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertyThicknessAuthoring: a64ef1c3f2856b13a64ef1c3f2856b13 -> 
-  custom:DOTSType/AttackNodeView: 65a92a641f9f648065a92a641f9f6480 -> 
+  custom:DOTSType/AttackNodeView: e441ff1924bafce8e441ff1924bafce8 -> 
   custom:DOTSType/Unity.Scenes.Editor.ClearEntitiesCacheWindow: ff5e4942d7943fe4ff5e4942d7943fe4 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowKeySelection: 947c91af5920f6ef947c91af5920f6ef -> 
   custom:DOTSType/AttackState: a81ac4db56bb7c6ea81ac4db56bb7c6e -> 
@@ -1416,8 +1416,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -1531,32 +1531,48 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.NavMeshObstacleInspector: e09ab8310b8a0334e09ab8310b8a0334 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Scripts/Systems/Attack/AttackTargetSelectionSystem.cs
+  path: Assets/Scripts/Systems/Attack/AttackSystem.cs
+  artifactKey: Guid(b652b02ba206eb64e8f11faaf8fed28b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Systems/Attack/AttackSystem.cs using Guid(b652b02ba206eb64e8f11faaf8fed28b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4eee05512226b59b11e0248edd89cc6a') in 0.024687 seconds
+  Import took 0.043477 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000216 seconds.
+  path: Assets/Scripts/Systems/Attack/View/AttackTargetSelectionViewSystem.cs
+  artifactKey: Guid(e1fd6d0f77d97994e907a438d718d579) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Systems/Attack/View/AttackTargetSelectionViewSystem.cs using Guid(e1fd6d0f77d97994e907a438d718d579) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d4995b4640474b2dd9ab0fab32cd639') in 0.001327 seconds
+  Import took 0.011558 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000192 seconds.
+  path: Assets/Scripts/Systems/Attack/TargetSelectionSystem.cs
   artifactKey: Guid(4963b7e3670a9974bbead5202a554646) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Systems/Attack/AttackTargetSelectionSystem.cs using Guid(4963b7e3670a9974bbead5202a554646) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bdfa6a46d9f560a9953b6f15a4e7a0b') in 0.029960 seconds
-  Import took 0.049047 seconds .
+Start importing Assets/Scripts/Systems/Attack/TargetSelectionSystem.cs using Guid(4963b7e3670a9974bbead5202a554646) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3d9f02e36ddd8092d18004978dc4d21') in 0.001192 seconds
+  Import took 0.010473 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.007389 seconds.
+Registered in 0.006903 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.21 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.19 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 277ms
+TypeManager.Initialize took: 268ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.344 seconds
+- Completed reload, in  2.261 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.21 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.17 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 201.7 MB.
 System memory in use after: 202.2 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5539.
-Total: 5.070300 ms (FindLiveObjects: 0.498600 ms CreateObjectMapping: 0.295700 ms MarkObjects: 4.247000 ms  DeleteObjects: 0.027800 ms)
+Total: 5.057400 ms (FindLiveObjects: 0.485300 ms CreateObjectMapping: 0.289000 ms MarkObjects: 4.253900 ms  DeleteObjects: 0.027600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -1639,15 +1655,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -1737,6 +1753,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -2153,7 +2170,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -2349,11 +2365,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -2706,7 +2722,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/Unity.Rendering.RootLODWorldReferencePoint: 52dc7da50b87318452dc7da50b873184 -> 
   custom:DOTSType/Unity.Entities.WorldTimeQueue: e9cbb96adca0937ee9cbb96adca0937e -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertyThicknessAuthoring: a64ef1c3f2856b13a64ef1c3f2856b13 -> 
-  custom:DOTSType/AttackNodeView: 65a92a641f9f648065a92a641f9f6480 -> 
+  custom:DOTSType/AttackNodeView: e441ff1924bafce8e441ff1924bafce8 -> 
   custom:DOTSType/Unity.Scenes.Editor.ClearEntitiesCacheWindow: ff5e4942d7943fe4ff5e4942d7943fe4 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowKeySelection: 947c91af5920f6ef947c91af5920f6ef -> 
   custom:DOTSType/AttackState: a81ac4db56bb7c6ea81ac4db56bb7c6e -> 
@@ -2904,8 +2920,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -3020,24 +3036,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006827 seconds.
+Registered in 0.006865 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.21 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.18 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 269ms
+TypeManager.Initialize took: 270ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.298 seconds
+- Completed reload, in  2.343 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.57 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.17 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 201.8 MB.
 System memory in use after: 202.3 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5544.
-Total: 6.174100 ms (FindLiveObjects: 0.550600 ms CreateObjectMapping: 0.412000 ms MarkObjects: 5.181400 ms  DeleteObjects: 0.028700 ms)
+Total: 5.157100 ms (FindLiveObjects: 0.483900 ms CreateObjectMapping: 0.290900 ms MarkObjects: 4.355100 ms  DeleteObjects: 0.026100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -3120,15 +3136,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -3218,6 +3234,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -3634,7 +3651,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -3830,11 +3846,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -4187,7 +4203,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/Unity.Rendering.RootLODWorldReferencePoint: 52dc7da50b87318452dc7da50b873184 -> 
   custom:DOTSType/Unity.Entities.WorldTimeQueue: e9cbb96adca0937ee9cbb96adca0937e -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertyThicknessAuthoring: a64ef1c3f2856b13a64ef1c3f2856b13 -> 
-  custom:DOTSType/AttackNodeView: 65a92a641f9f648065a92a641f9f6480 -> 
+  custom:DOTSType/AttackNodeView: e441ff1924bafce8e441ff1924bafce8 -> 
   custom:DOTSType/Unity.Scenes.Editor.ClearEntitiesCacheWindow: ff5e4942d7943fe4ff5e4942d7943fe4 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowKeySelection: 947c91af5920f6ef947c91af5920f6ef -> 
   custom:DOTSType/AttackState: a81ac4db56bb7c6ea81ac4db56bb7c6e -> 
@@ -4385,8 +4401,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -4501,24 +4517,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.007294 seconds.
+Registered in 0.006866 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 1.19 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 269ms
+TypeManager.Initialize took: 263ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.284 seconds
+- Completed reload, in  2.289 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.36 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.17 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 201.9 MB.
 System memory in use after: 202.3 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5549.
-Total: 6.604800 ms (FindLiveObjects: 0.529600 ms CreateObjectMapping: 0.296100 ms MarkObjects: 5.746900 ms  DeleteObjects: 0.030800 ms)
+Total: 5.084300 ms (FindLiveObjects: 0.490600 ms CreateObjectMapping: 0.287200 ms MarkObjects: 4.280700 ms  DeleteObjects: 0.024800 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -4601,15 +4617,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -4699,6 +4715,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -5115,7 +5132,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -5311,11 +5327,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -5668,7 +5684,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/Unity.Rendering.RootLODWorldReferencePoint: 52dc7da50b87318452dc7da50b873184 -> 
   custom:DOTSType/Unity.Entities.WorldTimeQueue: e9cbb96adca0937ee9cbb96adca0937e -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertyThicknessAuthoring: a64ef1c3f2856b13a64ef1c3f2856b13 -> 
-  custom:DOTSType/AttackNodeView: 65a92a641f9f648065a92a641f9f6480 -> 
+  custom:DOTSType/AttackNodeView: e441ff1924bafce8e441ff1924bafce8 -> 
   custom:DOTSType/Unity.Scenes.Editor.ClearEntitiesCacheWindow: ff5e4942d7943fe4ff5e4942d7943fe4 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowKeySelection: 947c91af5920f6ef947c91af5920f6ef -> 
   custom:DOTSType/AttackState: a81ac4db56bb7c6ea81ac4db56bb7c6e -> 
@@ -5866,8 +5882,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -5982,24 +5998,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.007019 seconds.
+Registered in 0.006898 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.22 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.92 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 268ms
+TypeManager.Initialize took: 266ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.307 seconds
+- Completed reload, in  2.404 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.24 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.20 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 201.9 MB.
 System memory in use after: 202.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5554.
-Total: 5.432200 ms (FindLiveObjects: 0.517300 ms CreateObjectMapping: 0.294400 ms MarkObjects: 4.591800 ms  DeleteObjects: 0.027700 ms)
+Total: 5.607200 ms (FindLiveObjects: 0.800800 ms CreateObjectMapping: 0.302100 ms MarkObjects: 4.471300 ms  DeleteObjects: 0.028600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -6082,15 +6098,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -6180,6 +6196,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -6596,7 +6613,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -6792,11 +6808,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -7347,8 +7363,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -7463,24 +7479,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006918 seconds.
+Registered in 0.006858 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 1.22 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 305ms
+TypeManager.Initialize took: 270ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.343 seconds
+- Completed reload, in  2.304 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.22 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.44 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 201.9 MB.
 System memory in use after: 202.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5559.
-Total: 5.926800 ms (FindLiveObjects: 0.508900 ms CreateObjectMapping: 0.287500 ms MarkObjects: 5.094100 ms  DeleteObjects: 0.034800 ms)
+Total: 5.604700 ms (FindLiveObjects: 0.508200 ms CreateObjectMapping: 0.288500 ms MarkObjects: 4.778800 ms  DeleteObjects: 0.027800 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -7563,15 +7579,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -7661,6 +7677,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -8077,7 +8094,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -8273,11 +8289,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -8828,8 +8844,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -8944,24 +8960,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006818 seconds.
+Registered in 0.006703 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.19 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.36 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 273ms
+TypeManager.Initialize took: 260ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.311 seconds
+- Completed reload, in  2.216 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.16 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.75 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 201.9 MB.
 System memory in use after: 202.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5564.
-Total: 5.102100 ms (FindLiveObjects: 0.471000 ms CreateObjectMapping: 0.290400 ms MarkObjects: 4.315100 ms  DeleteObjects: 0.024700 ms)
+Total: 5.445600 ms (FindLiveObjects: 0.514900 ms CreateObjectMapping: 0.297300 ms MarkObjects: 4.604500 ms  DeleteObjects: 0.028000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -9044,15 +9060,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -9142,6 +9158,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -9558,7 +9575,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -9754,11 +9770,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -10309,8 +10325,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -10425,24 +10441,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006922 seconds.
+Registered in 0.006753 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.19 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.21 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 268ms
+TypeManager.Initialize took: 264ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.266 seconds
+- Completed reload, in  2.212 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.18 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.21 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 201.9 MB.
 System memory in use after: 202.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5569.
-Total: 5.251700 ms (FindLiveObjects: 0.491000 ms CreateObjectMapping: 0.288800 ms MarkObjects: 4.446000 ms  DeleteObjects: 0.025000 ms)
+Total: 5.127600 ms (FindLiveObjects: 0.468700 ms CreateObjectMapping: 0.285900 ms MarkObjects: 4.347400 ms  DeleteObjects: 0.024300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -10525,15 +10541,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -10623,6 +10639,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -11039,7 +11056,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -11235,11 +11251,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -11790,8 +11806,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -11906,24 +11922,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006871 seconds.
+Registered in 0.006778 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.22 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.20 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 272ms
+TypeManager.Initialize took: 255ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.302 seconds
+- Completed reload, in  2.217 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.28 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.16 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 202.0 MB.
 System memory in use after: 202.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5574.
-Total: 5.215200 ms (FindLiveObjects: 0.500300 ms CreateObjectMapping: 0.286400 ms MarkObjects: 4.403200 ms  DeleteObjects: 0.023900 ms)
+Total: 5.045400 ms (FindLiveObjects: 0.472100 ms CreateObjectMapping: 0.286900 ms MarkObjects: 4.260300 ms  DeleteObjects: 0.025200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -12006,15 +12022,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -12104,6 +12120,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -12520,7 +12537,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -12716,11 +12732,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -13271,8 +13287,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -13387,24 +13403,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006845 seconds.
+Registered in 0.006877 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.21 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.57 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 278ms
+TypeManager.Initialize took: 262ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.367 seconds
+- Completed reload, in  2.214 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.25 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.18 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 202.0 MB.
 System memory in use after: 202.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5579.
-Total: 5.318500 ms (FindLiveObjects: 0.512400 ms CreateObjectMapping: 0.292300 ms MarkObjects: 4.484800 ms  DeleteObjects: 0.028100 ms)
+Total: 5.169500 ms (FindLiveObjects: 0.471000 ms CreateObjectMapping: 0.288500 ms MarkObjects: 4.382900 ms  DeleteObjects: 0.025900 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -13487,15 +13503,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -13585,6 +13601,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -14001,7 +14018,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -14197,11 +14213,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -14752,8 +14768,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -14868,24 +14884,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006896 seconds.
+Registered in 0.006782 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.22 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.20 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-TypeManager.Initialize took: 276ms
+TypeManager.Initialize took: 269ms
 Mono: successfully reloaded assembly
-- Completed reload, in  2.357 seconds
+- Completed reload, in  2.223 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.20 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.19 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4973 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 202.0 MB.
 System memory in use after: 202.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 5584.
-Total: 5.154700 ms (FindLiveObjects: 0.487100 ms CreateObjectMapping: 0.288500 ms MarkObjects: 4.353200 ms  DeleteObjects: 0.025100 ms)
+Total: 5.674000 ms (FindLiveObjects: 0.571500 ms CreateObjectMapping: 0.290000 ms MarkObjects: 4.783300 ms  DeleteObjects: 0.028000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEngine.EventSystems.EventSystem: 2c81b6c3f3277fcd2c81b6c3f3277fcd -> 
@@ -14968,15 +14984,15 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.U2D.SpriteShapeRenderer: c9fe580071495138c9fe580071495138 -> 
   custom:DOTSType/UnityEditor.ColorPresetLibraryEditor: 8af6ed9d2e96892f8af6ed9d2e96892f -> 
   custom:DOTSType/UnityEngine.UIElements.VectorImage: fab28eb0f01e3f3ffab28eb0f01e3f3f -> 
-  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
+  custom:DOTSType/ActionRequest: 604e087777a48bb9604e087777a48bb9 -> 
   custom:DOTSType/UnityEditorInternal.AnimationWindowSelectionItem: fab9a646cde907f4fab9a646cde907f4 -> 
+  custom:DOTSType/UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResourcesEditor: fca77b409ba1953dfca77b409ba1953d -> 
   custom:DOTSType/MoveRangePrefab: 9108a729024f02439108a729024f0243 -> 
   custom:DOTSType/Unity.Rendering.HLOD: f41aa023894dcd0bf41aa023894dcd0b -> 
   custom:DOTSType/TimelineProjectSettings: 4c2b1ff9e697c6ac4c2b1ff9e697c6ac -> 
   custom:DOTSType/UnityEditor.RenderTextureEditor: 1ca965769534042d1ca965769534042d -> 
   custom:DOTSType/UnityEditor.TrailRendererInspector: 6cd62f30bf2de8f96cd62f30bf2de8f9 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.SearchWindow: c580fedf644085d8c580fedf644085d8 -> 
-  custom:DOTSType/DecisionRequest: d28c3e0037c05673d28c3e0037c05673 -> 
   custom:DOTSType/UnityEditor.UIElements.UIElementsEditorWindowCreator: b5614dee3a2adbefb5614dee3a2adbef -> 
   custom:DOTSType/UnityEditor.Timeline.Signals.SignalAssetInspector+DoCreateSignalAsset: 0a9bedbbb37049f00a9bedbbb37049f0 -> 
   custom:DOTSType/UnityEditor.UI.CanvasScalerEditor: e177cbf177bdcf76e177cbf177bdcf76 -> 
@@ -15066,6 +15082,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.ParticleSystemForceFieldInspector: 41cc751fcaf9761f41cc751fcaf9761f -> 
   custom:DOTSType/UnityEditor.AddShaderVariantWindow: d372b3a12591a3ebd372b3a12591a3eb -> 
   custom:DOTSType/UnityEngine.TrailRenderer: 22be058ced85ba4522be058ced85ba45 -> 
+  custom:DOTSType/TargetManager: 1b36a2ec2acb670b1b36a2ec2acb670b -> 
   custom:DOTSType/UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector: 9453b49c4408146e9453b49c4408146e -> 
   custom:DOTSType/UnityEngine.LightProbeGroup: d62702013d91a1d2d62702013d91a1d2 -> 
   custom:DOTSType/UnityEngine.UI.Toggle: ed2df2392b1b65abed2df2392b1b65ab -> 
@@ -15482,7 +15499,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.AudioHighPassFilterEditor: 9831f5d71e4a920a9831f5d71e4a920a -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentLibraryEditor: 319788475d2881e5319788475d2881e5 -> 
   custom:DOTSType/UnityEngine.UIExtras.SearchWindow: 920fe37896289505920fe37896289505 -> 
-  custom:DOTSType/AttackTargetManager: 13dfbe87a6d4257f13dfbe87a6d4257f -> 
   custom:DOTSType/UnityEditor.ShaderGraph.NewGraphAction: 1b040fc23b5069be1b040fc23b5069be -> 
   custom:DOTSType/Unity.Physics.Authoring.PhysicsBodyAuthoring: 6fdaadea9f29b3c66fdaadea9f29b3c6 -> 
   custom:DOTSType/UnityEditor.DoubleCurvePresetLibrary: 48bcc8da5d7d83cc48bcc8da5d7d83cc -> 
@@ -15678,11 +15694,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEngine.Rendering.VolumeComponent: aef24875e7911c44aef24875e7911c44 -> 
   custom:DOTSType/UnityEditor.TestTools.TestRunner.TestRunnerWindow: 170d7307e47057e0170d7307e47057e0 -> 
   custom:DOTSType/UnityEditor.BoxColliderEditor: 565071303d418088565071303d418088 -> 
+  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/UnityEditor.AvatarSubEditor: 444fa3e8f50ab035444fa3e8f50ab035 -> 
   custom:DOTSType/Unity.Scenes.SubScene: ac4196b7e94e44ecac4196b7e94e44ec -> 
   custom:DOTSType/UnityEditor.Rendering.Universal.UniversalAdditionalCameraDataEditor: 21b086c7eaa41e9f21b086c7eaa41e9f -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerEnumField: bb95f7ac3a18c6adbb95f7ac3a18c6ad -> 
-  custom:DOTSType/Unity.Transforms.LocalToParent: 62243fe83dfe1a4d62243fe83dfe1a4d -> 
   custom:DOTSType/Unity.Transforms.CopyTransformFromGameObjectAuthoring: 4dbd5ee2f68d35234dbd5ee2f68d3523 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssets: 6ddc4981709436736ddc498170943673 -> 
   custom:DOTSType/UnityEditor.Experimental.GraphView.GraphViewUndoRedoSelection: ba25c88acd7ac73cba25c88acd7ac73c -> 
@@ -16233,8 +16249,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Profiling.ProfilerModulesDropdownWindow: 3f0f206142f512003f0f206142f51200 -> 
   custom:DOTSType/UnityEditor.EventSystems.EventTriggerEditor: c5b405750962e6abc5b405750962e6ab -> 
   custom:DOTSType/UnityEditor.AudioManagerInspector: 6a773b12efd7e7ba6a773b12efd7e7ba -> 
-  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEditor.AudioManager: 1143702ae2acbf151143702ae2acbf15 -> 
+  custom:DOTSType/CompanionGameObjectUpdateTransformSystemState: 69e375c46f12f32069e375c46f12f320 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVBox: 7d75ed63a8146c647d75ed63a8146c64 -> 
   custom:DOTSType/Unity.Rendering.HDRPMaterialPropertySmoothness: d61fa8a165a89109d61fa8a165a89109 -> 
   custom:DOTSType/Unity.Entities.Asset: 5205195e4c6bea1c5205195e4c6bea1c -> 
@@ -16346,136 +16362,3 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.CircleCollider2DEditor: 2306875b29acbf472306875b29acbf47 -> 
   custom:DOTSType/Unity.Scenes.DisableLiveLink: acfec9bf12a4cae8acfec9bf12a4cae8 -> 
   custom:DOTSType/UnityEditor.NavMeshObstacleInspector: e09ab8310b8a0334e09ab8310b8a0334 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 6164.731667 seconds.
-  path: Assets/SceneDependencyCache/90e86986c6693eebf433c191d79d02cc.sceneWithBuildSettings
-  artifactKey: Guid(90e86986c6693eebf433c191d79d02cc) Importer(2089858483,52bed625d08a7023a15481c3fbd73797)
-Start importing Assets/SceneDependencyCache/90e86986c6693eebf433c191d79d02cc.sceneWithBuildSettings using Guid(90e86986c6693eebf433c191d79d02cc) Importer(2089858483,52bed625d08a7023a15481c3fbd73797) Opening scene 'Assets/Scenes/GridSandbox/SubScene.unity additively'
-Loaded scene 'Assets/Scenes/GridSandbox/SubScene.unity'
-	Deserialize:            66.971 ms
-	Integration:            23.223 ms
-	Integration of assets:  13.309 ms
-	Thread Wait Time:       0.049 ms
-	Total Operation Time:   103.552 ms
-Object SelectionPointer is not a Prefab
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-Unity.Entities.Conversion.JournalingUnityLogger:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs:41)
-UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
-UnityEngine.Debug:LogWarning (object,UnityEngine.Object)
-Unity.Debug:LogWarning (object,UnityEngine.Object) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities/Stubs/Unity/Debug.cs:25)
-Unity.Entities.Conversion.GameObjectConversionMappingSystem:DeclareReferencedPrefab (UnityEngine.GameObject) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionMappingSystem.cs:913)
-Unity.Entities.GameObjectConversionUtility:DeclareReferencedObjects (Unity.Entities.World,Unity.Entities.Conversion.GameObjectConversionMappingSystem) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:114)
-Unity.Entities.GameObjectConversionUtility:Convert (Unity.Entities.World) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:147)
-Unity.Entities.GameObjectConversionUtility:ConvertScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:300)
-Unity.Scenes.Editor.EditorEntityScenes:ConvertAndWriteEntityScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings,System.Collections.Generic.List`1<Unity.Scenes.ReferencedUnityObjects>,Unity.Scenes.Editor.WriteEntitySceneSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/EditorEntityScenes.cs:164)
-Unity.Scenes.Editor.SubSceneImporter:OnImportAsset (UnityEditor.AssetImporters.AssetImportContext) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/SubSceneImporter.cs:144)
-UnityEditor.AssetImporters.ScriptedImporter:GenerateAssetData (UnityEditor.AssetImporters.AssetImportContext)
-
-(Filename: Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs Line: 41)
-
-Object SelectionPointer is not a Prefab
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-Unity.Entities.Conversion.JournalingUnityLogger:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs:41)
-UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
-UnityEngine.Debug:LogWarning (object,UnityEngine.Object)
-Unity.Debug:LogWarning (object,UnityEngine.Object) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities/Stubs/Unity/Debug.cs:25)
-Unity.Entities.Conversion.GameObjectConversionMappingSystem:DeclareReferencedPrefab (UnityEngine.GameObject) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionMappingSystem.cs:913)
-Unity.Entities.GameObjectConversionUtility:DeclareReferencedObjects (Unity.Entities.World,Unity.Entities.Conversion.GameObjectConversionMappingSystem) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:114)
-Unity.Entities.GameObjectConversionUtility:Convert (Unity.Entities.World) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:147)
-Unity.Entities.GameObjectConversionUtility:ConvertScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:300)
-Unity.Scenes.Editor.EditorEntityScenes:ConvertAndWriteEntityScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings,System.Collections.Generic.List`1<Unity.Scenes.ReferencedUnityObjects>,Unity.Scenes.Editor.WriteEntitySceneSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/EditorEntityScenes.cs:164)
-Unity.Scenes.Editor.SubSceneImporter:OnImportAsset (UnityEditor.AssetImporters.AssetImportContext) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/SubSceneImporter.cs:144)
-UnityEditor.AssetImporters.ScriptedImporter:GenerateAssetData (UnityEditor.AssetImporters.AssetImportContext)
-
-(Filename: Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs Line: 41)
-
-Object SelectionPointer is not a Prefab
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-Unity.Entities.Conversion.JournalingUnityLogger:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs:41)
-UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
-UnityEngine.Debug:LogWarning (object,UnityEngine.Object)
-Unity.Debug:LogWarning (object,UnityEngine.Object) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities/Stubs/Unity/Debug.cs:25)
-Unity.Entities.Conversion.GameObjectConversionMappingSystem:DeclareReferencedPrefab (UnityEngine.GameObject) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionMappingSystem.cs:913)
-Unity.Entities.GameObjectConversionUtility:DeclareReferencedObjects (Unity.Entities.World,Unity.Entities.Conversion.GameObjectConversionMappingSystem) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:114)
-Unity.Entities.GameObjectConversionUtility:Convert (Unity.Entities.World) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:147)
-Unity.Entities.GameObjectConversionUtility:ConvertScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:300)
-Unity.Scenes.Editor.EditorEntityScenes:ConvertAndWriteEntityScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings,System.Collections.Generic.List`1<Unity.Scenes.ReferencedUnityObjects>,Unity.Scenes.Editor.WriteEntitySceneSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/EditorEntityScenes.cs:164)
-Unity.Scenes.Editor.SubSceneImporter:OnImportAsset (UnityEditor.AssetImporters.AssetImportContext) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/SubSceneImporter.cs:144)
-UnityEditor.AssetImporters.ScriptedImporter:GenerateAssetData (UnityEditor.AssetImporters.AssetImportContext)
-
-(Filename: Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs Line: 41)
-
- -> (artifact id: '8b9ab0e28090759ffd215cfe0acaebae') in 8.220165 seconds
-  Import took 8.231927 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 22.544133 seconds.
-  path: Assets/SceneDependencyCache/90e86986c6693eebf433c191d79d02cc.sceneWithBuildSettings
-  artifactKey: Guid(90e86986c6693eebf433c191d79d02cc) Importer(2089858483,52bed625d08a7023a15481c3fbd73797)
-Start importing Assets/SceneDependencyCache/90e86986c6693eebf433c191d79d02cc.sceneWithBuildSettings using Guid(90e86986c6693eebf433c191d79d02cc) Importer(2089858483,52bed625d08a7023a15481c3fbd73797) Opening scene 'Assets/Scenes/GridSandbox/SubScene.unity additively'
-Loaded scene 'Assets/Scenes/GridSandbox/SubScene.unity'
-	Deserialize:            22.565 ms
-	Integration:            3.298 ms
-	Integration of assets:  1.648 ms
-	Thread Wait Time:       0.003 ms
-	Total Operation Time:   27.514 ms
-Object SelectionPointer is not a Prefab
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-Unity.Entities.Conversion.JournalingUnityLogger:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs:41)
-UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
-UnityEngine.Debug:LogWarning (object,UnityEngine.Object)
-Unity.Debug:LogWarning (object,UnityEngine.Object) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities/Stubs/Unity/Debug.cs:25)
-Unity.Entities.Conversion.GameObjectConversionMappingSystem:DeclareReferencedPrefab (UnityEngine.GameObject) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionMappingSystem.cs:913)
-Unity.Entities.GameObjectConversionUtility:DeclareReferencedObjects (Unity.Entities.World,Unity.Entities.Conversion.GameObjectConversionMappingSystem) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:114)
-Unity.Entities.GameObjectConversionUtility:Convert (Unity.Entities.World) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:147)
-Unity.Entities.GameObjectConversionUtility:ConvertScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:300)
-Unity.Scenes.Editor.EditorEntityScenes:ConvertAndWriteEntityScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings,System.Collections.Generic.List`1<Unity.Scenes.ReferencedUnityObjects>,Unity.Scenes.Editor.WriteEntitySceneSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/EditorEntityScenes.cs:164)
-Unity.Scenes.Editor.SubSceneImporter:OnImportAsset (UnityEditor.AssetImporters.AssetImportContext) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/SubSceneImporter.cs:144)
-UnityEditor.AssetImporters.ScriptedImporter:GenerateAssetData (UnityEditor.AssetImporters.AssetImportContext)
-
-(Filename: Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs Line: 41)
-
-Object SelectionPointer is not a Prefab
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-Unity.Entities.Conversion.JournalingUnityLogger:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs:41)
-UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
-UnityEngine.Debug:LogWarning (object,UnityEngine.Object)
-Unity.Debug:LogWarning (object,UnityEngine.Object) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities/Stubs/Unity/Debug.cs:25)
-Unity.Entities.Conversion.GameObjectConversionMappingSystem:DeclareReferencedPrefab (UnityEngine.GameObject) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionMappingSystem.cs:913)
-Unity.Entities.GameObjectConversionUtility:DeclareReferencedObjects (Unity.Entities.World,Unity.Entities.Conversion.GameObjectConversionMappingSystem) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:114)
-Unity.Entities.GameObjectConversionUtility:Convert (Unity.Entities.World) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:147)
-Unity.Entities.GameObjectConversionUtility:ConvertScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:300)
-Unity.Scenes.Editor.EditorEntityScenes:ConvertAndWriteEntityScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings,System.Collections.Generic.List`1<Unity.Scenes.ReferencedUnityObjects>,Unity.Scenes.Editor.WriteEntitySceneSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/EditorEntityScenes.cs:164)
-Unity.Scenes.Editor.SubSceneImporter:OnImportAsset (UnityEditor.AssetImporters.AssetImportContext) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/SubSceneImporter.cs:144)
-UnityEditor.AssetImporters.ScriptedImporter:GenerateAssetData (UnityEditor.AssetImporters.AssetImportContext)
-
-(Filename: Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs Line: 41)
-
-Object SelectionPointer is not a Prefab
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-Unity.Entities.Conversion.JournalingUnityLogger:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs:41)
-UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
-UnityEngine.Debug:LogWarning (object,UnityEngine.Object)
-Unity.Debug:LogWarning (object,UnityEngine.Object) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities/Stubs/Unity/Debug.cs:25)
-Unity.Entities.Conversion.GameObjectConversionMappingSystem:DeclareReferencedPrefab (UnityEngine.GameObject) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionMappingSystem.cs:913)
-Unity.Entities.GameObjectConversionUtility:DeclareReferencedObjects (Unity.Entities.World,Unity.Entities.Conversion.GameObjectConversionMappingSystem) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:114)
-Unity.Entities.GameObjectConversionUtility:Convert (Unity.Entities.World) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:147)
-Unity.Entities.GameObjectConversionUtility:ConvertScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs:300)
-Unity.Scenes.Editor.EditorEntityScenes:ConvertAndWriteEntityScene (UnityEngine.SceneManagement.Scene,Unity.Entities.GameObjectConversionSettings,System.Collections.Generic.List`1<Unity.Scenes.ReferencedUnityObjects>,Unity.Scenes.Editor.WriteEntitySceneSettings) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/EditorEntityScenes.cs:164)
-Unity.Scenes.Editor.SubSceneImporter:OnImportAsset (UnityEditor.AssetImporters.AssetImportContext) (at Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Scenes.Editor/SubSceneImporter.cs:144)
-UnityEditor.AssetImporters.ScriptedImporter:GenerateAssetData (UnityEditor.AssetImporters.AssetImportContext)
-
-(Filename: Library/PackageCache/com.unity.entities@0.17.0-preview.41/Unity.Entities.Hybrid/GameObjectConversion/JournalingUnityLogger.cs Line: 41)
-
- -> (artifact id: '25e66ebf6f8fb117df13c2c7a698b3e2') in 0.111460 seconds
-  Import took 0.122111 seconds .
-
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -34,8 +34,8 @@ public class AISystem : SubSystem
 
             EntityManager.SetComponentData(unit, new PathfindingTarget { node = gridPos });
 
-            EntityManager.AddComponentData(unit, new DecisionRequest());
-            ecb.RemoveComponent<DecisionRequest>(unit);
+            EntityManager.AddComponentData(unit, new ActionRequest());
+            ecb.RemoveComponent<ActionRequest>(unit);
 
         }).WithStructuralChanges().Run();
     }

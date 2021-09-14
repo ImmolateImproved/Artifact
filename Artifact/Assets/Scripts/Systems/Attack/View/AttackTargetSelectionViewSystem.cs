@@ -8,33 +8,33 @@ public class AttackTargetSelectionViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        Entities.ForEach((ref AttackNodeView attackNodeView, in AttackTargetManager attackTargetData) =>
+        Entities.ForEach((ref AttackNodeView attackNodeView, in TargetManager targetData) =>
         {
-            if (attackTargetData.attackNode.Equals(-1))
+            if (targetData.moveTarget.Equals(-1) || targetData.attackTarget.Equals(-1))
             {
                 EntityManager.DestroyEntity(attackNodeView.attackPointerEntity);
-                attackNodeView.attackNode = -1;
+                attackNodeView.moveNode = -1;
                 return;
             }
 
             var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-            var attackNode = attackTargetData.attackNode;
-            var attackTarget = attackTargetData.attackTarget;
+            var moveNode = targetData.moveTarget;
+            var attackTarget = targetData.attackTarget;
 
-            if (!attackNodeView.attackNode.Equals(attackNode) || !attackNodeView.attackTarget.Equals(attackTarget))
+            if (!attackNodeView.moveNode.Equals(moveNode) || !attackNodeView.attackTarget.Equals(attackTarget))
             {
-                attackNodeView.attackNode = attackNode;
+                attackNodeView.moveNode = moveNode;
                 attackNodeView.attackTarget = attackTarget;
                 EntityManager.DestroyEntity(attackNodeView.attackPointerEntity);
 
                 attackNodeView.attackPointerEntity = EntityManager.Instantiate(attackNodeView.attackPointerPrefab);
 
-                var attackNodePos = grid[attackNode];
+                var moveNodePos = grid[moveNode];
                 var attackTargetPos = grid[attackTarget];
 
                 //rotation
-                var direction2D = attackTargetPos - attackNodePos;
+                var direction2D = attackTargetPos - moveNodePos;
                 var direction = new float3(direction2D.x, 0, direction2D.y);
                 var attackTileRotation = quaternion.LookRotationSafe(direction, new float3(0, 1, 0));
 
@@ -44,7 +44,7 @@ public class AttackTargetSelectionViewSystem : SubSystem
                 var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>().value;
                 var selectedUnitGridPos = EntityManager.GetComponentData<IndexInGrid>(selectedUnit).value;
 
-                var position = new float3(attackTargetPos.x, 1, attackTargetPos.y) + new float3(attackNodePos.x, 1, attackNodePos.y);
+                var position = new float3(attackTargetPos.x, 1, attackTargetPos.y) + new float3(moveNodePos.x, 1, moveNodePos.y);
                 position /= 2;
                 position.y = 1;
 

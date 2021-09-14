@@ -8,17 +8,7 @@ public class AttackSystem : SubSystem
     {
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        Entities.WithAll<DecisionRequest>()
-           .ForEach((Entity e, in AttackState attackState) =>
-           {
-               if (attackState.attack)
-               {
-
-               }
-
-           }).WithStructuralChanges().Run();
-
-        Entities.WithAny<DecisionRequest, Movinginternal>().WithNone<Moving>()
+        Entities.WithAny<ActionRequest, Movinginternal>().WithNone<Moving>()
            .ForEach((Entity e, UnitCombat unitCombat, in AttackTarget attackTarget, in AttackState attackState) =>
            {
                if (!attackState.attack)

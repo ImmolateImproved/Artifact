@@ -27,7 +27,7 @@ public class PlayerInputSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<UnitSelectionSystem>();
         GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
 
-        GetOrCreateAndAddSystem<TargetSelectionSystem>();
+        GetOrCreateAndAddSystem<ActionRequestSystem>();
     }
 }
 
@@ -43,7 +43,7 @@ public class PerFrameSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<MouseHoverSystem>();
         GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
 
-        GetOrCreateAndAddSystem<AttackTargetSelectionSystem>();
+        GetOrCreateAndAddSystem<TargetSelectionSystem>();
 
         //Movement
         GetOrCreateAndAddSystem<PathfindingSystem>();

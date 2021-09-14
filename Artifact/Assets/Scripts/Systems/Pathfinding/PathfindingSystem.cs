@@ -31,7 +31,7 @@ public class PathfindingSystem : SubSystem
     {
         var findPathData = this.findPathData;
 
-        Entities.WithAll<DecisionRequest>()
+        Entities.WithAll<ActionRequest>()
             .ForEach((ref DynamicBuffer<UnitPath> pathBuffer, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
             {
                 pathBuffer.Clear();

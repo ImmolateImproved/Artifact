@@ -13,7 +13,7 @@ public class WaypointsMovementSystem : SubSystem
 
         var grid = latiosWorld.sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        Entities.WithAll<DecisionRequest>()
+        Entities.WithAll<ActionRequest>()
            .ForEach((Entity e, ref WaypointsMovement waypointsMovement, in DynamicBuffer<UnitPath> path) =>
            {
                if (path.Length == 0)

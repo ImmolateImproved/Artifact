@@ -3,9 +3,9 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
-public struct AttackTargetManager : IComponentData
+public struct TargetManager : IComponentData
 {
-    public int2 attackNode;
+    public int2 moveTarget;
     public int2 attackTarget;
 }
 
@@ -15,7 +15,7 @@ public struct AttackNodeView : IComponentData
 
     public Entity attackPointerEntity;
 
-    public int2 attackNode;
+    public int2 moveNode;
     public int2 attackTarget;
 }
 

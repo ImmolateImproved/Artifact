@@ -16,7 +16,7 @@ public class PathfindingViewSystem : SubSystem
 
     protected override void OnUpdate()
     {
-        Entities.WithAll<DecisionRequest, DrawPath>()
+        Entities.WithAll<ActionRequest, DrawPath>()
             .ForEach((ref DynamicBuffer<UnitPath> path) =>
             {
                 var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);

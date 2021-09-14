@@ -14,7 +14,7 @@ public class AttackNodeManagerAuthoring : MonoBehaviour, IConvertGameObjectToEnt
 
         attackPoiterPrefab.transform.localScale = new Vector3(scale, scale, scale);
 
-        dstManager.AddComponentData(entity, new AttackTargetManager());
+        dstManager.AddComponentData(entity, new TargetManager());
 
         dstManager.AddComponentData(entity, new AttackNodeView
         {
