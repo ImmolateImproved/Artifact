@@ -10,14 +10,14 @@ public partial class MouseHoverViewSystem : SubSystem
         var hoverColor = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
         Entities.WithAll<Hover>().WithNone<HoverInternal>()
-            .ForEach((ref SecondaryColorVector4Override color) =>
+            .ForEach((ref GlowColorVector4Override color) =>
             {
                 color.Value = (Vector4)hoverColor.value;
 
             }).Run();
 
         Entities.WithAll<HoverInternal>().WithNone<Hover>()
-            .ForEach((Entity e, ref SecondaryColorVector4Override color) =>
+            .ForEach((Entity e, ref GlowColorVector4Override color) =>
             {
                 color.Value = (Vector4)Color.black;
 

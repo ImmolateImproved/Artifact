@@ -4,15 +4,12 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
+using UnityEngine;
 
 public struct GridConfiguration : IComponentData
 {
     public int height;
     public int width;
-
-    public float tileScale;
-
-    public Entity tilePrefab;
 }
 
 public struct IndexInGrid : IComponentData
@@ -38,10 +35,11 @@ public struct Grid : ICollectionComponent
     public readonly int width;
     public readonly int height;
 
-    public Grid(int width, int height, Allocator allocator)
+    public Grid(GridConfiguration gridConfig, Allocator allocator)
     {
-        this.width = width;
-        this.height = height;
+        width = gridConfig.width;
+        height = gridConfig.height;
+
         nodePositions = new NativeArray<float2>(height * width, allocator);
         units = new NativeArray<Entity>(height * width, allocator);
         nodeToTile = new NativeHashMap<int2, Entity>(height * width, allocator);
@@ -69,6 +67,26 @@ public struct Grid : ICollectionComponent
     public void InitTile(int2 nodeIndex, Entity tile)
     {
         nodeToTile.Add(nodeIndex, tile);
+    }
+
+    public static Vector2 GetTileOffset(float tilesMargin, float tileRadius)
+    {
+        var tileSlotRadius = ((tilesMargin * tileRadius) + tileRadius);
+
+        var xOffset = Mathf.Sqrt(3) * tileSlotRadius;
+        var yOffset = 2f * tileSlotRadius;
+
+        return new Vector2(xOffset, yOffset * (3 / 4f));
+    }
+
+    public static int2 PositionToGridIndex(Vector3 position, float tilesMargin, float tileRadius)
+    {
+        var tileOffset = GetTileOffset(tilesMargin, tileRadius);
+
+        var xIndex = Mathf.FloorToInt(position.x / tileOffset.x);
+        var yIndex = Mathf.RoundToInt(position.z / tileOffset.y);
+
+        return new int2(xIndex, yIndex);
     }
 
     public Entity GetTile(int2 index)

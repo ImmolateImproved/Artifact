@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5459842120788319182}
-  m_Mesh: {fileID: -5938077517726053091, guid: 1f8b39a0ea5b79f47b9077c0a8ff852d, type: 3}
+  m_Mesh: {fileID: 4021805801945829177, guid: 4853ca1ab59d07b4790d3908c85af235, type: 3}
 --- !u!23 &7465062186832369059
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6838c6c11d56a6341bbfd0de7edeb5b2, type: 2}
+  - {fileID: 2100000, guid: 478025132bf6db34da31eec43149d92a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d849f6ed953e947a0ea6954432e1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideAsset: {fileID: 11400000, guid: ff73b64997c12354fabba90bba114977, type: 2}
+  overrideAsset: {fileID: 11400000, guid: 5a7ccaeb189821e4bb86e6d3290b4cfc, type: 2}
   overrideList:
   - name: _Color
     displayName: _Color
@@ -263,10 +263,17 @@ MonoBehaviour:
     type: 0
     value: {x: 0.046724804, y: 0.3962264, z: 0.20730665, w: 1}
     instanceOverride: 1
-  - name: _SecondaryColor
-    displayName: _SecondaryColor
-    shaderName: Assets/Materials/ColorChanger/ColorChangerShader.shadergraph
-    materialName: ColorChanger
+  - name: _GlowColor
+    displayName: _GlowColor
+    shaderName: Assets/Materials/Glow/GlowShader.shadergraph
+    materialName: Glow
     type: 0
     value: {x: 0, y: 0, z: 0, w: 1}
     instanceOverride: 0
+  - name: _GlowPower
+    displayName: _GlowPower
+    shaderName: Assets/Materials/Glow/GlowShader.shadergraph
+    materialName: Glow
+    type: 2
+    value: {x: 0.2, y: 0, z: 0, w: 0}
+    instanceOverride: 1

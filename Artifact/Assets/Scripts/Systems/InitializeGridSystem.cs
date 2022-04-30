@@ -38,7 +38,7 @@ public partial class InitializeGridSystem : SubSystem
         EntityManager.RemoveComponent<GridConfiguration>(gridConfigQuery);
 
         //Initialize Grid Collection Component
-        var grid = new Grid(config.width, config.height, Allocator.Persistent);
+        var grid = new Grid(config, Allocator.Persistent);
         sceneBlackboardEntity.AddCollectionComponent(grid);
 
         //Initialize units grid index

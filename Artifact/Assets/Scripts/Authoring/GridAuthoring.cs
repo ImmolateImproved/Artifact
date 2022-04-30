@@ -9,9 +9,8 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
     public int width;
     public int height;
 
-    public float tileRaius = 1;
-    public float tileHeight;
-    public float tileOffset;
+    public float tileRadius = 1;
+    public float tilesMargin;
 
     public TileAuthoring tilePrefab;
     public GameObject moveRangePrefab;
@@ -19,16 +18,14 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        var moveRangeTileScale = tileRaius * 0.8f;
+        var moveRangeTileScale = tileRadius * 0.8f;
         moveRangePrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
         pathPrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
 
         dstManager.AddComponentData(entity, new GridConfiguration
         {
             height = height,
-            width = width,
-            tileScale = tileRaius,
-            tilePrefab = conversionSystem.GetPrimaryEntity(tilePrefab)
+            width = width
         });
 
         dstManager.AddComponentData(entity, new PathPrefab { prefab = conversionSystem.GetPrimaryEntity(pathPrefab) });
@@ -37,7 +34,6 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
     public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
     {
-        referencedPrefabs.Add(tilePrefab.gameObject);
         referencedPrefabs.Add(pathPrefab);
         referencedPrefabs.Add(moveRangePrefab);
     }
@@ -46,20 +42,19 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
     {
         var mapHolder = CreateMapHolder();
 
-        var tilePosY = -tileHeight;
-
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
                 var tilePos = GetPositionCellFromCoordinate(new Vector2Int(x, y));
-                tilePos.y = tilePosY;
+                tilePos.y -= 1;
 
                 var tile = Instantiate(tilePrefab, tilePos, Quaternion.identity, mapHolder);
 
-                tile.transform.localScale = new Vector3(tileRaius, tileHeight, tileRaius);
+                tile.transform.localScale = new Vector3(tileRadius, 1, tileRadius);
 
                 tile.indexInGrid = new int2(x, y);
+                tile.testIndices = Grid.PositionToGridIndex(tilePos, tilesMargin, tileRadius);
             }
         }
     }
@@ -86,20 +81,16 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         var column = coordinate.x;
         var row = coordinate.y;
 
-        var tileSize = tileOffset + tileRaius;
-
-        var width = Mathf.Sqrt(3) * tileSize;
-        var height = 2f * tileSize;
-
-        var horizontalDistance = width;
-        var verticalDistance = height * (3 / 4f);
+        var tileOffset = Grid.GetTileOffset(tilesMargin, tileRadius);
 
         var shouldOffset = (row % 2) == 1;
-        var offset = shouldOffset ? width / 2 : 0;
+        var oddRowOffset = shouldOffset ? tileOffset.x / 2 : 0;
 
-        var xPosition = (column * horizontalDistance) + offset;
-        var yPosition = row * verticalDistance;
+        var xPosition = (column * tileOffset.x) + oddRowOffset;
+        var zPosition = row * tileOffset.y;
 
-        return new Vector3(xPosition, 0, -yPosition);
+        var tilePos = new Vector3(xPosition, 0, zPosition);
+
+        return tilePos;
     }
 }

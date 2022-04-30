@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1514650238}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &200879896
 MonoBehaviour:
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9d78be1e986b448b2b7d40e2ddce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTileIndices: 1
+  showTileIndices: 0
   textPrefab: {fileID: 2930590222040506488, guid: 81afd08fcf5984f428368e76dc5b2c09, type: 3}
 --- !u!1 &850799360
 GameObject:
@@ -277,7 +277,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1514650238}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &850799363
 MonoBehaviour:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2882f5d2db58e4b9f43a70c53dc1e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0.00231399, g: 0.03773582, b: 0.01835406, a: 1}
+  hoverColor: {r: 0, g: 0.7689938, b: 0.8, a: 1}
 --- !u!1001 &1007502500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.7
+      value: 12.1
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 1283734556}
   - component: {fileID: 1283734557}
   m_Layer: 0
-  m_Name: MapEditor
+  m_Name: MapGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,9 +491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 11
   height: 11
-  tileRaius: 1
-  tileHeight: 1
-  tileOffset: 0.17
+  tileRadius: 1
+  tilesMargin: 0.17
   tilePrefab: {fileID: 4500278449099019359, guid: 61f06477d5b3da34bae6c7529e801b06, type: 3}
   moveRangePrefab: {fileID: 7469562289596992864, guid: 58c92eb0361abec49ab174192cf9b7dc, type: 3}
   pathPrefab: {fileID: 7469562289596992864, guid: d08b7079eaa180b4796584979acda044, type: 3}
@@ -553,8 +552,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 200879895}
   - {fileID: 850799362}
+  - {fileID: 200879895}
   - {fileID: 1079018808}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -612,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 4851757422368061674, guid: ff4e991a7b71fc1488319386fa44dda3, type: 3}
       propertyPath: m_LocalRotation.w

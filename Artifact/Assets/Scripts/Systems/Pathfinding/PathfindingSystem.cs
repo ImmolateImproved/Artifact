@@ -57,7 +57,7 @@ public partial class PathfindingSystem : SubSystem
 
         private DynamicBuffer<int2> path;
 
-        private NativeHashMap<int2, int> costs;
+        private NativeHashMap<int2, int> costSoFar;
         private NativeHashMap<int2, int2> pathTrack;
 
         private NativeMinHeap openSet;
@@ -70,7 +70,7 @@ public partial class PathfindingSystem : SubSystem
             this = default;
             this.grid = grid;
 
-            costs = new NativeHashMap<int2, int>(64, Allocator.Persistent);
+            costSoFar = new NativeHashMap<int2, int>(64, Allocator.Persistent);
             pathTrack = new NativeHashMap<int2, int2>(64, Allocator.Persistent);
 
             openSet = new NativeMinHeap(grid.width * grid.height * 5, Allocator.Persistent);
@@ -80,9 +80,9 @@ public partial class PathfindingSystem : SubSystem
 
         public void Dispose()
         {
-            if (costs.IsCreated)
+            if (costSoFar.IsCreated)
             {
-                costs.Dispose();
+                costSoFar.Dispose();
                 openSet.Dispose();
                 pathTrack.Dispose();
             }
@@ -97,13 +97,13 @@ public partial class PathfindingSystem : SubSystem
             this.end = end;
             this.path = path;
 
-            costs.Clear();
+            costSoFar.Clear();
             pathTrack.Clear();
             openSet.Clear();
 
             openSet.Push(new MinHeapNode(start, 0));
 
-            costs[start] = 0;
+            costSoFar[start] = 0;
 
             while (openSet.HasNext())
             {
@@ -126,13 +126,13 @@ public partial class PathfindingSystem : SubSystem
                     if (!grid.IsWalkable(neighborIndex) && !neighborIndex.Equals(end))
                         continue;
 
-                    var newCost = costs[currentNode] + 1;
-                    costs.TryGetValue(neighborIndex, out var oldCost);
+                    var newCost = costSoFar[currentNode] + 1;
+                    costSoFar.TryGetValue(neighborIndex, out var oldCost);
 
                     if (oldCost > 0 && newCost >= oldCost)
                         continue;
 
-                    costs[neighborIndex] = newCost;
+                    costSoFar[neighborIndex] = newCost;
                     pathTrack[neighborIndex] = currentNode;
 
                     var expectedCost = newCost + GetDistance(neighborIndex, end);
