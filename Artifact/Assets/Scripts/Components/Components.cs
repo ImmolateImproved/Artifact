@@ -27,11 +27,6 @@ public struct MousePosition : IComponentData
     public float2 value;
 }
 
-public struct DefaultColor : IComponentData
-{
-    public Color defaultColor;
-}
-
 public struct HoverColor : IComponentData
 {
     public Color value;

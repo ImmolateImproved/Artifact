@@ -1,20 +1,25 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 
-public class UnitSelectionViewSystem : SubSystem
+public partial class UnitSelectionViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
         var unitColors = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
-        var unitUi = this.GetSingleton<UnitUi>();
+        var unitUi = default(UnitUi);
+
+        if (this.HasSingleton<UnitUi>())
+        {
+            unitUi = this.GetSingleton<UnitUi>();
+        }
 
         Entities.WithAll<Selected>().WithNone<SelectedInternal>()
             .ForEach((UnitCombat unitCombat, in UnitSelectionPointer selectionPointer) =>
             {
                 EntityManager.SetEnabled(selectionPointer.value, true);
 
-                unitUi.Init(unitCombat);
+                unitUi?.Init(unitCombat);
 
             }).WithStructuralChanges().Run();
 
@@ -23,7 +28,7 @@ public class UnitSelectionViewSystem : SubSystem
             {
                 EntityManager.SetEnabled(selectionPointer.value, false);
 
-                unitUi.Reset(unitCombat);
+                unitUi?.Reset(unitCombat);
 
             }).WithStructuralChanges().Run();
     }

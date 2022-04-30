@@ -1,11 +1,11 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 using UnityEngine;
 using Unity.Physics;
 using Unity.Physics.Systems;
 using Unity.Mathematics;
 
-public class MouseHoverSystem : SubSystem
+public partial class MouseHoverSystem : SubSystem
 {
     private BuildPhysicsWorld physicsWorld;
 

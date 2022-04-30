@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ColorChanger
+  m_Shader: {fileID: -6465566751694194690, guid: bcd939d49c4dd3146bd6ccbd52083e99, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Boolean_55a0a46d88d34698a98cb23c9f994b67: 0
+    - Boolean_fb746f0a749f46998dc4ce660fffe08c: 0
+    - Vector1_7d702248d20c4227986b290a60a0c30c: 0.7
+    - _DynamicGlow: 0
+    - _Enabled: 1
+    - _Glow: 0
+    - _GlowPower: 1
+    - _Switch: 1
+    m_Colors:
+    - Color_ee970fcec9514786b30e526f54b9ace9: {r: 1.2950705, g: 3.1156769, b: 1.7079915, a: 1}
+    - _Color: {r: 0.047058824, g: 0.4, b: 0.20784314, a: 1}
+    - _GlowColor: {r: 1.082353, g: 2.6039217, b: 1.427451, a: 1}
+    - _SecondaryColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

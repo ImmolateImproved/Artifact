@@ -1,4 +1,4 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 
 public struct SelectedInternal : ISystemStateComponentData
@@ -6,7 +6,7 @@ public struct SelectedInternal : ISystemStateComponentData
 
 }
 
-public class UnitSelectionReactiveSystem : SubSystem
+public partial class UnitSelectionReactiveSystem : SubSystem
 {
     protected override void OnUpdate()
     {

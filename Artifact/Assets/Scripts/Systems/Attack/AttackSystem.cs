@@ -1,8 +1,8 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 using UnityEngine;
 
-public class AttackSystem : SubSystem
+public partial class AttackSystem : SubSystem
 {
     protected override void OnUpdate()
     {

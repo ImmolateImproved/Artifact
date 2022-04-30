@@ -9,23 +9,25 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
     public int width;
     public int height;
 
-    public float tileScale;
+    public float tileRaius = 1;
+    public float tileHeight;
+    public float tileOffset;
 
-    public GameObject tilePrefab;
+    public TileAuthoring tilePrefab;
     public GameObject moveRangePrefab;
     public GameObject pathPrefab;
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        var moveRangeTileScale = tileScale * 0.8f;
+        var moveRangeTileScale = tileRaius * 0.8f;
         moveRangePrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
         pathPrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
 
         dstManager.AddComponentData(entity, new GridConfiguration
         {
-            rows = height,
-            columns = width,
-            tileScale = tileScale,
+            height = height,
+            width = width,
+            tileScale = tileRaius,
             tilePrefab = conversionSystem.GetPrimaryEntity(tilePrefab)
         });
 
@@ -35,45 +37,69 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
     public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
     {
-        referencedPrefabs.Add(tilePrefab);
+        referencedPrefabs.Add(tilePrefab.gameObject);
         referencedPrefabs.Add(pathPrefab);
         referencedPrefabs.Add(moveRangePrefab);
     }
 
     public void BuildGrid()
     {
-        var holderName = "GeneratedMap";
+        var mapHolder = CreateMapHolder();
 
-        var mapHolder = GameObject.Find(holderName).transform;
+        var tilePosY = -tileHeight;
 
-        if (mapHolder)
+        for (int y = 0; y < height; y++)
         {
-            DestroyImmediate(mapHolder.gameObject);
-        }
-
-        mapHolder = new GameObject(holderName).transform;
-        mapHolder.gameObject.AddComponent<ConvertToEntity>();
-
-        for (int index = 0; index < width * height; index++)
-        {
-            float xOffset = 1.05f;
-            float zOffset = 0.9f;
-
-            int x = index % width;
-            int y = index / width;
-
-            float xPos = (x * xOffset * tileScale) - (width / 2);
-            float yPos = (y * zOffset * tileScale) - (height / 2);
-
-            if (y % 2 == 1)
+            for (int x = 0; x < width; x++)
             {
-                xPos += xOffset * tileScale / 2;
-            }
+                var tilePos = GetPositionCellFromCoordinate(new Vector2Int(x, y));
+                tilePos.y = tilePosY;
 
-            var tile = Instantiate(tilePrefab, new Vector3(xPos, 0f, yPos), Quaternion.identity, mapHolder);
-            tile.transform.localScale = new Vector3(tileScale, 1, tileScale);
-            tile.GetComponent<TileAuthoring>().indexInGrid = new int2(x, y);
+                var tile = Instantiate(tilePrefab, tilePos, Quaternion.identity, mapHolder);
+
+                tile.transform.localScale = new Vector3(tileRaius, tileHeight, tileRaius);
+
+                tile.indexInGrid = new int2(x, y);
+            }
         }
     }
 
+    private Transform CreateMapHolder()
+    {
+        var holderName = "GeneratedMap";
+
+        var mapHolder = GameObject.Find(holderName);
+
+        if (mapHolder)
+        {
+            DestroyImmediate(mapHolder);
+        }
+
+        mapHolder = new GameObject(holderName);
+        mapHolder.AddComponent<ConvertToEntity>();
+
+        return mapHolder.transform;
+    }
+
+    private Vector3 GetPositionCellFromCoordinate(Vector2Int coordinate)
+    {
+        var column = coordinate.x;
+        var row = coordinate.y;
+
+        var tileSize = tileOffset + tileRaius;
+
+        var width = Mathf.Sqrt(3) * tileSize;
+        var height = 2f * tileSize;
+
+        var horizontalDistance = width;
+        var verticalDistance = height * (3 / 4f);
+
+        var shouldOffset = (row % 2) == 1;
+        var offset = shouldOffset ? width / 2 : 0;
+
+        var xPosition = (column * horizontalDistance) + offset;
+        var yPosition = row * verticalDistance;
+
+        return new Vector3(xPosition, 0, -yPosition);
+    }
 }

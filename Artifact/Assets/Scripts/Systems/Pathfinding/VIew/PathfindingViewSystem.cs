@@ -1,11 +1,11 @@
-﻿using Latios;
+using Latios;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-public class PathfindingViewSystem : SubSystem
+public partial class PathfindingViewSystem : SubSystem
 {
     private EntityQuery pathTileQuery;
 

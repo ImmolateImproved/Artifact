@@ -36,7 +36,7 @@ public class PerFrameSuperSystem : SuperSystem
     protected override void CreateSystems()
     {
         //Initialization
-        GetOrCreateAndAddSystem<BuildGridSystem>();
+        GetOrCreateAndAddSystem<InitializeGridSystem>();
         GetOrCreateAndAddSystem<UnitInitializationSystem>();
         //
 

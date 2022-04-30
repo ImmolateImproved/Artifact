@@ -1,11 +1,12 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 using Unity.Collections;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using Unity.Rendering;
 
-public class MoveRangeViewSystem : SubSystem
+public partial class MoveRangeViewSystem : SubSystem
 {
     private EntityQuery moveRangeTileQuery;
 
@@ -16,6 +17,8 @@ public class MoveRangeViewSystem : SubSystem
 
     protected override void OnUpdate()
     {
+        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
+
         Entities.WithChangeFilter<Moving>()
             .ForEach((Entity e) =>
             {
@@ -29,8 +32,6 @@ public class MoveRangeViewSystem : SubSystem
                 EntityManager.DestroyEntity(moveRangeTileQuery);
 
             }).WithStructuralChanges().Run();
-
-        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
         Entities.WithAll<CalculateMoveRange>()
             .ForEach((Entity e, in IndexInGrid indexInGrid) =>

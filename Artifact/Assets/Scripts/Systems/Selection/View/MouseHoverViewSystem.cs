@@ -1,26 +1,27 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 using UnityEngine;
 using Unity.Rendering;
 
-public class MouseHoverViewSystem : SubSystem
+public partial class MouseHoverViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var unitColors = sceneBlackboardEntity.GetComponentData<HoverColor>();
+        var hoverColor = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
         Entities.WithAll<Hover>().WithNone<HoverInternal>()
-            .ForEach((ref URPMaterialPropertyBaseColor color) =>
+            .ForEach((ref SecondaryColorVector4Override color) =>
             {
-                color.Value = (Vector4)unitColors.value;
+                color.Value = (Vector4)hoverColor.value;
 
             }).Run();
 
         Entities.WithAll<HoverInternal>().WithNone<Hover>()
-            .ForEach((Entity e, ref URPMaterialPropertyBaseColor color, in DefaultColor entityColors) =>
+            .ForEach((Entity e, ref SecondaryColorVector4Override color) =>
             {
-                color.Value = (Vector4)entityColors.defaultColor;
+                color.Value = (Vector4)Color.black;
 
             }).Run();
+
     }
 }

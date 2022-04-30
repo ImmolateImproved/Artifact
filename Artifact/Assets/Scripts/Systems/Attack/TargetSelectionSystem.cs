@@ -1,34 +1,34 @@
-﻿using Latios;
+using Latios;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 
-public class TargetSelectionSystem : SubSystem
+public partial class TargetSelectionSystem : SubSystem
 {
     protected override void OnUpdate()
     {
         if (!TryGetSingletonEntity<Hover>(out var hoverTile))
             return;
 
-        var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>();
+        var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>().value;
 
-        if (selectedUnit.value == Entity.Null) return;
+        if (selectedUnit == Entity.Null) return;
 
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
         var mousePosition = GetSingleton<MousePosition>().value;
         var neighbors = HexTileNeighbors.Neighbors;
 
-        var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(selectedUnit.value, true).moveRangeHashSet;
+        var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(selectedUnit, true).moveRangeHashSet;
 
         Entities.ForEach((ref TargetManager targetManager) =>
         {
             var currentNode = GetComponent<IndexInGrid>(hoverTile).value;
-            var selectedUnitNode = GetComponent<IndexInGrid>(selectedUnit.value).value;
+            var selectedUnitNode = GetComponent<IndexInGrid>(selectedUnit).value;
 
             targetManager.moveTarget = -1;
             targetManager.attackTarget = -1;
 
-            var targetIsValid = selectedUnit.value != grid.GetUnit(currentNode);
+            var targetIsValid = selectedUnit != grid.GetUnit(currentNode);
 
             if (!targetIsValid)
                 return;
@@ -38,7 +38,7 @@ public class TargetSelectionSystem : SubSystem
 
             for (int i = 0; i < neighbors.Length; i++)
             {
-                var neighborNode = HexTileNeighbors.GetNeightbor(currentNode, neighbors[i]);
+                var neighborNode = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
                 if (!grid.IndexInRange(neighborNode))
                     continue;
 

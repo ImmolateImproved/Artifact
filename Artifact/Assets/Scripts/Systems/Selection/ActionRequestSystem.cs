@@ -1,7 +1,7 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 
-public class ActionRequestSystem : SubSystem
+public partial class ActionRequestSystem : SubSystem
 {
     private EntityQuery clickedTileQuery;
     private EntityQuery selectedQuery;

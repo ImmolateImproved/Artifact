@@ -1,4 +1,4 @@
-﻿using Latios;
+using Latios;
 using Unity.Entities;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public struct Movinginternal : ISystemStateComponentData
 
 }
 
-public class MovementReactionSystem : SubSystem
+public partial class MovementReactionSystem : SubSystem
 {
     protected override void OnUpdate()
     {

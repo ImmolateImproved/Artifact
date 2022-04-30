@@ -1,9 +1,9 @@
-﻿using Latios;
+using Latios;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-public class WaypointsMovementSystem : SubSystem
+public partial class WaypointsMovementSystem : SubSystem
 {
     protected override void OnUpdate()
     {

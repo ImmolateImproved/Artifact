@@ -10,7 +10,7 @@ public class AttackNodeManagerAuthoring : MonoBehaviour, IConvertGameObjectToEnt
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        var scale = gridAuthoring.tileScale * 0.8f;
+        var scale = gridAuthoring.tileRaius * 0.8f;
 
         attackPoiterPrefab.transform.localScale = new Vector3(scale, scale, scale);
 

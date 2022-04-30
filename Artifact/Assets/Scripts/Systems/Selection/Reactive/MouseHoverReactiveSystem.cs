@@ -1,4 +1,4 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 
 public struct HoverInternal : ISystemStateComponentData
@@ -6,7 +6,7 @@ public struct HoverInternal : ISystemStateComponentData
 
 }
 
-public class MouseHoverReactiveSystem : SubSystem
+public partial class MouseHoverReactiveSystem : SubSystem
 {
     protected override void OnUpdate()
     {

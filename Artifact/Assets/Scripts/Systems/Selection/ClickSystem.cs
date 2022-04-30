@@ -1,9 +1,9 @@
-﻿using Latios;
+using Latios;
 using Unity.Entities;
 using Unity.Physics;
 using Unity.Physics.Systems;
 
-public class ClickSystem : SubSystem
+public partial class ClickSystem : SubSystem
 {
     private EndSimulationEntityCommandBufferSystem ecbSystem;
 

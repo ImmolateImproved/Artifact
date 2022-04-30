@@ -7,8 +7,8 @@ using Unity.Mathematics;
 
 public struct GridConfiguration : IComponentData
 {
-    public int rows;
-    public int columns;
+    public int height;
+    public int width;
 
     public float tileScale;
 
@@ -33,19 +33,18 @@ public struct Grid : ICollectionComponent
 
     private NativeArray<Entity> units;
 
-    [NativeDisableParallelForRestriction]
     private NativeHashMap<int2, Entity> nodeToTile;
 
-    public readonly int columns;
-    public readonly int rows;
+    public readonly int width;
+    public readonly int height;
 
-    public Grid(int columns, int rows, Allocator allocator)
+    public Grid(int width, int height, Allocator allocator)
     {
-        this.columns = columns;
-        this.rows = rows;
-        nodePositions = new NativeArray<float2>(rows * columns, allocator);
-        units = new NativeArray<Entity>(rows * columns, allocator);
-        nodeToTile = new NativeHashMap<int2, Entity>(rows * columns, allocator);
+        this.width = width;
+        this.height = height;
+        nodePositions = new NativeArray<float2>(height * width, allocator);
+        units = new NativeArray<Entity>(height * width, allocator);
+        nodeToTile = new NativeHashMap<int2, Entity>(height * width, allocator);
     }
 
     public JobHandle Dispose(JobHandle inputDeps)
@@ -57,8 +56,8 @@ public struct Grid : ICollectionComponent
 
     public float2 this[int x, int y]
     {
-        get => nodePositions[y * columns + x];
-        set => nodePositions[y * columns + x] = value;
+        get => nodePositions[y * width + x];
+        set => nodePositions[y * width + x] = value;
     }
 
     public float2 this[int2 index]
@@ -114,11 +113,11 @@ public struct Grid : ICollectionComponent
 
     public int From2DIndex(int x, int y)
     {
-        return y * columns + x;
+        return y * width + x;
     }
 
     public bool IndexInRange(int2 index)
     {
-        return index.x >= 0 && index.x < columns && index.y >= 0 && index.y < rows;
+        return index.x >= 0 && index.x < width && index.y >= 0 && index.y < height;
     }
 }

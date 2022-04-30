@@ -1,9 +1,10 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 using Unity.Collections;
 using Unity.Mathematics;
+using UnityEngine;
 
-public class CalculateMoveRangeSystem : SubSystem
+public partial class CalculateMoveRangeSystem : SubSystem
 {
     private EntityQuery calculateMoveRangeQuery;
 
@@ -59,24 +60,28 @@ public class CalculateMoveRangeSystem : SubSystem
                 queue.Enqueue(indexInGrid.value);
                 moveRangeSet.Add(indexInGrid.value);
 
-                var currentRange = 0;
+                var maxRange = HexTileNeighbors.CalculateTilesCount(moveRange.value);
 
-                var maxRange = HexTileNeighbors.CalculateTilesCount(moveRange.value, neighbors.Length);
+                var visitedTiles = new NativeHashSet<int2>(maxRange, Allocator.Temp);
 
                 while (queue.Count > 0)
                 {
-                    if (currentRange++ >= maxRange)
+                    if (visitedTiles.Count() > maxRange)
                         break;
 
                     var node = queue.Dequeue();
 
                     for (int i = 0; i < neighbors.Length; i++)
                     {
-                        var neighborNode = HexTileNeighbors.GetNeightbor(node, neighbors[i]);
+                        var neighborNode = HexTileNeighbors.GetNeighbor(node, neighbors[i]);
+
+                        if (visitedTiles.Add(neighborNode))
+                        {
+                            queue.Enqueue(neighborNode);
+                        }
 
                         if (grid.IndexInRange(neighborNode) && !grid.HasUnit(neighborNode))
                         {
-                            queue.Enqueue(neighborNode);
                             moveRangeSet.Add(neighborNode);
                         }
                     }

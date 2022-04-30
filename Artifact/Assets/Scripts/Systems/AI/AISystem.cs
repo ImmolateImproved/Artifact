@@ -1,8 +1,8 @@
-﻿using Latios;
+using Latios;
 using Unity.Entities;
 using Unity.Mathematics;
 
-public class AISystem : SubSystem
+public partial class AISystem : SubSystem
 {
     private Random random;
 
@@ -25,7 +25,7 @@ public class AISystem : SubSystem
 
         Entities.ForEach((Entity e, in DynamicBuffer<AIUnits> aIUnits) =>
         {
-            var gridPos = random.NextInt2(int2.zero, new int2(map.columns, map.rows));
+            var gridPos = random.NextInt2(int2.zero, new int2(map.width, map.height));
 
             //if (!map.IsWalkable(gridPos))
             //    return;

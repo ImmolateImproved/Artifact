@@ -13,10 +13,12 @@ public static class HexTileNeighbors
         [5] = new int2(-1, -1)
     };
 
-    public static int2 GetNeightbor(int2 currentNode, int2 neighborOffset)
+    public static int2 GetNeighbor(int2 currentNode, int2 neighborOffset)
     {
         //for hex grid, if we on odd row - change the sign of a neighborOffset
-        neighborOffset = math.select(neighborOffset, -neighborOffset, currentNode.y % 2 == 1);
+        //neighborOffset = math.select(neighborOffset, -neighborOffset, currentNode.y % 2 == 1);
+
+        neighborOffset = currentNode.y % 2 == 0 ? neighborOffset : -neighborOffset;
 
         return currentNode + neighborOffset;
     }
@@ -25,7 +27,7 @@ public static class HexTileNeighbors
     {
         for (int i = 0; i < array.Length; i++)
         {
-            if (GetNeightbor(nodeA, array[i]).Equals(nodeB))
+            if (GetNeighbor(nodeA, array[i]).Equals(nodeB))
             {
                 return true;
             }
@@ -34,11 +36,13 @@ public static class HexTileNeighbors
         return false;
     }
 
-    public static int CalculateTilesCount(int moveRange, int neighborCount)
+    public static int CalculateTilesCount(int moveRange)
     {
-        var count = moveRange == 0 ? 0 : 1;
+        var neighborCount = 6;
 
-        for (int i = 0; i < moveRange; i++)
+        var count = 0;
+
+        for (int i = 1; i <= moveRange; i++)
         {
             count += neighborCount * i;
         }

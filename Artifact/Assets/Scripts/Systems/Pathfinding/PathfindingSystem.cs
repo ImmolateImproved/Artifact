@@ -1,11 +1,11 @@
-﻿using Latios;
+using Latios;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PathfindingSystem : SubSystem
+public partial class PathfindingSystem : SubSystem
 {
     private FindPathData findPathData;
 
@@ -73,7 +73,7 @@ public class PathfindingSystem : SubSystem
             costs = new NativeHashMap<int2, int>(64, Allocator.Persistent);
             pathTrack = new NativeHashMap<int2, int2>(64, Allocator.Persistent);
 
-            openSet = new NativeMinHeap(grid.columns * grid.rows * 5, Allocator.Persistent);
+            openSet = new NativeMinHeap(grid.width * grid.height * 5, Allocator.Persistent);
 
             neighbors = HexTileNeighbors.Neighbors;
         }
@@ -118,7 +118,7 @@ public class PathfindingSystem : SubSystem
 
                 for (int i = 0; i < neighbors.Length; i++)
                 {
-                    var neighborIndex = HexTileNeighbors.GetNeightbor(currentNode, neighbors[i]);
+                    var neighborIndex = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
 
                     if (!grid.IndexInRange(neighborIndex))
                         continue;

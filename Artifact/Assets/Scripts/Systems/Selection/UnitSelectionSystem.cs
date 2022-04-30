@@ -1,10 +1,10 @@
-﻿using Latios;
+using Latios;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Rendering;
 using UnityEngine;
 
-public class UnitSelectionSystem : SubSystem
+public partial class UnitSelectionSystem : SubSystem
 {
     private EntityQuery selectedQuery;
 

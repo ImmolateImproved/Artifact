@@ -1,9 +1,9 @@
-﻿using Latios;
+using Latios;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 
-public class UnitInitializationSystem : SubSystem
+public partial class UnitInitializationSystem : SubSystem
 {
     private BeginInitializationEntityCommandBufferSystem ecbSystem;
 
@@ -19,7 +19,7 @@ public class UnitInitializationSystem : SubSystem
         Entities.WithNone<MoveRangeAssociated>()
             .ForEach((Entity e, in MoveRange moveRange, in UnitSelectionPointer selectionPointer) =>
             {
-                var moveRangeSet = new MoveRangeSet(HexTileNeighbors.CalculateTilesCount(moveRange.value, 6), Allocator.Persistent);
+                var moveRangeSet = new MoveRangeSet(HexTileNeighbors.CalculateTilesCount(moveRange.value), Allocator.Persistent);
                 EntityManager.AddCollectionComponent(e, moveRangeSet);
 
                 ecb.AddComponent<Disabled>(selectionPointer.value);

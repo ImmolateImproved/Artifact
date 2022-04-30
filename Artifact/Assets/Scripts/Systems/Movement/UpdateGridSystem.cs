@@ -1,8 +1,8 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Latios;
 using UnityEngine;
 
-public class UpdateGridSystem : SubSystem
+public partial class UpdateGridSystem : SubSystem
 {
     protected override void OnUpdate()
     {
