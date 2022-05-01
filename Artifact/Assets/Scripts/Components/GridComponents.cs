@@ -69,26 +69,6 @@ public struct Grid : ICollectionComponent
         nodeToTile.Add(nodeIndex, tile);
     }
 
-    public static Vector2 GetTileOffset(float tilesMargin, float tileRadius)
-    {
-        var tileSlotRadius = ((tilesMargin * tileRadius) + tileRadius);
-
-        var xOffset = Mathf.Sqrt(3) * tileSlotRadius;
-        var yOffset = 2f * tileSlotRadius;
-
-        return new Vector2(xOffset, yOffset * (3 / 4f));
-    }
-
-    public static int2 PositionToGridIndex(Vector3 position, float tilesMargin, float tileRadius)
-    {
-        var tileOffset = GetTileOffset(tilesMargin, tileRadius);
-
-        var xIndex = Mathf.FloorToInt(position.x / tileOffset.x);
-        var yIndex = Mathf.RoundToInt(position.z / tileOffset.y);
-
-        return new int2(xIndex, yIndex);
-    }
-
     public Entity GetTile(int2 index)
     {
         return nodeToTile.TryGetValue(index, out var tile) ? tile : Entity.Null;
@@ -137,5 +117,25 @@ public struct Grid : ICollectionComponent
     public bool IndexInRange(int2 index)
     {
         return index.x >= 0 && index.x < width && index.y >= 0 && index.y < height;
+    }
+
+    public static Vector2 GetTileOffset(float tilesMargin, float tileRadius)
+    {
+        var tileSlotRadius = ((tilesMargin * tileRadius) + tileRadius);
+
+        var xOffset = Mathf.Sqrt(3) * tileSlotRadius;
+        var yOffset = 2f * tileSlotRadius;
+
+        return new Vector2(xOffset, yOffset * (3 / 4f));
+    }
+
+    public static int2 PositionToGridIndex(Vector3 position, float tilesMargin, float tileRadius)
+    {
+        var tileOffset = GetTileOffset(tilesMargin, tileRadius);
+
+        var xIndex = Mathf.FloorToInt(position.x / tileOffset.x);
+        var yIndex = Mathf.RoundToInt(position.z / tileOffset.y);
+
+        return new int2(xIndex, yIndex);
     }
 }
