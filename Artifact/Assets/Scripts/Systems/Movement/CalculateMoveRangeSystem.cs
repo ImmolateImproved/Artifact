@@ -60,15 +60,12 @@ public partial class CalculateMoveRangeSystem : SubSystem
                 queue.Enqueue(indexInGrid.value);
                 moveRangeSet.Add(indexInGrid.value);
 
-                var maxRange = HexTileNeighbors.CalculateTilesCount(moveRange.value);
+                var tilesInMoveRange = HexTileNeighbors.CalculateTilesCount(moveRange.value);
 
-                var visitedTiles = new NativeHashSet<int2>(maxRange, Allocator.Temp);
+                var visitedTiles = new NativeHashSet<int2>(tilesInMoveRange, Allocator.Temp);
 
-                while (queue.Count > 0)
+                while (visitedTiles.Count() <= tilesInMoveRange)
                 {
-                    if (visitedTiles.Count() > maxRange)
-                        break;
-
                     var node = queue.Dequeue();
 
                     for (int i = 0; i < neighbors.Length; i++)

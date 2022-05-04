@@ -91,8 +91,14 @@ public partial class InitializeGridSystem : SubSystem
             {
                 grid.SetUnit(gridIndex.value, entity);
 
-                var position = grid[gridIndex.value];
-                translation.Value = new float3(position.x, translation.Value.y, position.y);
+                var positionResult = grid[gridIndex.value];
+
+                if (positionResult != null)
+                {
+                    var position = positionResult.Value;
+
+                    translation.Value = new float3(position.x, translation.Value.y, position.y);
+                }
 
             }).Run();
     }
@@ -109,9 +115,14 @@ public partial class InitializeGridSystem : SubSystem
                 int x = index % config.width;
                 int y = index / config.width;
 
-                var pos = grid[new int2(x, y)];
-                var text = GameObject.Instantiate(tileText.textPrefab, new float3(pos.x, 0.201f, pos.y), Quaternion.Euler(90, 0, 0), parent);
-                text.text = $"{x}.{y}";
+                var positionResult = grid[new int2(x, y)];
+
+                if (positionResult != null)
+                {
+                    var pos = positionResult.Value;
+                    var text = GameObject.Instantiate(tileText.textPrefab, new float3(pos.x, 0.201f, pos.y), Quaternion.Euler(90, 0, 0), parent);
+                    text.text = $"{x}.{y}";
+                }
             }
         }
     }

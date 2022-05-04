@@ -51,7 +51,7 @@ public partial class MoveRangeViewSystem : SubSystem
                 var tiles = EntityManager.Instantiate(pathPrefab, nodes.Length, Allocator.Temp);
                 for (int i = 0; i < tiles.Length; i++)
                 {
-                    var node = grid[nodes[i]];
+                    var node = grid[nodes[i]].Value;
                     var pos = new float3(node.x, 0.05f, node.y);
 
                     EntityManager.SetComponentData(tiles[i], new Translation { Value = pos });

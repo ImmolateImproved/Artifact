@@ -29,7 +29,7 @@ public partial class WaypointsMovementSystem : SubSystem
             {
                 var currentNode = path[waypointsMovement.currentWaypointIndex].nodeIndex;
 
-                var position = grid[currentNode];
+                var position = grid[currentNode].Value;
 
                 var nextPosition = new float3(position.x, translation.Value.y, position.y);
 

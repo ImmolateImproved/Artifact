@@ -29,7 +29,7 @@ public partial class PathfindingViewSystem : SubSystem
 
                 for (int i = 0; i < tiles.Length; i++)
                 {
-                    var pos = grid[pathArray[i]];
+                    var pos = grid[pathArray[i]].Value;
 
                     EntityManager.SetComponentData(tiles[i], new Translation
                     {

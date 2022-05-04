@@ -26,9 +26,9 @@ public struct GridTag : IComponentData { }
 
 public struct Grid : ICollectionComponent
 {
-    private NativeArray<float2> nodePositions;
+    private NativeHashMap<int2, float2> nodePositions;
 
-    private NativeArray<Entity> units;
+    private NativeHashMap<int2, Entity> units;
 
     private NativeHashMap<int2, Entity> nodeToTile;
 
@@ -40,8 +40,8 @@ public struct Grid : ICollectionComponent
         width = gridConfig.width;
         height = gridConfig.height;
 
-        nodePositions = new NativeArray<float2>(height * width, allocator);
-        units = new NativeArray<Entity>(height * width, allocator);
+        nodePositions = new NativeHashMap<int2, float2>(height * width, allocator);
+        units = new NativeHashMap<int2, Entity>(height * width, allocator);
         nodeToTile = new NativeHashMap<int2, Entity>(height * width, allocator);
     }
 
@@ -52,16 +52,36 @@ public struct Grid : ICollectionComponent
 
     public Type AssociatedComponentType => typeof(GridTag);
 
-    public float2 this[int x, int y]
+    public float2? this[int x, int y]
     {
-        get => nodePositions[y * width + x];
-        set => nodePositions[y * width + x] = value;
+        get
+        {
+            var index = new int2(x, y);
+            return this[index];
+        }
+        set
+        {
+            var index = new int2(x, y);
+            this[index] = value;
+        }
     }
 
-    public float2 this[int2 index]
+    public float2? this[int2 index]
     {
-        get => this[index.x, index.y];
-        set => this[index.x, index.y] = value;
+        get
+        {
+            if (nodePositions.TryGetValue(index, out var position))
+            {
+                return position;
+            }
+
+            return null;
+        }
+
+        set
+        {
+            nodePositions[index] = value.Value;
+        }
     }
 
     public void InitTile(int2 nodeIndex, Entity tile)
@@ -76,17 +96,14 @@ public struct Grid : ICollectionComponent
 
     public void SetUnit(int2 index, Entity unit)
     {
-        units[From2DIndex(index)] = unit;
-    }
-
-    public void RemoveUnit(int2 index)
-    {
-        units[From2DIndex(index)] = Entity.Null;
+        units[index] = unit;
     }
 
     public Entity GetUnit(int2 index)
     {
-        return IndexInRange(index) ? units[From2DIndex(index)] : Entity.Null;
+        units.TryGetValue(index, out var unit);
+
+        return IndexInRange(index) ? unit : Entity.Null;
     }
 
     public bool HasUnit(int2 index)
@@ -94,48 +111,25 @@ public struct Grid : ICollectionComponent
         return IndexInRange(index) && (GetUnit(index) != Entity.Null);
     }
 
+    public void RemoveUnit(int2 index)
+    {
+        units[index] = Entity.Null;
+    }
+
     public bool IsWalkable(int2 index)
     {
-        return IsWalkable(index.x, index.y);
+        return GetUnit(index) == Entity.Null;
     }
 
     public bool IsWalkable(int x, int y)
     {
-        return GetUnit(new int2(x, y)) == Entity.Null;
-    }
-
-    public int From2DIndex(int2 index)
-    {
-        return From2DIndex(index.x, index.y);
-    }
-
-    public int From2DIndex(int x, int y)
-    {
-        return y * width + x;
+        return IsWalkable(new int2(x, y));
     }
 
     public bool IndexInRange(int2 index)
     {
-        return index.x >= 0 && index.x < width && index.y >= 0 && index.y < height;
-    }
+        var cellExist = nodePositions.TryGetValue(index, out var _);
 
-    public static Vector2 GetTileOffset(float tilesMargin, float tileRadius)
-    {
-        var tileSlotRadius = ((tilesMargin * tileRadius) + tileRadius);
-
-        var xOffset = Mathf.Sqrt(3) * tileSlotRadius;
-        var yOffset = 2f * tileSlotRadius;
-
-        return new Vector2(xOffset, yOffset * (3 / 4f));
-    }
-
-    public static int2 PositionToGridIndex(Vector3 position, float tilesMargin, float tileRadius)
-    {
-        var tileOffset = GetTileOffset(tilesMargin, tileRadius);
-
-        var xIndex = Mathf.FloorToInt(position.x / tileOffset.x);
-        var yIndex = Mathf.RoundToInt(position.z / tileOffset.y);
-
-        return new int2(xIndex, yIndex);
+        return cellExist;
     }
 }

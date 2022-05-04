@@ -42,7 +42,7 @@ public partial class TargetSelectionSystem : SubSystem
                 if (!grid.IndexInRange(neighborNode))
                     continue;
 
-                var tilePos = grid[neighborNode];
+                var tilePos = grid[neighborNode].Value;
 
                 var distance = math.distancesq(mousePosition, tilePos);
                 if (distance < minDistance)

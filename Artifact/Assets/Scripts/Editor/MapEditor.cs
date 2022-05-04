@@ -14,7 +14,7 @@ public class MapEditor : Editor
 
         if (GUILayout.Button("Generate map"))
         {
-            grid.BuildGrid();
+            grid.GenerateGrid();
         }
     }
 }

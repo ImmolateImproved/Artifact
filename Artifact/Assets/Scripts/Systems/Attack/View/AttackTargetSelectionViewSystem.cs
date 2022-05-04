@@ -30,8 +30,8 @@ public partial class AttackTargetSelectionViewSystem : SubSystem
 
                 attackNodeView.attackPointerEntity = EntityManager.Instantiate(attackNodeView.attackPointerPrefab);
 
-                var moveNodePos = grid[moveNode];
-                var attackTargetPos = grid[attackTarget];
+                var moveNodePos = grid[moveNode].Value;
+                var attackTargetPos = grid[attackTarget].Value;
 
                 //rotation
                 var direction2D = attackTargetPos - moveNodePos;
