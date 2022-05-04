@@ -66,7 +66,6 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
                     break;
                 }
         }
-
     }
 
     private void GenerateSquareGrid()
@@ -112,7 +111,7 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         }
     }
 
-    public HashSet<int2> BuidGridBFS()
+    private HashSet<int2> BuidGridBFS()
     {
         var neighbors = HexTileNeighbors.Neighbors;
 
@@ -176,16 +175,6 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         return tilePos;
     }
 
-    private Vector2 GetTileOffset()
-    {
-        var tileSlotRadius = ((tilesMargin * tileRadius) + tileRadius);
-
-        var xOffset = Mathf.Sqrt(3) * tileSlotRadius;
-        var yOffset = 2f * tileSlotRadius;
-
-        return new Vector2(xOffset, yOffset * (3 / 4f));
-    }
-
     private int2 PositionToGridIndex(Vector3 position)
     {
         var tileOffset = GetTileOffset();
@@ -194,5 +183,15 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         var yIndex = Mathf.RoundToInt(position.z / tileOffset.y);
 
         return new int2(xIndex, yIndex);
+    }
+
+    private Vector2 GetTileOffset()
+    {
+        var tileSlotRadius = (tilesMargin * tileRadius) + tileRadius;
+
+        var xOffset = Mathf.Sqrt(3) * tileSlotRadius;
+        var yOffset = tileSlotRadius * (3 / 2f);
+
+        return new Vector2(xOffset, yOffset);
     }
 }
