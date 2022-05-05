@@ -33,14 +33,3 @@ public struct AttackRequest : IComponentData
 {
     
 }
-
-//class components
-public class UnitCombat : IComponentData
-{
-    public UnitCombatBehaviour combatBehaviour;
-
-    public UnitCombat()
-    {
-
-    }
-}

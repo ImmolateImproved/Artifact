@@ -63,8 +63,9 @@ public partial class CalculateMoveRangeSystem : SubSystem
                 var tilesInMoveRange = HexTileNeighbors.CalculateTilesCount(moveRange.value);
 
                 var visitedTiles = new NativeHashSet<int2>(tilesInMoveRange, Allocator.Temp);
+                visitedTiles.Add(indexInGrid.value);
 
-                while (visitedTiles.Count() <= tilesInMoveRange)
+                while (visitedTiles.Count() < tilesInMoveRange)
                 {
                     var node = queue.Dequeue();
 

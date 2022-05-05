@@ -6,8 +6,6 @@ public class TileAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 {
     public int2 indexInGrid;
 
-    public int2 testIndices;
-
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
         dstManager.AddComponentData(entity, new TileTag { });

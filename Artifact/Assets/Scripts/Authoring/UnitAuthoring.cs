@@ -9,17 +9,9 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclare
 
     public GameObject selectionPointer;
 
-    public UnitCombatBehaviour combatBehaviour;
-
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
         dstManager.AddComponentData(entity, new MoveRange { value = moveRange });
-
-        dstManager.AddComponentObject(entity, new UnitCombat
-        {
-            combatBehaviour = combatBehaviour
-
-        });
 
         dstManager.AddComponent<UnitTag>(entity);
         dstManager.AddComponent<Selectable>(entity);

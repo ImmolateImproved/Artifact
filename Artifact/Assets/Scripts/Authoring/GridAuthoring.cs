@@ -1,43 +1,41 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
-
-public enum GridType
-{
-    Square, Circle
-}
 
 [DisallowMultipleComponent]
 public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertGameObjectToEntity
 {
-    public GridType gridType;
-
-    [Header("For square grid")]
-    public int width;
-    public int height;
-
-    [Header("For circle grid")]
     public int gridRadius;
 
     [Space]
-    public float tileRadius = 1;
+    public float tileSize = 1;
     public float tilesMargin;
 
     public TileAuthoring tilePrefab;
     public GameObject moveRangePrefab;
     public GameObject pathPrefab;
 
+    public TextMeshPro indicesTextPrefab;
+    public bool showTileIndices;
+
+    public float TileSlotRadius
+    {
+        get => (tilesMargin * tileSize) + tileSize;
+    }
+
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        var moveRangeTileScale = tileRadius * 0.8f;
+        var moveRangeTileScale = tileSize * 0.8f;
         moveRangePrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
         pathPrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
 
         dstManager.AddComponentData(entity, new GridConfiguration
         {
-            height = height,
-            width = width
+            gridRadius = gridRadius,
+            tileSlotRadius = TileSlotRadius
         });
 
         dstManager.AddComponentData(entity, new PathPrefab { prefab = conversionSystem.GetPrimaryEntity(pathPrefab) });
@@ -52,66 +50,31 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
     public void GenerateGrid()
     {
-        switch (gridType)
-        {
-            case GridType.Square:
-                {
-                    GenerateSquareGrid();
-                    break;
-                }
+        GenerateCircleGrid();
 
-            case GridType.Circle:
-                {
-                    GenerateCircleGrid();
-                    break;
-                }
-        }
-    }
-
-    private void GenerateSquareGrid()
-    {
-        var mapHolder = CreateMapHolder();
-
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                var tilePos = GetPositionCellFromCoordinate(new Vector2Int(x, y));
-                tilePos.y -= 1;
-
-                var tile = Instantiate(tilePrefab, tilePos, Quaternion.identity, mapHolder);
-
-                tile.transform.localScale = new Vector3(tileRadius, 1, tileRadius);
-
-                tile.indexInGrid = new int2(x, y);
-                tile.testIndices = PositionToGridIndex(tilePos);
-            }
-        }
+        SpawnTileText();
     }
 
     private void GenerateCircleGrid()
     {
-        var mapHolder = CreateMapHolder();
+        var mapHolder = CreateHolder("GeneratedMap", true);
 
-        var nodes = BuidGridBFS();
+        var nodes = BuildGridBFSAxial();
 
         foreach (var node in nodes)
         {
-            var vectorNode = new Vector2Int(node.x, node.y);
+            var position = NodeToPosition(node);
+            position.y = -1;
 
-            var tilePos = GetPositionCellFromCoordinate(vectorNode);
-            tilePos.y -= 1;
+            var tile = Instantiate(tilePrefab, position, Quaternion.identity, mapHolder);
 
-            var tile = Instantiate(tilePrefab, tilePos, Quaternion.identity, mapHolder);
+            tile.transform.localScale = new Vector3(tileSize, 1, tileSize);
 
-            tile.transform.localScale = new Vector3(tileRadius, 1, tileRadius);
-
-            tile.indexInGrid = new int2(node.x, node.y);
-            tile.testIndices = PositionToGridIndex(tilePos);
+            tile.indexInGrid = node;
         }
     }
 
-    private HashSet<int2> BuidGridBFS()
+    private HashSet<int2> BuildGridBFSAxial()
     {
         var neighbors = HexTileNeighbors.Neighbors;
 
@@ -120,9 +83,10 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         var queue = new Queue<int2>(tileInGridRadius);
         var visited = new HashSet<int2>();
 
-        queue.Enqueue(new int2(gridRadius, gridRadius));
+        queue.Enqueue(0);
+        visited.Add(0);
 
-        while (visited.Count <= tileInGridRadius)
+        while (visited.Count < tileInGridRadius)
         {
             var node = queue.Dequeue();
 
@@ -140,10 +104,50 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         return visited;
     }
 
-    private Transform CreateMapHolder()
+    private float3 NodeToPosition(int2 node)
     {
-        var holderName = "GeneratedMap";
+        var position = TileSlotRadius * math.mul(Grid.NodeToPositionMatrix, node);
 
+        return new float3(position.x, 0, position.y);
+    }
+
+    private int2 OddrToAxial(int2 node)
+    {
+        var q = node.x - (node.y - (node.y & 1)) / 2;
+        var r = node.y;
+
+        return new int2(q, r);
+    }
+
+    private void SpawnTileText()
+    {
+        if (!showTileIndices)
+            return;
+
+        var holderName = "GeneratedMap";
+        var tilesParent = GameObject.Find(holderName);
+
+        if (!tilesParent)
+            return;
+
+        var textParent = CreateHolder("Text");
+
+        SceneVisibilityManager.instance.DisablePicking(textParent.gameObject, true);
+
+        foreach (var tile in tilesParent.transform.GetComponentsInChildren<TileAuthoring>())
+        {
+            var textPos = new float3(tile.transform.position.x, 0.201f, tile.transform.position.z);
+
+            var text = GameObject.Instantiate(indicesTextPrefab, textPos, Quaternion.Euler(90, 0, 0), textParent);
+
+            var index = tile.indexInGrid;
+
+            text.text = $"{index.x}.{index.y}";
+        }
+    }
+
+    private Transform CreateHolder(string holderName, bool addConvertion = false)
+    {
         var mapHolder = GameObject.Find(holderName);
 
         if (mapHolder)
@@ -152,46 +156,9 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         }
 
         mapHolder = new GameObject(holderName);
-        mapHolder.AddComponent<ConvertToEntity>();
+        if (addConvertion)
+            mapHolder.AddComponent<ConvertToEntity>();
 
         return mapHolder.transform;
-    }
-
-    private Vector3 GetPositionCellFromCoordinate(Vector2Int coordinate)
-    {
-        var column = coordinate.x;
-        var row = coordinate.y;
-
-        var tileOffset = GetTileOffset();
-
-        var shouldOffset = (row % 2) == 1;
-        var oddRowOffset = shouldOffset ? tileOffset.x / 2 : 0;
-
-        var xPosition = (column * tileOffset.x) + oddRowOffset;
-        var zPosition = row * tileOffset.y;
-
-        var tilePos = new Vector3(xPosition, 0, zPosition);
-
-        return tilePos;
-    }
-
-    private int2 PositionToGridIndex(Vector3 position)
-    {
-        var tileOffset = GetTileOffset();
-
-        var xIndex = Mathf.FloorToInt(position.x / tileOffset.x);
-        var yIndex = Mathf.RoundToInt(position.z / tileOffset.y);
-
-        return new int2(xIndex, yIndex);
-    }
-
-    private Vector2 GetTileOffset()
-    {
-        var tileSlotRadius = (tilesMargin * tileRadius) + tileRadius;
-
-        var xOffset = Mathf.Sqrt(3) * tileSlotRadius;
-        var yOffset = tileSlotRadius * (3 / 2f);
-
-        return new Vector2(xOffset, yOffset);
     }
 }

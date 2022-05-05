@@ -25,7 +25,7 @@ public partial class AISystem : SubSystem
 
         Entities.ForEach((Entity e, in DynamicBuffer<AIUnits> aIUnits) =>
         {
-            var gridPos = random.NextInt2(int2.zero, new int2(map.width, map.height));
+            var gridPos = random.NextInt2(int2.zero, new int2(5, 5));
 
             //if (!map.IsWalkable(gridPos))
             //    return;

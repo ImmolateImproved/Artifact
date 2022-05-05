@@ -7,33 +7,17 @@ using UnityEngine;
 
 public partial class PathfindingSystem : SubSystem
 {
-    private FindPathData findPathData;
-
-    protected override void OnStartRunning()
+    protected override void OnUpdate()
     {
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        findPathData.Dispose();
-        findPathData = new FindPathData(grid);
-    }
-
-    protected override void OnStopRunning()
-    {
-        findPathData.Dispose();
-    }
-
-    protected override void OnDestroy()
-    {
-        findPathData.Dispose();
-    }
-
-    protected override void OnUpdate()
-    {
-        var findPathData = this.findPathData;
+        var neighbors = HexTileNeighbors.Neighbors;
 
         Entities.WithAll<ActionRequest>()
             .ForEach((ref DynamicBuffer<UnitPath> pathBuffer, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
             {
+                var findPathData = new FindPathData(grid, neighbors);
+
                 pathBuffer.Clear();
                 if (gridPosition.value.Equals(pathfindingTarget.node))
                     return;
@@ -65,17 +49,17 @@ public partial class PathfindingSystem : SubSystem
         private int2 start;
         private int2 end;
 
-        public FindPathData(Grid grid)
+        public FindPathData(Grid grid, NativeArray<int2> neighbors)
         {
             this = default;
             this.grid = grid;
 
-            costSoFar = new NativeHashMap<int2, int>(64, Allocator.Persistent);
-            pathTrack = new NativeHashMap<int2, int2>(64, Allocator.Persistent);
+            costSoFar = new NativeHashMap<int2, int>(64, Allocator.Temp);
+            pathTrack = new NativeHashMap<int2, int2>(64, Allocator.Temp);
 
-            openSet = new NativeMinHeap(grid.width * grid.height * 5, Allocator.Persistent);
+            openSet = new NativeMinHeap(grid.NodeCount * grid.NodeCount * 5, Allocator.Temp);
 
-            neighbors = HexTileNeighbors.Neighbors;
+            this.neighbors = neighbors;
         }
 
         public void Dispose()
@@ -164,15 +148,11 @@ public partial class PathfindingSystem : SubSystem
             }
         }
 
-        private int GetDistance(int2 p0, int2 p1)
+        private int GetDistance(int2 a, int2 b)
         {
-            var dist = math.abs(p0 - p1);
+            var result = (math.abs(a.x - b.x) + math.abs(a.x + a.y - b.x - b.y) + math.abs(a.y - b.y)) / 2;
 
-            var multiplier = 2;
-
-            return dist.x > dist.y
-                   ? multiplier * dist.y + (dist.x - dist.y)
-                   : multiplier * dist.x + (dist.y - dist.x);
+            return result;
         }
     }
 }
