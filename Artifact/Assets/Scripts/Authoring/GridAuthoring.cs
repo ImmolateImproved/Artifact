@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEditor;
@@ -28,7 +29,7 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        var moveRangeTileScale = tileSize * 0.8f;
+        var moveRangeTileScale = tileSize;
         moveRangePrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
         pathPrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
 
