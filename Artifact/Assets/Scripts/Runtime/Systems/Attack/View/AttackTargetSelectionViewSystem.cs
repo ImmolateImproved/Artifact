@@ -6,6 +6,11 @@ using UnityEngine;
 
 public partial class AttackTargetSelectionViewSystem : SubSystem
 {
+    protected override void OnCreate()
+    {
+        RequireSingletonForUpdate<Selected>();
+    }
+
     protected override void OnUpdate()
     {
         Entities.ForEach((ref AttackNodeView attackNodeView, in TargetManager targetData) =>
@@ -21,7 +26,7 @@ public partial class AttackTargetSelectionViewSystem : SubSystem
             var moveNode = targetData.moveTarget.Value;
             var attackTarget = targetData.attackTarget.Value;
 
-            if (!attackNodeView.moveNode.Equals(moveNode) || !attackNodeView.attackTarget.Equals(attackTarget))
+            if (!EntityManager.Exists(attackNodeView.attackPointerEntity) || !attackNodeView.moveNode.Equals(moveNode) || !attackNodeView.attackTarget.Equals(attackTarget))
             {
                 attackNodeView.moveNode = moveNode;
                 attackNodeView.attackTarget = attackTarget;

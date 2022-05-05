@@ -6,14 +6,24 @@ using UnityEngine;
 
 public partial class TargetSelectionSystem : SubSystem
 {
+    protected override void OnCreate()
+    {
+        RequireSingletonForUpdate<Selected>();
+    }
+
     protected override void OnUpdate()
     {
         if (!TryGetSingletonEntity<Hover>(out var hoverTile))
+        {
             return;
+        }
 
         var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>().value;
 
-        if (selectedUnit == Entity.Null) return;
+        if (selectedUnit == Entity.Null)
+        {
+            return;
+        }
 
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
         var mousePosition = GetSingleton<MousePosition>().value;
