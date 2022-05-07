@@ -33,7 +33,7 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         moveRangePrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
         pathPrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
 
-        dstManager.AddComponentData(entity, new GridConfiguration
+        dstManager.AddComponentData(entity, new GridConfig
         {
             gridRadius = gridRadius,
             tileSlotRadius = TileSlotRadius
@@ -64,7 +64,7 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
         foreach (var node in nodes)
         {
-            var position = NodeToPosition(node);
+            var position = GridConfig.NodeToPosition(node, TileSlotRadius);
             position.y = -1;
 
             var tile = Instantiate(tilePrefab, position, Quaternion.identity, mapHolder);
@@ -103,21 +103,6 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         }
 
         return visited;
-    }
-
-    private float3 NodeToPosition(int2 node)
-    {
-        var position = TileSlotRadius * math.mul(Grid.NodeToPositionMatrix, node);
-
-        return new float3(position.x, 0, position.y);
-    }
-
-    private int2 OddrToAxial(int2 node)
-    {
-        var q = node.x - (node.y - (node.y & 1)) / 2;
-        var r = node.y;
-
-        return new int2(q, r);
     }
 
     private void SpawnTileText()

@@ -4,42 +4,20 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 public partial class InitializeGridSystem : SubSystem
 {
-    private EntityQuery gridConfigQuery;
-
-    public override bool ShouldUpdateSystem()
-    {
-        return !gridConfigQuery.IsEmptyIgnoreFilter;
-    }
-
     protected override void OnUpdate()
     {
-        var config = default(GridConfiguration);
-        //Get config data
-        Entities.ForEach((in GridConfiguration gridConfig) =>
+        if (!TryGetSingleton<GridConfig>(out var gridConfig))
         {
-            config = gridConfig;
-
-        }).WithStoreEntityQueryInField(ref gridConfigQuery).Run();
-
-        EntityManager.RemoveComponent<GridConfiguration>(gridConfigQuery);
+            return;
+        }
 
         //Initialize Grid Collection Component
-        var grid = new Grid(config, Allocator.Persistent);
+        var grid = new Grid(gridConfig, Allocator.Persistent);
         sceneBlackboardEntity.AddCollectionComponent(grid);
-
-        //Initialize units grid index
-        Entities.WithAll<UnitTag>().WithNone<MoveRangeAssociated>()
-            .ForEach((Entity e, in Translation translation) =>
-            {
-                var node = grid.PositionToNode(translation.Value);
-
-                EntityManager.AddComponentData(e, new IndexInGrid { value = node });
-                EntityManager.AddComponentData(e, new PreviousGridIndex { value = node });
-
-            }).WithStructuralChanges().Run();
 
         //Initialize tile positions
         Entities.WithAll<TileTag>()
@@ -57,21 +35,6 @@ public partial class InitializeGridSystem : SubSystem
 
             }).Run();
 
-        //Initialize units position
-        Entities.WithAll<UnitTag>()
-            .ForEach((Entity entity, ref Translation translation, in IndexInGrid gridIndex) =>
-            {
-                grid.SetUnit(gridIndex.value, entity);
-
-                var positionResult = grid[gridIndex.value];
-
-                if (positionResult != null)
-                {
-                    var position = positionResult.Value;
-
-                    translation.Value = new float3(position.x, translation.Value.y, position.y);
-                }
-
-            }).Run();
+        Enabled = false;
     }
 }

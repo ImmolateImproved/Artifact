@@ -18,6 +18,9 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclare
         dstManager.AddComponent<AttackState>(entity);
         dstManager.AddComponent<AttackTarget>(entity);
 
+        dstManager.AddComponent<IndexInGrid>(entity);
+        dstManager.AddComponent<PreviousGridIndex>(entity);
+
         dstManager.AddComponentData(entity, new UnitSelectionPointer { value = conversionSystem.GetPrimaryEntity(selectionPointer) });
     }
 

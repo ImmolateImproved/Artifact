@@ -6,10 +6,76 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 
-public struct GridConfiguration : IComponentData
+public struct GridConfig : IComponentData
 {
     public int gridRadius;
     public float tileSlotRadius;
+
+    public static readonly float2x2 NodeToPositionMatrix = new float2x2
+    {
+        c0 = new float2(math.sqrt(3), 0),
+        c1 = new float2(math.sqrt(3) / 2, 3 / 2f)
+    };
+
+    public static readonly float2x2 PositionToNodeMatrix = math.inverse(NodeToPositionMatrix);
+
+    public int2 PositionToNode(float3 position)
+    {
+        return PositionToNode(position, tileSlotRadius);
+    }
+
+    public float3 NodeToPosition(int2 node)
+    {
+        return NodeToPosition(node, tileSlotRadius);
+    }
+
+    public static int2 PositionToNode(float3 position, float tileSlotRadius)
+    {
+        var fractionalNodeCoordinate = math.mul(PositionToNodeMatrix, new float2(position.x, position.z)) / tileSlotRadius;
+
+        return AxialRound(fractionalNodeCoordinate);
+    }
+
+    public static float3 NodeToPosition(int2 node, float tileSlotRadius)
+    {
+        var position = tileSlotRadius * math.mul(NodeToPositionMatrix, node);
+
+        return new float3(position.x, 0, position.y);
+    }
+
+    public static int2 AxialToOddr(int2 node)
+    {
+        var col = node.x + (node.y - (node.y & 1)) / 2;
+        var row = node.y;
+
+        return new int2(col, row);
+    }
+
+    public static int2 OddrToAxial(int2 node)
+    {
+        var q = node.x - (node.y - (node.y & 1)) / 2;
+        var r = node.y;
+
+        return new int2(q, r);
+    }
+
+    private static int2 AxialRound(float2 position)
+    {
+        var x = position.x;
+        var y = position.y;
+
+        var xgrid = Mathf.RoundToInt(x);
+        var ygrid = Mathf.RoundToInt(y);
+        x -= xgrid;
+        y -= ygrid;
+
+        if (math.abs(x) >= math.abs(y))
+        {
+            return new int2(xgrid + Mathf.RoundToInt(x + 0.5f * y), ygrid);
+        }
+
+        return new int2(xgrid, ygrid + Mathf.RoundToInt(y + 0.5f * x));
+    }
 }
 
 public struct IndexInGrid : IComponentData
@@ -32,23 +98,11 @@ public struct Grid : ICollectionComponent
 
     private NativeHashMap<int2, Entity> nodeToTile;
 
-    private readonly float tileSlotRadius;
-
     public int NodeCount { get; private set; }
 
-    public static readonly float2x2 NodeToPositionMatrix = new float2x2
-    {
-        c0 = new float2(math.sqrt(3), 0),
-        c1 = new float2(math.sqrt(3) / 2, 3 / 2f)
-    };
-
-    public static readonly float2x2 PositionToNodeMatrix = math.inverse(NodeToPositionMatrix);
-
-    public Grid(GridConfiguration gridConfig, Allocator allocator)
+    public Grid(GridConfig gridConfig, Allocator allocator)
     {
         NodeCount = HexTileNeighbors.CalculateTilesCount(gridConfig.gridRadius);
-
-        tileSlotRadius = gridConfig.tileSlotRadius;
 
         nodePositions = new NativeHashMap<int2, float2>(NodeCount, allocator);
         units = new NativeHashMap<int2, Entity>(NodeCount, allocator);
@@ -92,39 +146,6 @@ public struct Grid : ICollectionComponent
         {
             nodePositions[index] = value.Value;
         }
-    }
-
-    public int2 PositionToNode(float3 position)
-    {
-        var fractionalNodeCoordinate = math.mul(PositionToNodeMatrix, new float2(position.x, position.z)) / tileSlotRadius;
-
-        return AxialRound(fractionalNodeCoordinate);
-
-        int2 AxialRound(float2 position)
-        {
-            var x = position.x;
-            var y = position.y;
-
-            var xgrid = Mathf.RoundToInt(x);
-            var ygrid = Mathf.RoundToInt(y);
-            x -= xgrid;
-            y -= ygrid;
-
-            if (math.abs(x) >= math.abs(y))
-            {
-                return new int2(xgrid + Mathf.RoundToInt(x + 0.5f * y), ygrid);
-            }
-
-            return new int2(xgrid, ygrid + Mathf.RoundToInt(y + 0.5f * x));
-        }
-    }
-
-    public int2 AxialToOddr(int2 node)
-    {
-        var col = node.x + (node.y - (node.y & 1)) / 2;
-        var row = node.y;
-
-        return new int2(col, row);
     }
 
     public void InitTile(int2 nodeIndex, Entity tile)
