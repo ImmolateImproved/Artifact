@@ -15,9 +15,17 @@ public partial class InitializeGridSystem : SubSystem
             return;
         }
 
-        //Initialize Grid Collection Component
+        #region Collection Components Initialization
+
+        //Grid Collection Component
         var grid = new Grid(gridConfig, Allocator.Persistent);
         sceneBlackboardEntity.AddCollectionComponent(grid);
+
+        //MoveRangeSet Collection Component
+        var moveRangeSet = new MoveRangeSet(6, Allocator.Persistent);
+        sceneBlackboardEntity.AddCollectionComponent(moveRangeSet);
+
+        #endregion
 
         //Initialize tile positions
         Entities.WithAll<TileTag>()

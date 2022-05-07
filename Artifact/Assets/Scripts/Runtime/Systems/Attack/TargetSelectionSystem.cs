@@ -19,7 +19,7 @@ public partial class TargetSelectionSystem : SubSystem
         }
 
         var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>().value;
-
+      
         if (selectedUnit == Entity.Null)
         {
             return;
@@ -29,7 +29,7 @@ public partial class TargetSelectionSystem : SubSystem
         var mousePosition = GetSingleton<MousePosition>().value;
         var neighbors = HexTileNeighbors.Neighbors;
 
-        var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(selectedUnit, true).moveRangeHashSet;
+        var moveRangeSet = sceneBlackboardEntity.GetCollectionComponent<MoveRangeSet>().moveRangeHashSet;
 
         Entities.ForEach((ref TargetManager targetManager) =>
         {

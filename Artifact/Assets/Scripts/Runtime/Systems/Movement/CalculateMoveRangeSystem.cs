@@ -6,8 +6,6 @@ using UnityEngine;
 
 public partial class CalculateMoveRangeSystem : SubSystem
 {
-    private EntityQuery calculateMoveRangeQuery;
-
     protected override void OnUpdate()
     {
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
@@ -35,17 +33,10 @@ public partial class CalculateMoveRangeSystem : SubSystem
 
     private void CalculateMoveRange()
     {
-        if (calculateMoveRangeQuery.IsEmpty)
+        if (!HasSingleton<CalculateMoveRange>())
             return;
 
-        var moveRangeSet = default(NativeHashSet<int2>);
-
-        Entities.WithAll<CalculateMoveRange>()
-            .ForEach((Entity e) =>
-            {
-                moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e).moveRangeHashSet;
-
-            }).WithStoreEntityQueryInField(ref calculateMoveRangeQuery).WithoutBurst().Run();
+        var moveRangeSet = sceneBlackboardEntity.GetCollectionComponent<MoveRangeSet>().moveRangeHashSet;
 
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 

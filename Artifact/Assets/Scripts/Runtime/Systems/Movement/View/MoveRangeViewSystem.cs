@@ -36,7 +36,8 @@ public partial class MoveRangeViewSystem : SubSystem
         Entities.WithAll<CalculateMoveRange>()
             .ForEach((Entity e, in IndexInGrid indexInGrid) =>
             {
-                var moveRangeSet = EntityManager.GetCollectionComponent<MoveRangeSet>(e).moveRangeHashSet;
+                var moveRangeSet = sceneBlackboardEntity.GetCollectionComponent<MoveRangeSet>().moveRangeHashSet;
+
                 moveRangeSet.Remove(indexInGrid.value);//remove the player's tile so that it is not displayed
 
                 var nodes = moveRangeSet.ToNativeArray(Allocator.Temp);//copy the nodes into an array without a player node
