@@ -167,12 +167,12 @@ public struct Grid : ICollectionComponent
     {
         units.TryGetValue(index, out var unit);
 
-        return IndexInRange(index) ? unit : Entity.Null;
+        return HasTile(index) ? unit : Entity.Null;
     }
 
     public bool HasUnit(int2 index)
     {
-        return IndexInRange(index) && (GetUnit(index) != Entity.Null);
+        return HasTile(index) && (GetUnit(index) != Entity.Null);
     }
 
     public void RemoveUnit(int2 index)
@@ -190,7 +190,7 @@ public struct Grid : ICollectionComponent
         return IsWalkable(new int2(x, y));
     }
 
-    public bool IndexInRange(int2 index)
+    public bool HasTile(int2 index)
     {
         var cellExist = nodePositions.TryGetValue(index, out var _);
 

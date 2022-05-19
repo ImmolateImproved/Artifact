@@ -51,7 +51,7 @@ public partial class TargetSelectionSystem : SubSystem
             {
                 var neighborNode = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
 
-                if (!grid.IndexInRange(neighborNode))
+                if (!grid.HasTile(neighborNode))
                     continue;
 
                 var tilePos = grid[neighborNode].Value;

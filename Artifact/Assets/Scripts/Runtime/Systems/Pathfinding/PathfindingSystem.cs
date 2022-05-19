@@ -104,7 +104,7 @@ public partial class PathfindingSystem : SubSystem
                 {
                     var neighborIndex = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
 
-                    if (!grid.IndexInRange(neighborIndex))
+                    if (!grid.HasTile(neighborIndex))
                         continue;
 
                     if (!grid.IsWalkable(neighborIndex) && !neighborIndex.Equals(end))

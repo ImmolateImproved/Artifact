@@ -41,12 +41,13 @@ public partial class CalculateMoveRangeSystem : SubSystem
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
         var neighbors = HexTileNeighbors.Neighbors;
-        var queue = new NativeQueue<int2>(Allocator.Temp);
 
         Entities.WithAll<CalculateMoveRange>()
             .ForEach((in IndexInGrid indexInGrid, in MoveRange moveRange) =>
             {
                 moveRangeSet.Clear();
+
+                var queue = new NativeQueue<int2>(Allocator.Temp);
 
                 queue.Enqueue(indexInGrid.value);
                 moveRangeSet.Add(indexInGrid.value);
@@ -69,7 +70,7 @@ public partial class CalculateMoveRangeSystem : SubSystem
                             queue.Enqueue(neighborNode);
                         }
 
-                        if (grid.IndexInRange(neighborNode) && !grid.HasUnit(neighborNode))
+                        if (grid.HasTile(neighborNode) && !grid.HasUnit(neighborNode))
                         {
                             moveRangeSet.Add(neighborNode);
                         }
