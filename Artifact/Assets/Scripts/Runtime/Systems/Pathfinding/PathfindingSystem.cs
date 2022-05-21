@@ -14,42 +14,37 @@ public partial class PathfindingSystem : SubSystem
         var neighbors = HexTileNeighbors.Neighbors;
 
         Entities.WithAll<ActionRequest>()
-            .ForEach((ref DynamicBuffer<UnitPath> pathBuffer, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
+            .ForEach((ref DynamicBuffer<UnitPath> unitPath, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
             {
-                var findPathData = new FindPathData(grid, neighbors);
+                var findPathData = new PathfindingData(grid, neighbors);
 
-                pathBuffer.Clear();
+                unitPath.Clear();
                 if (gridPosition.value.Equals(pathfindingTarget.node))
                     return;
 
                 var start = gridPosition.value;
                 var end = pathfindingTarget.node;
 
-                var path = pathBuffer.Reinterpret<int2>();
+                var path = unitPath.Reinterpret<int2>();
 
                 findPathData.FindPath(start, end, path);
 
             }).Run();
     }
 
-    public struct FindPathData
+    public struct PathfindingData
     {
         //neighbors for hex tile (even rows)
         public readonly NativeArray<int2> neighbors;
 
         private readonly Grid grid;
 
-        private DynamicBuffer<int2> path;
-
         private NativeHashMap<int2, int> costSoFar;
         private NativeHashMap<int2, int2> pathTrack;
 
         private NativeMinHeap openSet;
 
-        private int2 start;
-        private int2 end;
-
-        public FindPathData(Grid grid, NativeArray<int2> neighbors)
+        public PathfindingData(Grid grid, NativeArray<int2> neighbors)
         {
             this = default;
             this.grid = grid;
@@ -72,14 +67,32 @@ public partial class PathfindingSystem : SubSystem
             }
         }
 
-        public void FindPath(in int2 start, in int2 end, in DynamicBuffer<int2> path)
+        public void FindPath(int2 start, int2 end, DynamicBuffer<int2> path)
+        {
+            FindPath(start, end);
+            ReconstructPath(start, end, path);
+        }
+
+        public int CalculatePathLength(int2 start, int2 end)
+        {
+            FindPath(start, end);
+
+            var pathLength = 0;
+
+            var node = end;
+            while (!node.Equals(start))
+            {
+                pathLength++;
+                node = pathTrack[node];
+            }
+
+            return pathLength;
+        }
+
+        private void FindPath(int2 start, int2 end)
         {
             if (start.Equals(end))
                 return;
-
-            this.start = start;
-            this.end = end;
-            this.path = path;
 
             costSoFar.Clear();
             pathTrack.Clear();
@@ -96,7 +109,6 @@ public partial class PathfindingSystem : SubSystem
 
                 if (currentNode.Equals(end))
                 {
-                    ReconstructPath();
                     return;
                 }
 
@@ -119,14 +131,14 @@ public partial class PathfindingSystem : SubSystem
                     costSoFar[neighborIndex] = newCost;
                     pathTrack[neighborIndex] = currentNode;
 
-                    var expectedCost = newCost + GetDistance(neighborIndex, end);
+                    var expectedCost = newCost + Grid.GetDistance(neighborIndex, end);
 
                     openSet.Push(new MinHeapNode(neighborIndex, expectedCost));
                 }
             }
         }
 
-        private void ReconstructPath()
+        private void ReconstructPath(int2 start, int2 end, DynamicBuffer<int2> path)
         {
             var node = end;
             while (!node.Equals(start))
@@ -146,13 +158,6 @@ public partial class PathfindingSystem : SubSystem
             {
                 path.RemoveAt(path.Length - 1);
             }
-        }
-
-        private int GetDistance(int2 a, int2 b)
-        {
-            var result = (math.abs(a.x - b.x) + math.abs(a.x + a.y - b.x - b.y) + math.abs(a.y - b.y)) / 2;
-
-            return result;
         }
     }
 }

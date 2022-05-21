@@ -52,12 +52,9 @@ public partial class CalculateMoveRangeSystem : SubSystem
                 queue.Enqueue(indexInGrid.value);
                 moveRangeSet.Add(indexInGrid.value);
 
-                var tilesInMoveRange = HexTileNeighbors.CalculateTilesCount(moveRange.value);
+                var pathfindingData = new PathfindingSystem.PathfindingData(grid, neighbors);
 
-                var visitedTiles = new NativeHashSet<int2>(tilesInMoveRange, Allocator.Temp);
-                visitedTiles.Add(indexInGrid.value);
-
-                while (visitedTiles.Count() < tilesInMoveRange)
+                while (queue.Count > 0)
                 {
                     var node = queue.Dequeue();
 
@@ -65,15 +62,18 @@ public partial class CalculateMoveRangeSystem : SubSystem
                     {
                         var neighborNode = HexTileNeighbors.GetNeighbor(node, neighbors[i]);
 
-                        if (visitedTiles.Add(neighborNode))
-                        {
-                            queue.Enqueue(neighborNode);
-                        }
+                        var nodeIsValid = grid.IsWalkable(neighborNode) && !moveRangeSet.Contains(neighborNode);
 
-                        if (grid.HasTile(neighborNode) && !grid.HasUnit(neighborNode))
-                        {
-                            moveRangeSet.Add(neighborNode);
-                        }
+                        if (!nodeIsValid)
+                            continue;
+
+                        var pathLength = pathfindingData.CalculatePathLength(indexInGrid.value, neighborNode);
+
+                        if (pathLength > moveRange.value)
+                            continue;
+
+                        queue.Enqueue(neighborNode);
+                        moveRangeSet.Add(neighborNode);
                     }
                 }
 

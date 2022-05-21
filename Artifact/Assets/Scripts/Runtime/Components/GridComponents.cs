@@ -116,20 +116,6 @@ public struct Grid : ICollectionComponent
 
     public Type AssociatedComponentType => typeof(GridTag);
 
-    public float2? this[int x, int y]
-    {
-        get
-        {
-            var index = new int2(x, y);
-            return this[index];
-        }
-        set
-        {
-            var index = new int2(x, y);
-            this[index] = value;
-        }
-    }
-
     public float2? this[int2 index]
     {
         get
@@ -153,47 +139,49 @@ public struct Grid : ICollectionComponent
         nodeToTile.Add(nodeIndex, tile);
     }
 
-    public Entity GetTile(int2 index)
+    public Entity GetTile(int2 nodeIndex)
     {
-        return nodeToTile.TryGetValue(index, out var tile) ? tile : Entity.Null;
+        return nodeToTile.TryGetValue(nodeIndex, out var tile) ? tile : Entity.Null;
     }
 
-    public void SetUnit(int2 index, Entity unit)
+    public void SetUnit(int2 nodeIndex, Entity unit)
     {
-        units[index] = unit;
+        units[nodeIndex] = unit;
     }
 
-    public Entity GetUnit(int2 index)
+    public Entity GetUnit(int2 nodeIndex)
     {
-        units.TryGetValue(index, out var unit);
+        var hasUnit = units.TryGetValue(nodeIndex, out var unit);
 
-        return HasTile(index) ? unit : Entity.Null;
+        return hasUnit ? unit : Entity.Null;
     }
 
-    public bool HasUnit(int2 index)
+    public bool HasUnit(int2 nodeIndex)
     {
-        return HasTile(index) && (GetUnit(index) != Entity.Null);
+        return GetUnit(nodeIndex) != Entity.Null;
     }
 
-    public void RemoveUnit(int2 index)
+    public void RemoveUnit(int2 nodeIndex)
     {
-        units[index] = Entity.Null;
+        units[nodeIndex] = Entity.Null;
     }
 
-    public bool IsWalkable(int2 index)
+    public bool IsWalkable(int2 nodeIndex)
     {
-        return GetUnit(index) == Entity.Null;
+        return HasTile(nodeIndex) && !HasUnit(nodeIndex);
     }
 
-    public bool IsWalkable(int x, int y)
+    public bool HasTile(int2 nodeIndex)
     {
-        return IsWalkable(new int2(x, y));
-    }
-
-    public bool HasTile(int2 index)
-    {
-        var cellExist = nodePositions.TryGetValue(index, out var _);
+        var cellExist = nodePositions.TryGetValue(nodeIndex, out var _);
 
         return cellExist;
+    }
+
+    public static int GetDistance(int2 nodeA, int2 nodeB)
+    {
+        var result = (math.abs(nodeA.x - nodeB.x) + math.abs(nodeA.x + nodeA.y - nodeB.x - nodeB.y) + math.abs(nodeA.y - nodeB.y)) / 2;
+
+        return result;
     }
 }
