@@ -16,7 +16,7 @@ public partial class PathfindingSystem : SubSystem
         Entities.WithAll<ActionRequest>()
             .ForEach((ref DynamicBuffer<UnitPath> unitPath, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
             {
-                var findPathData = new PathfindingData(grid, neighbors);
+                var findPathData = new AStarPathfinding(grid, neighbors);
 
                 unitPath.Clear();
                 if (gridPosition.value.Equals(pathfindingTarget.node))
@@ -32,9 +32,8 @@ public partial class PathfindingSystem : SubSystem
             }).Run();
     }
 
-    public struct PathfindingData
+    public struct AStarPathfinding
     {
-        //neighbors for hex tile (even rows)
         public readonly NativeArray<int2> neighbors;
 
         private readonly Grid grid;
@@ -44,7 +43,7 @@ public partial class PathfindingSystem : SubSystem
 
         private NativeMinHeap openSet;
 
-        public PathfindingData(Grid grid, NativeArray<int2> neighbors)
+        public AStarPathfinding(Grid grid, NativeArray<int2> neighbors)
         {
             this = default;
             this.grid = grid;
@@ -115,9 +114,6 @@ public partial class PathfindingSystem : SubSystem
                 for (int i = 0; i < neighbors.Length; i++)
                 {
                     var neighborIndex = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
-
-                    if (!grid.HasTile(neighborIndex))
-                        continue;
 
                     if (!grid.IsWalkable(neighborIndex) && !neighborIndex.Equals(end))
                         continue;
