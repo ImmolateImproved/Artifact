@@ -12,11 +12,12 @@ public partial class PathfindingViewSystem : SubSystem
     protected override void OnCreate()
     {
         pathTileQuery = GetEntityQuery(typeof(PathTile));
+        RequireSingletonForUpdate<DrawPath>();
     }
 
     protected override void OnUpdate()
     {
-        Entities.WithAll<ActionRequest, DrawPath>()
+        Entities.WithAll<ActionRequest>()
             .ForEach((ref DynamicBuffer<UnitPath> path) =>
             {
                 var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);

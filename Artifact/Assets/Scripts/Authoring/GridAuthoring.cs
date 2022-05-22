@@ -22,6 +22,8 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
     public TextMeshPro indicesTextPrefab;
     public bool showTileIndices;
 
+    public bool showPath;
+
     public float TileSlotRadius
     {
         get => (tilesMargin * tileSize) + tileSize;
@@ -41,6 +43,11 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
         dstManager.AddComponentData(entity, new PathPrefab { prefab = conversionSystem.GetPrimaryEntity(pathPrefab) });
         dstManager.AddComponentData(entity, new MoveRangePrefab { prefab = conversionSystem.GetPrimaryEntity(moveRangePrefab) });
+
+        if (showPath)
+        {
+            dstManager.AddComponentData(entity, new DrawPath());
+        }
     }
 
     public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
@@ -73,6 +80,8 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
             tile.indexInGrid = node;
         }
+
+        EditorUtility.SetDirty(mapHolder);
     }
 
     private HashSet<int2> BuildGridBFSAxial()

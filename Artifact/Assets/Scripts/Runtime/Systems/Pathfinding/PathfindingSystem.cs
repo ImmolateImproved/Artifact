@@ -72,22 +72,6 @@ public partial class PathfindingSystem : SubSystem
             ReconstructPath(start, end, path);
         }
 
-        public int CalculatePathLength(int2 start, int2 end)
-        {
-            FindPath(start, end);
-
-            var pathLength = 0;
-
-            var node = end;
-            while (!node.Equals(start))
-            {
-                pathLength++;
-                node = pathTrack[node];
-            }
-
-            return pathLength;
-        }
-
         private void FindPath(int2 start, int2 end)
         {
             if (start.Equals(end))
