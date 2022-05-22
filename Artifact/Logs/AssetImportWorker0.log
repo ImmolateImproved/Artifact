@@ -16393,3 +16393,4 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.CircleCollider2DEditor: 5f338b7e6e11c4f85f338b7e6e11c4f8 -> 
   custom:DOTSType/Unity.Scenes.PrefabAssetReference: af0a2330600ef73daf0a2330600ef73d -> 
   custom:DOTSType/UnityEditor.NavMeshObstacleInspector: f2c83c64be28b8fcf2c83c64be28b8fc -> 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
