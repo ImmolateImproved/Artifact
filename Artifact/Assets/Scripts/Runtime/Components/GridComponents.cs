@@ -78,14 +78,24 @@ public struct GridConfig : IComponentData
     }
 }
 
-public struct IndexInGrid : IComponentData
+public struct IndexInGrid : IComponentData, IEquatable<PreviousGridIndex>
 {
     public int2 value;
+
+    public bool Equals(PreviousGridIndex other)
+    {
+        return value.Equals(other.value);
+    }
 }
 
-public struct PreviousGridIndex : IComponentData
+public struct PreviousGridIndex : IComponentData, IEquatable<IndexInGrid>
 {
     public int2 value;
+
+    public bool Equals(IndexInGrid other)
+    {
+        return value.Equals(other.value);
+    }
 }
 
 public struct GridTag : IComponentData { }
@@ -98,20 +108,32 @@ public struct Grid : ICollectionComponent
 
     private NativeHashMap<int2, Entity> nodeToTile;
 
+    public readonly NativeArray<int2> neighbors;
+
     public int NodeCount { get; private set; }
 
-    public Grid(GridConfig gridConfig, Allocator allocator)
+    public Grid(GridConfig gridConfig)
     {
         NodeCount = HexTileNeighbors.CalculateTilesCount(gridConfig.gridRadius);
 
-        nodePositions = new NativeHashMap<int2, float2>(NodeCount, allocator);
-        units = new NativeHashMap<int2, Entity>(NodeCount, allocator);
-        nodeToTile = new NativeHashMap<int2, Entity>(NodeCount, allocator);
+        nodePositions = new NativeHashMap<int2, float2>(NodeCount, Allocator.Persistent);
+        units = new NativeHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
+        nodeToTile = new NativeHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
+
+        neighbors = new NativeArray<int2>(HexTileNeighbors.Neighbors, Allocator.Persistent);
     }
 
     public JobHandle Dispose(JobHandle inputDeps)
     {
-        return JobHandle.CombineDependencies(units.Dispose(inputDeps), nodePositions.Dispose(inputDeps), nodeToTile.Dispose(inputDeps));
+        var disposeDependencies = new NativeArray<JobHandle>(4, Allocator.Temp)
+        {
+            [0] = units.Dispose(inputDeps),
+            [1] = nodePositions.Dispose(inputDeps),
+            [2] = nodeToTile.Dispose(inputDeps),
+            [3] = neighbors.Dispose(inputDeps)
+        };
+
+        return JobHandle.CombineDependencies(disposeDependencies);
     }
 
     public Type AssociatedComponentType => typeof(GridTag);

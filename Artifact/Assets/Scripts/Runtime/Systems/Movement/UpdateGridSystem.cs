@@ -1,5 +1,5 @@
-using Unity.Entities;
 using Latios;
+using Unity.Entities;
 using UnityEngine;
 
 public partial class UpdateGridSystem : SubSystem
@@ -9,16 +9,12 @@ public partial class UpdateGridSystem : SubSystem
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
 
         Entities.WithAll<Moving>()
-            .ForEach((Entity e, ref PreviousGridIndex previousGridIndex, in IndexInGrid indexInGrid, in DynamicBuffer<UnitPath> path) =>
+            .ForEach((Entity e, ref IndexInGrid indexInGrid, in PreviousGridIndex previousGridIndex, in MoveDestination moveDestination) =>
             {
-                if (!previousGridIndex.value.Equals(indexInGrid.value))
-                {
-                    grid.RemoveUnit(previousGridIndex.value);
+                if (!moveDestination.inDistance) return;
 
-                    previousGridIndex.value = indexInGrid.value;
-
-                    grid.SetUnit(indexInGrid.value, e);
-                }
+                grid.RemoveUnit(previousGridIndex.value);
+                grid.SetUnit(indexInGrid.value, e);
 
             }).Run();
     }

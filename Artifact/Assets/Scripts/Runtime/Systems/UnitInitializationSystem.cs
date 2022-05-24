@@ -7,6 +7,11 @@ using Unity.Transforms;
 
 public partial class UnitInitializationSystem : SubSystem
 {
+    protected override void OnCreate()
+    {
+        RequireSingletonForUpdate<GridInitialized>();
+    }
+
     protected override void OnUpdate()
     {
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
@@ -15,7 +20,7 @@ public partial class UnitInitializationSystem : SubSystem
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
 
         Entities.WithAll<UnitTag>().WithNone<UnitInitialized>()
-            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex, ref PreviousGridIndex previousGridIndex, in UnitSelectionPointer selectionPointer) =>
+            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex, ref PreviousGridIndex previousGridIndex) =>
             {
                 var node = gridConfig.PositionToNode(translation.Value);
 
@@ -34,6 +39,12 @@ public partial class UnitInitializationSystem : SubSystem
                 }
 
                 ecb.AddComponent<UnitInitialized>(entity);
+
+            }).Run();
+
+        Entities.WithAll<UnitTag>().WithNone<UnitInitialized>()
+            .ForEach((in UnitSelectionPointer selectionPointer)=>
+            {
                 ecb.AddComponent<Disabled>(selectionPointer.value);
 
             }).Run();

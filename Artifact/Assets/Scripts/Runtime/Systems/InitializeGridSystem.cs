@@ -8,6 +8,11 @@ using UnityEngine;
 
 public partial class InitializeGridSystem : SubSystem
 {
+    public override bool ShouldUpdateSystem()
+    {
+        return !sceneBlackboardEntity.HasComponent<GridInitialized>();
+    }
+
     protected override void OnUpdate()
     {
         if (!TryGetSingleton<GridConfig>(out var gridConfig))
@@ -18,7 +23,7 @@ public partial class InitializeGridSystem : SubSystem
         #region Collection Components Initialization
 
         //Grid Collection Component
-        var grid = new Grid(gridConfig, Allocator.Persistent);
+        var grid = new Grid(gridConfig);
         sceneBlackboardEntity.AddCollectionComponent(grid);
 
         //MoveRangeSet Collection Component
@@ -27,22 +32,23 @@ public partial class InitializeGridSystem : SubSystem
 
         #endregion
 
-        //Initialize tile positions
+        var initialized = false;
+
+        //Initialize tile positions and "Index to tile-entity" HashMap
         Entities.WithAll<TileTag>()
-             .ForEach((in Translation translation, in IndexInGrid indexInGrid) =>
+             .ForEach((Entity entity, in Translation translation, in IndexInGrid indexInGrid) =>
              {
                  grid[indexInGrid.value] = new float2(translation.Value.x, translation.Value.z);
+                 grid.InitTile(indexInGrid.value, entity);
+
+                 initialized = true;
 
              }).Run();
 
-        //Initialize "Index to tile-entity" HashMap
-        Entities.WithAll<TileTag>()
-            .ForEach((Entity entity, in IndexInGrid gridIndex) =>
-            {
-                grid.InitTile(gridIndex.value, entity);
+        if (initialized)
+        {
+            sceneBlackboardEntity.AddComponent<GridInitialized>();
+        }
 
-            }).Run();
-
-        Enabled = false;
     }
 }

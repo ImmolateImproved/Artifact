@@ -1,16 +1,33 @@
 ﻿using Unity.Collections;
 using Unity.Mathematics;
 
+public enum AxialDirections
+{
+    Right, BottomRight, BottomLeft, Left, TopLeft, TopRight
+}
+
+public static class AxialDirectionsExtentions
+{
+    public const int DIRECTIONS_COUNT = 6;
+
+    public static AxialDirections ReverseDirection(this AxialDirections direction)
+    {
+        var newDirection = ((int)direction + DIRECTIONS_COUNT / 2) % DIRECTIONS_COUNT;
+
+        return (AxialDirections)newDirection;
+    }
+}
+
 public static class HexTileNeighbors
 {
-    public static NativeArray<int2> Neighbors => new NativeArray<int2>(6, Allocator.Temp)
+    public static readonly int2[] Neighbors = new int2[] 
     {
-        [0] = new int2(1, 0),
-        [1] = new int2(1, -1),
-        [2] = new int2(0, -1),
-        [3] = new int2(-1, 0),
-        [4] = new int2(-1, 1),
-        [5] = new int2(0, 1)
+        new int2(1, 0),
+        new int2(1, -1),
+        new int2(0, -1),
+        new int2(-1, 0),
+        new int2(-1, 1),
+        new int2(0, 1)
     };
 
     public static int2 GetNeighbor(int2 current, int2 direction)

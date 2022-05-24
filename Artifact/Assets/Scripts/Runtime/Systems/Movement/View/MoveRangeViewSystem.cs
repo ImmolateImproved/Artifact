@@ -12,7 +12,7 @@ public partial class MoveRangeViewSystem : SubSystem
 
     protected override void OnCreate()
     {
-        moveRangeTileQuery = GetEntityQuery(typeof(MoveRangeTile));
+        moveRangeTileQuery = GetEntityQuery(typeof(MoveRangeTileTag));
     }
 
     protected override void OnUpdate()

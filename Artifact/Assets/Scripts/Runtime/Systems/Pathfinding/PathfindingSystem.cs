@@ -11,12 +11,10 @@ public partial class PathfindingSystem : SubSystem
     {
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        var neighbors = HexTileNeighbors.Neighbors;
-
         Entities.WithAll<ActionRequest>()
             .ForEach((ref DynamicBuffer<UnitPath> unitPath, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
             {
-                var findPathData = new AStarPathfinding(grid, neighbors);
+                var findPathData = new AStarPathfinding(grid);
 
                 unitPath.Clear();
                 if (gridPosition.value.Equals(pathfindingTarget.node))
@@ -43,7 +41,7 @@ public partial class PathfindingSystem : SubSystem
 
         private NativeMinHeap openSet;
 
-        public AStarPathfinding(Grid grid, NativeArray<int2> neighbors)
+        public AStarPathfinding(Grid grid)
         {
             this = default;
             this.grid = grid;
@@ -53,7 +51,7 @@ public partial class PathfindingSystem : SubSystem
 
             openSet = new NativeMinHeap(grid.NodeCount * grid.NodeCount * 5, Allocator.Temp);
 
-            this.neighbors = neighbors;
+            this.neighbors = grid.neighbors;
         }
 
         public void Dispose()

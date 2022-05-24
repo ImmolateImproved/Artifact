@@ -5,14 +5,26 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 
-public struct MoveRangeTile : IComponentData
+public struct Moving : IComponentData
 {
     
 }
 
-public struct Moving : IComponentData
+public struct StepCounters : IComponentData
 {
-    
+    public int pointA;
+    public int pointB;
+}
+
+public struct MoveDirection : IComponentData
+{
+    public AxialDirections value;
+}
+
+public struct MoveDestination : IComponentData
+{
+    public int2 node;
+    public bool inDistance;
 }
 
 public struct MoveSpeed : IComponentData
@@ -23,6 +35,11 @@ public struct MoveSpeed : IComponentData
 public struct WaypointsMovement : IComponentData
 {
     public int currentWaypointIndex;
+}
+
+public struct MoveRangeTileTag : IComponentData
+{
+
 }
 
 public struct MoveRangePrefab : IComponentData

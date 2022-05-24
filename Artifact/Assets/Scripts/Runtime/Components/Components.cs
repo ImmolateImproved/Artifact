@@ -7,6 +7,11 @@ public struct UnitTag : IComponentData
     
 }
 
+public struct GridInitialized : IComponentData
+{
+    
+}
+
 public struct UnitInitialized : IComponentData
 {
 

@@ -14,6 +14,7 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclare
         dstManager.AddComponentData(entity, new MoveRange { value = moveRange });
 
         dstManager.AddComponent<UnitTag>(entity);
+        dstManager.AddComponent<MoveDestination>(entity);
         dstManager.AddComponent<Selectable>(entity);
         dstManager.AddComponent<AttackState>(entity);
         dstManager.AddComponent<AttackTarget>(entity);

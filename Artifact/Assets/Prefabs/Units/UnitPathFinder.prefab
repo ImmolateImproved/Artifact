@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4851757422368061680}
   - component: {fileID: 2634560518715282431}
   m_Layer: 0
-  m_Name: Unit
+  m_Name: UnitPathFinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,9 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcde954449644324c975b4d76913b90e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 55
   addMovementComponents: 1
-  drawPath: 0
 --- !u!114 &4851757422368061680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7559b3d618dd6db4aaeedba036d6e0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveRange: 3
+  moveRange: 7
   selectionPointer: {fileID: 864218604938470435}
 --- !u!114 &2634560518715282431
 MonoBehaviour:
@@ -329,7 +328,7 @@ MonoBehaviour:
     shaderName: Packages/com.unity.render-pipelines.universal/Shaders/Lit.shader
     materialName: Unit
     type: 0
-    value: {x: 0.7058824, y: 0.19424354, z: 0.02352939, w: 1}
+    value: {x: 0.16019939, y: 0.6021224, z: 0.754717, w: 1}
     instanceOverride: 1
 --- !u!1001 &4628314229947613165
 PrefabInstance:

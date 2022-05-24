@@ -47,7 +47,7 @@ public partial class CalculateMoveRangeSystem : SubSystem
             {
                 moveRangeSet.Clear();
 
-                dijkstraPathfinding.FindPath(indexInGrid.value, moveRange.value, moveRangeSet);
+                dijkstraPathfinding.Execute(indexInGrid.value, moveRange.value, moveRangeSet);
 
             }).Run();
     }
@@ -61,10 +61,10 @@ public partial class CalculateMoveRangeSystem : SubSystem
         {
             this.grid = grid;
 
-            neighbors = HexTileNeighbors.Neighbors;
+            neighbors = grid.neighbors;
         }
 
-        public void FindPath(int2 start, int moveRange, NativeHashSet<int2> moveRangeSet)
+        public void Execute(int2 start, int moveRange, NativeHashSet<int2> moveRangeSet)
         {
             var costSoFar = new NativeHashMap<int2, int>(64, Allocator.Temp);
             var queue = new NativeQueue<int2>(Allocator.Temp);

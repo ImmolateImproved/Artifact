@@ -27,7 +27,7 @@ public partial class TargetSelectionSystem : SubSystem
 
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
         var mousePosition = GetSingleton<MousePosition>().value;
-        var neighbors = HexTileNeighbors.Neighbors;
+        var neighbors = grid.neighbors;
 
         var moveRangeSet = sceneBlackboardEntity.GetCollectionComponent<MoveRangeSet>().moveRangeHashSet;
 
