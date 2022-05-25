@@ -97,7 +97,7 @@ public partial class PathfindingSystem : SubSystem
                 {
                     var neighborIndex = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
 
-                    if (!grid.IsWalkable(neighborIndex) && !neighborIndex.Equals(end))
+                    if (!grid.HasNode(neighborIndex) && !neighborIndex.Equals(end))
                         continue;
 
                     var newCost = costSoFar[currentNode] + 1;

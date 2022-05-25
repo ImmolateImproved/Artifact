@@ -1,14 +1,14 @@
 using Latios;
 using Unity.Entities;
 
-public partial class WaypointsMovementSystem : SubSystem
+public partial class IncrementWaypointIndexSystem : SubSystem
 {
     protected override void OnUpdate()
     {
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
 
         Entities.WithAll<Moving>()
-           .ForEach((Entity e, ref WaypointsMovement waypointsMovement, ref DynamicBuffer<UnitPath> path, in MoveDestination moveDestination) =>
+           .ForEach((ref WaypointsMovement waypointsMovement, ref DynamicBuffer<UnitPath> path, in MoveDestination moveDestination) =>
            {
                if (!moveDestination.inDistance)
                    return;
@@ -18,7 +18,6 @@ public partial class WaypointsMovementSystem : SubSystem
                if (waypointsMovement.currentWaypointIndex == path.Length)
                {
                    path.Length = 0;
-                   // ecb.RemoveComponent<Moving>(e);
                }
 
            }).Run();

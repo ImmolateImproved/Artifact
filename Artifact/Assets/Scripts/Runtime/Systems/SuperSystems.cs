@@ -45,27 +45,25 @@ public class PerFrameSuperSystem : SuperSystem
 
         GetOrCreateAndAddSystem<TargetSelectionSystem>();
 
-        //Movement
         GetOrCreateAndAddSystem<PathfindingSystem>();
+        //Movement
 
-        GetOrCreateAndAddSystem<MovementSystem>();
-        GetOrCreateAndAddSystem<AISelectMoveTargetSystem>();
         GetOrCreateAndAddSystem<SelectMoveTargetSystem>();
-        GetOrCreateAndAddSystem<WaypointsMovementSystem>();
+        GetOrCreateAndAddSystem<MovementSystem>();
+        GetOrCreateAndAddSystem<IncrementWaypointIndexSystem>();
 
         GetOrCreateAndAddSystem<UpdateGridSystem>();
 
-        GetOrCreateAndAddSystem<MovementReactionSystem>();
-
         //AI Systems
-        GetOrCreateAndAddSystem<AINotifierSystem>();
-        GetOrCreateAndAddSystem<AISelectDirectionSystem>();
-        GetOrCreateAndAddSystem<AIListenerSystem>();
-
-        GetOrCreateAndAddSystem<CalculateMoveRangeSystem>();
-        //
+        //GetOrCreateAndAddSystem<AINotifierSystem>();
+        GetOrCreateAndAddSystem<AIObserverSystem>();
+        //GetOrCreateAndAddSystem<AIListenerSystem>();
 
         GetOrCreateAndAddSystem<UpdatePreviousGridIndexSystem>();
+        //
+        GetOrCreateAndAddSystem<MovementReactionSystem>();
+        GetOrCreateAndAddSystem<CalculateMoveRangeSystem>();
+        //
 
         #region ViewSystems
         //View

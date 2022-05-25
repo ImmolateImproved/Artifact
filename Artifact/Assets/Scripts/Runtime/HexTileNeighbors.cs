@@ -11,6 +11,14 @@ public static class AxialDirectionsExtentions
 {
     public const int DIRECTIONS_COUNT = 6;
 
+    public static AxialDirections GetNextDirection(AxialDirections direction)
+    {
+        var intDirection = (int)direction;
+        intDirection = (intDirection + 1) % DIRECTIONS_COUNT;
+
+        return (AxialDirections)intDirection;
+    }
+
     public static AxialDirections ReverseDirection(this AxialDirections direction)
     {
         var newDirection = ((int)direction + DIRECTIONS_COUNT / 2) % DIRECTIONS_COUNT;
