@@ -19,7 +19,7 @@ public partial class TargetSelectionSystem : SubSystem
         }
 
         var selectedUnit = sceneBlackboardEntity.GetComponentData<SelectedUnit>().value;
-      
+
         if (selectedUnit == Entity.Null)
         {
             return;
@@ -39,9 +39,9 @@ public partial class TargetSelectionSystem : SubSystem
             targetManager.moveTarget = null;
             targetManager.attackTarget = null;
 
-            var targetIsValid = selectedUnit != grid.GetUnit(currentNode);
+            var targetIsNotValid = grid.CompareObjects(currentNode, selectedUnit);
 
-            if (!targetIsValid)
+            if (targetIsNotValid)
                 return;
 
             var minDistance = float.MaxValue;
@@ -51,7 +51,7 @@ public partial class TargetSelectionSystem : SubSystem
             {
                 var neighborNode = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
 
-                if (!grid.HasTile(neighborNode))
+                if (!grid.HasNode(neighborNode))
                     continue;
 
                 var tilePos = grid[neighborNode].Value;
@@ -64,13 +64,13 @@ public partial class TargetSelectionSystem : SubSystem
                 }
             }
 
-            int2? moveTarget = grid.HasUnit(currentNode) ? closestNode : currentNode;
-            int2? attackTarget = grid.HasUnit(currentNode) ? currentNode : closestNode;
+            int2? moveTarget = grid.HasGridOject(currentNode) ? closestNode : currentNode;
+            int2? attackTarget = grid.HasGridOject(currentNode) ? currentNode : closestNode;
 
             moveTarget = moveRangeSet.Contains(moveTarget.Value) ? moveTarget : null;
             moveTarget = moveTarget == null || (!moveRangeSet.Contains(moveTarget.Value) && neighbors.IsNeightbors(selectedUnitNode, currentNode)) ? selectedUnitNode : moveTarget;
 
-            attackTarget = grid.HasUnit(attackTarget.Value) ? attackTarget : null;
+            attackTarget = grid.HasGridOject(attackTarget.Value) ? attackTarget : null;
             attackTarget = (attackTarget != null && !attackTarget.Value.Equals(selectedUnitNode)) ? attackTarget : null;
 
             targetManager.moveTarget = moveTarget;

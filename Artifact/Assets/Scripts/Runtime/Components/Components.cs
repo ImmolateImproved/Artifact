@@ -7,24 +7,9 @@ public struct UnitTag : IComponentData
     
 }
 
-public struct GridInitialized : IComponentData
-{
-    
-}
-
 public struct UnitInitialized : IComponentData
 {
 
-}
-
-public struct TileTag : IComponentData
-{
-    
-}
-
-public struct PathTile : IComponentData
-{
-    
 }
 
 public struct ActionRequest : IComponentData

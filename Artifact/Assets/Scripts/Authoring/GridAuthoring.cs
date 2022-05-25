@@ -38,7 +38,8 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         dstManager.AddComponentData(entity, new GridConfig
         {
             gridRadius = gridRadius,
-            tileSlotRadius = TileSlotRadius
+            tileSlotRadius = TileSlotRadius,
+            tileSize = tileSize
         });
 
         dstManager.AddComponentData(entity, new PathPrefab { prefab = conversionSystem.GetPrimaryEntity(pathPrefab) });
@@ -65,7 +66,7 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
     private void GenerateCircleGrid()
     {
-        var mapHolder = CreateHolder("GeneratedMap", true);
+        var mapHolder = CreateHolder("GeneratedMap");
 
         var nodes = BuildGridBFSAxial();
 
@@ -141,7 +142,7 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         }
     }
 
-    private Transform CreateHolder(string holderName, bool addConvertion = false)
+    private Transform CreateHolder(string holderName)
     {
         var mapHolder = GameObject.Find(holderName);
 
@@ -151,8 +152,8 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
         }
 
         mapHolder = new GameObject(holderName);
-        if (addConvertion)
-            mapHolder.AddComponent<ConvertToEntity>();
+
+        mapHolder.AddComponent<DisableOnStart>();
 
         return mapHolder.transform;
     }

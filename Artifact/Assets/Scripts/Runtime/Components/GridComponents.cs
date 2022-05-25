@@ -6,10 +6,16 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 
+public enum GridObjectTypes
+{
+    Unit, Base, Recource
+}
+
 public struct GridConfig : IComponentData
 {
     public int gridRadius;
     public float tileSlotRadius;
+    public float tileSize;
 
     public static readonly float2x2 NodeToPositionMatrix = new float2x2
     {
@@ -98,112 +104,32 @@ public struct PreviousGridIndex : IComponentData, IEquatable<IndexInGrid>
     }
 }
 
-public struct GridTag : IComponentData { }
-
-public struct Grid : ICollectionComponent
+public struct GridInitializedTag : IComponentData
 {
-    private NativeHashMap<int2, float2> nodePositions;
 
-    private NativeHashMap<int2, Entity> units;
+}
 
-    private NativeHashMap<int2, Entity> nodeToTile;
+public struct TileTag : IComponentData
+{
 
-    public readonly NativeArray<int2> neighbors;
+}
 
-    public int NodeCount { get; private set; }
+public struct PathTile : IComponentData
+{
 
-    public Grid(GridConfig gridConfig)
-    {
-        NodeCount = HexTileNeighbors.CalculateTilesCount(gridConfig.gridRadius);
+}
 
-        nodePositions = new NativeHashMap<int2, float2>(NodeCount, Allocator.Persistent);
-        units = new NativeHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
-        nodeToTile = new NativeHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
+public struct GridObjectType : IComponentData
+{
+    public GridObjectTypes value;
+}
 
-        neighbors = new NativeArray<int2>(HexTileNeighbors.Neighbors, Allocator.Persistent);
-    }
+public struct Resource : IComponentData
+{
+    public int amount;
+}
 
-    public JobHandle Dispose(JobHandle inputDeps)
-    {
-        var disposeDependencies = new NativeArray<JobHandle>(4, Allocator.Temp)
-        {
-            [0] = units.Dispose(inputDeps),
-            [1] = nodePositions.Dispose(inputDeps),
-            [2] = nodeToTile.Dispose(inputDeps),
-            [3] = neighbors.Dispose(inputDeps)
-        };
+public struct BaseTag : IComponentData
+{
 
-        return JobHandle.CombineDependencies(disposeDependencies);
-    }
-
-    public Type AssociatedComponentType => typeof(GridTag);
-
-    public float2? this[int2 index]
-    {
-        get
-        {
-            if (nodePositions.TryGetValue(index, out var position))
-            {
-                return position;
-            }
-
-            return null;
-        }
-
-        set
-        {
-            nodePositions[index] = value.Value;
-        }
-    }
-
-    public void InitTile(int2 nodeIndex, Entity tile)
-    {
-        nodeToTile.Add(nodeIndex, tile);
-    }
-
-    public Entity GetTile(int2 nodeIndex)
-    {
-        return nodeToTile.TryGetValue(nodeIndex, out var tile) ? tile : Entity.Null;
-    }
-
-    public void SetUnit(int2 nodeIndex, Entity unit)
-    {
-        units[nodeIndex] = unit;
-    }
-
-    public Entity GetUnit(int2 nodeIndex)
-    {
-        var hasUnit = units.TryGetValue(nodeIndex, out var unit);
-
-        return hasUnit ? unit : Entity.Null;
-    }
-
-    public bool HasUnit(int2 nodeIndex)
-    {
-        return GetUnit(nodeIndex) != Entity.Null;
-    }
-
-    public void RemoveUnit(int2 nodeIndex)
-    {
-        units[nodeIndex] = Entity.Null;
-    }
-
-    public bool IsWalkable(int2 nodeIndex)
-    {
-        return HasTile(nodeIndex) && !HasUnit(nodeIndex);
-    }
-
-    public bool HasTile(int2 nodeIndex)
-    {
-        var cellExist = nodePositions.TryGetValue(nodeIndex, out var _);
-
-        return cellExist;
-    }
-
-    public static int GetDistance(int2 nodeA, int2 nodeB)
-    {
-        var result = (math.abs(nodeA.x - nodeB.x) + math.abs(nodeA.x + nodeA.y - nodeB.x - nodeB.y) + math.abs(nodeA.y - nodeB.y)) / 2;
-
-        return result;
-    }
 }

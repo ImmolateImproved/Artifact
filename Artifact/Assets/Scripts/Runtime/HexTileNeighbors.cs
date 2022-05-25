@@ -1,5 +1,6 @@
 ﻿using Unity.Collections;
 using Unity.Mathematics;
+using UnityEngine;
 
 public enum AxialDirections
 {
@@ -16,11 +17,28 @@ public static class AxialDirectionsExtentions
 
         return (AxialDirections)newDirection;
     }
+
+    public static AxialDirections FromVector(int2 self, int2 target, NativeArray<int2> neighbors)
+    {
+        var dir = target - self;
+
+        for (int i = 0; i < neighbors.Length; i++)
+        {
+            var direction = neighbors[i];
+
+            if (direction.Equals(dir))
+            {
+                return (AxialDirections)i;
+            }
+        }
+
+        return default;
+    }
 }
 
 public static class HexTileNeighbors
 {
-    public static readonly int2[] Neighbors = new int2[] 
+    public static readonly int2[] Neighbors = new int2[]
     {
         new int2(1, 0),
         new int2(1, -1),

@@ -19,6 +19,12 @@ public partial class SelectMoveTargetSystem : SubSystem
         Entities.WithAll<Moving>()
            .ForEach((ref MoveDestination moveDestination, in WaypointsMovement waypointsMovement, in DynamicBuffer<UnitPath> path) =>
            {
+               if (!moveDestination.inDistance)
+                   return;
+
+               if (path.Length == 0)
+                   return;
+
                var currentNode = path[waypointsMovement.currentWaypointIndex].nodeIndex;
 
                moveDestination.node = currentNode;

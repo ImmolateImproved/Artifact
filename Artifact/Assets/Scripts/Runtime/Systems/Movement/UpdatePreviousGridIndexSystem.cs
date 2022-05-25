@@ -10,7 +10,7 @@ public partial class UpdatePreviousGridIndexSystem : SubSystem
         Entities.WithAll<Moving>()
             .ForEach((ref MoveDestination moveDestination, ref PreviousGridIndex previousGridIndex, in IndexInGrid indexInGrid) =>
             {
-                if (previousGridIndex.Equals(indexInGrid)) return;
+                if (!moveDestination.inDistance) return;
 
                 previousGridIndex.value = indexInGrid.value;
                 moveDestination.inDistance = false;

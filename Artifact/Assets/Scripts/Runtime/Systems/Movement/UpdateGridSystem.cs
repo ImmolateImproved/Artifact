@@ -9,12 +9,12 @@ public partial class UpdateGridSystem : SubSystem
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
 
         Entities.WithAll<Moving>()
-            .ForEach((Entity e, ref IndexInGrid indexInGrid, in PreviousGridIndex previousGridIndex, in MoveDestination moveDestination) =>
+            .ForEach((Entity e, in IndexInGrid indexInGrid, in PreviousGridIndex previousGridIndex, in MoveDestination moveDestination) =>
             {
                 if (!moveDestination.inDistance) return;
 
-                grid.RemoveUnit(previousGridIndex.value);
-                grid.SetUnit(indexInGrid.value, e);
+                grid.RemoveGridObject(previousGridIndex.value, e);
+                grid.SetGridObjects(indexInGrid.value, e);
 
             }).Run();
     }

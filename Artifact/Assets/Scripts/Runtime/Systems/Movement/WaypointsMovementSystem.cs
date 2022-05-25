@@ -8,15 +8,17 @@ public partial class WaypointsMovementSystem : SubSystem
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
 
         Entities.WithAll<Moving>()
-           .ForEach((Entity e, ref WaypointsMovement waypointsMovement, in MoveDestination moveDestination, in DynamicBuffer<UnitPath> path) =>
+           .ForEach((Entity e, ref WaypointsMovement waypointsMovement, ref DynamicBuffer<UnitPath> path, in MoveDestination moveDestination) =>
            {
-               if (!moveDestination.inDistance) return;
+               if (!moveDestination.inDistance)
+                   return;
 
                waypointsMovement.currentWaypointIndex++;
 
                if (waypointsMovement.currentWaypointIndex == path.Length)
                {
-                   ecb.RemoveComponent<Moving>(e);
+                   path.Length = 0;
+                   // ecb.RemoveComponent<Moving>(e);
                }
 
            }).Run();
