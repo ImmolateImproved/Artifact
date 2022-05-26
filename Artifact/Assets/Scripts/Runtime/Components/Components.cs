@@ -12,11 +12,6 @@ public struct UnitInitialized : IComponentData
 
 }
 
-public struct ActionRequest : IComponentData
-{
-
-}
-
 public struct MousePosition : IComponentData
 {
     public float2 value;

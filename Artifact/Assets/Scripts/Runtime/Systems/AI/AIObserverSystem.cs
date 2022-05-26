@@ -11,9 +11,10 @@ public partial class AIObserverSystem : SubSystem
     {
         var grid = latiosWorld.sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        Entities.ForEach((ref SwarmIntelligenceData aIData, ref MoveDirection moveDirection, in IndexInGrid indexInGrid, in MoveDestination moveDestination) =>
+        Entities.ForEach((ref SwarmIntelligenceData aIData, ref MoveDirection moveDirection, in IndexInGrid indexInGrid, in InDistance inDistance) =>
         {
-            if (!moveDestination.inDistance) return;
+            if (!inDistance.value)
+                return;
 
             var gridObjectsInRange = new NativeList<Entity>(5, Allocator.Temp);
             grid.FindGridObjects(indexInGrid.value, aIData.notificationRange, gridObjectsInRange);
@@ -23,19 +24,17 @@ public partial class AIObserverSystem : SubSystem
 
             var gridObjects = gridObjectsInRange;
 
-            var objectType = default(GridObjectTypes);
+            var objectType = GridObjectTypes.Unit;
 
             for (int i = 0; i < gridObjects.Length; i++)
             {
-                var obj = gridObjects[i];
-                objectType = GetComponent<GridObjectType>(obj).value;
+                var objType = GetComponent<GridObjectType>(gridObjects[i]).value;
 
-                if (objectType == GridObjectTypes.Unit)
-                    continue;
+                if (objType != GridObjectTypes.Unit)
+                {
+                    objectType = objType;
+                }
             }
-
-            if (objectType == GridObjectTypes.Unit)
-                return;
 
             if (objectType == GridObjectTypes.Base)
             {

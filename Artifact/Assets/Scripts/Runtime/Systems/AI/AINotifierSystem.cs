@@ -11,9 +11,9 @@ public partial class AINotifierSystem : SubSystem
 
         var objectTypeCDFE = GetComponentDataFromEntity<GridObjectType>(true);
 
-        Entities.ForEach((ref SwarmIntelligenceData aiData, in MoveDestination moveDestination, in IndexInGrid indexInGrid) =>
+        Entities.ForEach((ref SwarmIntelligenceData aiData, in InDistance inDistance, in IndexInGrid indexInGrid) =>
         {
-            if (!moveDestination.inDistance) return;
+            if (!inDistance.value) return;
 
             aiData.stepsToBase++;
             aiData.stepsToResource++;

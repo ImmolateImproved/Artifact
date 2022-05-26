@@ -62,7 +62,7 @@ public struct GridSpawnerJob
 
             for (int i = 0; i < neighbors.Length; i++)
             {
-                var neighborNode = HexTileNeighbors.GetNeighbor(node, neighbors[i]);
+                var neighborNode = HexTileNeighbors.GetNeighborNode(node, neighbors[i]);
 
                 if (visited.Add(neighborNode))
                 {
@@ -104,10 +104,6 @@ public partial class GridInitializationSystem : SubSystem
         var grid = new Grid(gridConfig);
         sceneBlackboardEntity.AddCollectionComponent(grid);
 
-        //MoveRangeSet Collection Component
-        var moveRangeSet = new MoveRangeSet(6, Allocator.Persistent);
-        sceneBlackboardEntity.AddCollectionComponent(moveRangeSet);
-
         #endregion
 
         var initialized = false;
@@ -116,7 +112,9 @@ public partial class GridInitializationSystem : SubSystem
         Entities.WithAll<TileTag>()
              .ForEach((Entity entity, in Translation translation, in IndexInGrid indexInGrid) =>
              {
-                 grid[indexInGrid.value] = new float2(translation.Value.x, translation.Value.z);
+                 var nodePosition = new float2(translation.Value.x, translation.Value.z);
+
+                 grid.SetNodePosition(indexInGrid.value, nodePosition);
                  grid.InitTile(indexInGrid.value, entity);
 
                  initialized = true;

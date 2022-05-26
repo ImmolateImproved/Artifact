@@ -5,7 +5,6 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs
 {
-    public bool attacker;
     public bool selectable;
     public GameObject selectionPointer;
 
@@ -15,12 +14,6 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclare
 
         dstManager.AddComponent<IndexInGrid>(entity);
         dstManager.AddComponent<PreviousGridIndex>(entity);
-
-        if (attacker)
-        {
-            dstManager.AddComponent<AttackState>(entity);
-            dstManager.AddComponent<AttackTarget>(entity);
-        }
 
         if (selectable)
         {

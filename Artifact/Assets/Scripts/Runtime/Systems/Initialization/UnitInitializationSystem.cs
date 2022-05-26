@@ -24,7 +24,7 @@ public partial class UnitInitializationSystem : SubSystem
 
         Entities.ForEach((Entity e, ref AIUnitSpawner spawner) =>
         {
-            var gridEnumerator = grid.GetNodePositions();
+            var gridEnumerator = grid.GetAllNodePositions();
 
             var count = math.min(spawner.count, grid.NodeCount);
 
@@ -47,23 +47,22 @@ public partial class UnitInitializationSystem : SubSystem
 
         }).Run();
 
-        Entities.WithAll<UnitTag>().WithNone<UnitInitialized>()
-            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex, ref PreviousGridIndex previousGridIndex, in GridObjectType gridObjectType) =>
+        Entities.WithAll<GridObjectType>().WithNone<UnitInitialized>()
+            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex, ref PreviousGridIndex previousGridIndex) =>
             {
                 var node = gridConfig.PositionToNode(translation.Value);
 
-                gridIndex.value = node;
-                previousGridIndex.value = node;
-
-                grid.SetGridObjects(node, entity);
-
-                var positionResult = grid[node];
-
-                if (positionResult != null)
+                if (grid.HasNode(node))
                 {
-                    var position = positionResult.Value;
+                    gridIndex.value = node;
+                    previousGridIndex.value = node;
 
-                    translation.Value = new float3(position.x, translation.Value.y, position.y);
+                    grid.SetGridObjects(node, entity);
+
+                    var position = grid.GetNodePosition(node);
+                    position.y = translation.Value.y;
+
+                    translation.Value = position;
                 }
 
                 ecb.AddComponent<UnitInitialized>(entity);

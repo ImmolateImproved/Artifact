@@ -10,9 +10,7 @@ public partial class AIListenerSystem : SubSystem
     {
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        var pathfinder = new PathfindingSystem.AStarPathfinding(grid);
-
-        Entities.ForEach((ref MoveDirection moveDirection, ref SwarmIntelligenceData aIData, ref NotificationListener notificationListener, ref DynamicBuffer<UnitPath> path, ref WaypointsMovement waypointsMovement, in IndexInGrid indexInGrid) =>
+        Entities.ForEach((ref SwarmIntelligenceData aIData, ref NotificationListener notificationListener, ref PathfindingTarget pathfindingTarget) =>
         {
             if (!notificationListener.changed) return;
 
@@ -24,9 +22,7 @@ public partial class AIListenerSystem : SubSystem
 
                 if (aIData.target == GridObjectTypes.Base)
                 {
-                    pathfinder.FindPath(indexInGrid.value, notificationListener.notifierNode, path.Reinterpret<int2>());
-                    waypointsMovement.currentWaypointIndex = 0;
-                    //moveDirection.value = AxialDirectionsExtentions.FromVector(indexInGrid.value, notificationListener.notifierNode, grid.neighbors);
+                    pathfindingTarget.node = notificationListener.notifierNode;
                 }
             }
 
@@ -36,9 +32,7 @@ public partial class AIListenerSystem : SubSystem
 
                 if (aIData.target == GridObjectTypes.Recource)
                 {
-                    pathfinder.FindPath(indexInGrid.value, notificationListener.notifierNode, path.Reinterpret<int2>());
-                    waypointsMovement.currentWaypointIndex = 0;
-                    //moveDirection.value = AxialDirectionsExtentions.FromVector(indexInGrid.value, notificationListener.notifierNode, grid.neighbors);
+                    pathfindingTarget.node = notificationListener.notifierNode;
                 }
             }
 

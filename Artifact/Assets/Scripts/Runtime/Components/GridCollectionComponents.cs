@@ -46,30 +46,26 @@ public struct Grid : ICollectionComponent
 
     public Type AssociatedComponentType => typeof(GridTag);
 
-    public float2? this[int2 index]
-    {
-        get
-        {
-            if (nodePositions.TryGetValue(index, out var position))
-            {
-                return position;
-            }
-
-            return null;
-        }
-
-        set
-        {
-            nodePositions[index] = value.Value;
-        }
-    }
-
-    public NativeHashMap<int2, float2>.Enumerator GetNodePositions()
+    public NativeHashMap<int2, float2>.Enumerator GetAllNodePositions()
     {
         return nodePositions.GetEnumerator();
     }
 
-    public int2 GetNextNode(int2 currentNode, AxialDirections direction)
+    public float3 GetNodePosition(int2 nodeIndex)
+    {
+        var nodePos = nodePositions[nodeIndex];
+
+        var position = new float3(nodePos.x, 0, nodePos.y);
+
+        return position;
+    }
+
+    public void SetNodePosition(int2 index, float2 position)
+    {
+        nodePositions[index] = position;
+    }
+
+    public int2 GetNeighborNode(int2 currentNode, AxialDirections direction)
     {
         var dir = neighbors[(int)direction];
 
@@ -132,9 +128,7 @@ public struct Grid : ICollectionComponent
 
     public bool HasNode(int2 nodeIndex)
     {
-        var cellExist = nodePositions.TryGetValue(nodeIndex, out var _);
-
-        return cellExist;
+        return nodePositions.TryGetValue(nodeIndex, out var _); ;
     }
 
     public bool IsWalkable(int2 nodeIndex)
@@ -142,7 +136,7 @@ public struct Grid : ICollectionComponent
         return HasNode(nodeIndex) && !HasGridOject(nodeIndex);
     }
 
-    public static int GetDistance(int2 nodeA, int2 nodeB)
+    public static int Distance(int2 nodeA, int2 nodeB)
     {
         var result = (math.abs(nodeA.x - nodeB.x) + math.abs(nodeA.x + nodeA.y - nodeB.x - nodeB.y) + math.abs(nodeA.y - nodeB.y)) / 2;
 
@@ -165,7 +159,7 @@ public struct Grid : ICollectionComponent
 
             for (int i = 0; i < neighbors.Length; i++)
             {
-                var neighborNode = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
+                var neighborNode = HexTileNeighbors.GetNeighborNode(currentNode, neighbors[i]);
 
                 if (!visited.Add(neighborNode))
                 {

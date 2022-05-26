@@ -7,14 +7,18 @@ using Unity.Mathematics;
 
 public struct Moving : IComponentData
 {
-    
+
 }
 
-public struct MoveDestination : IComponentData
+public struct DestinationNode : IComponentData
 {
+    public float3 position;
     public int2 node;
+}
 
-    public bool inDistance;
+public struct InDistance : IComponentData
+{
+    public bool value;
 }
 
 public struct MoveSpeed : IComponentData
@@ -25,46 +29,4 @@ public struct MoveSpeed : IComponentData
 public struct WaypointsMovement : IComponentData
 {
     public int currentWaypointIndex;
-}
-
-public struct MoveRangeTileTag : IComponentData
-{
-
-}
-
-public struct MoveRangePrefab : IComponentData
-{
-    public Entity prefab;
-}
-
-public struct CalculateMoveRange : IComponentData
-{
-
-}
-
-public struct MoveRange : IComponentData
-{
-    public int value;
-}
-
-public struct MoveRangeAssociated : IComponentData
-{
-    
-}
-
-public struct MoveRangeSet : ICollectionComponent
-{
-    public NativeHashSet<int2> moveRangeHashSet;
-
-    public MoveRangeSet(int capacity, Allocator allocator)
-    {
-        moveRangeHashSet = new NativeHashSet<int2>(capacity, allocator);
-    }
-
-    public Type AssociatedComponentType => typeof(MoveRangeAssociated);
-
-    public JobHandle Dispose(JobHandle inputDeps)
-    {
-        return moveRangeHashSet.Dispose(inputDeps);
-    }
 }

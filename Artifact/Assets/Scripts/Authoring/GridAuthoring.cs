@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertGameObjectToEntity
+public class GridAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 {
     public int gridRadius;
 
@@ -16,8 +16,6 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
     public float tilesMargin;
 
     public TileAuthoring tilePrefab;
-    public GameObject moveRangePrefab;
-    public GameObject pathPrefab;
 
     public TextMeshPro indicesTextPrefab;
     public bool showTileIndices;
@@ -31,30 +29,12 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        var moveRangeTileScale = tileSize;
-        moveRangePrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
-        pathPrefab.transform.localScale = new Vector3(moveRangeTileScale, 1, moveRangeTileScale);
-
         dstManager.AddComponentData(entity, new GridConfig
         {
             gridRadius = gridRadius,
             tileSlotRadius = TileSlotRadius,
             tileSize = tileSize
         });
-
-        dstManager.AddComponentData(entity, new PathPrefab { prefab = conversionSystem.GetPrimaryEntity(pathPrefab) });
-        dstManager.AddComponentData(entity, new MoveRangePrefab { prefab = conversionSystem.GetPrimaryEntity(moveRangePrefab) });
-
-        if (showPath)
-        {
-            dstManager.AddComponentData(entity, new DrawPath());
-        }
-    }
-
-    public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
-    {
-        referencedPrefabs.Add(pathPrefab);
-        referencedPrefabs.Add(moveRangePrefab);
     }
 
     public void GenerateGrid()
@@ -103,7 +83,7 @@ public class GridAuthoring : MonoBehaviour, IDeclareReferencedPrefabs, IConvertG
 
             for (int i = 0; i < neighbors.Length; i++)
             {
-                var neighborNode = HexTileNeighbors.GetNeighbor(node, neighbors[i]);
+                var neighborNode = HexTileNeighbors.GetNeighborNode(node, neighbors[i]);
 
                 if (visited.Add(neighborNode))
                 {

@@ -7,13 +7,6 @@ public partial class UnitSelectionViewSystem : SubSystem
     {
         var unitColors = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
-        var unitUi = default(UnitUi);
-
-        if (this.HasSingleton<UnitUi>())
-        {
-            unitUi = this.GetSingleton<UnitUi>();
-        }
-
         Entities.WithAll<Selected>().WithNone<SelectedInternal>()
             .ForEach(( in UnitSelectionPointer selectionPointer) =>
             {

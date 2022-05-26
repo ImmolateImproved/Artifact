@@ -26,8 +26,6 @@ public class PlayerInputSuperSystem : SuperSystem
 
         GetOrCreateAndAddSystem<UnitSelectionSystem>();
         GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
-
-        GetOrCreateAndAddSystem<ActionRequestSystem>();
     }
 }
 
@@ -43,35 +41,24 @@ public class PerFrameSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<MouseHoverSystem>();
         GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
 
-        GetOrCreateAndAddSystem<TargetSelectionSystem>();
-
-        GetOrCreateAndAddSystem<PathfindingSystem>();
         //Movement
 
-        GetOrCreateAndAddSystem<SelectMoveTargetSystem>();
-        GetOrCreateAndAddSystem<MovementSystem>();
-        GetOrCreateAndAddSystem<IncrementWaypointIndexSystem>();
+        GetOrCreateAndAddSystem<AIObserverSystem>();
+
+        GetOrCreateAndAddSystem<SelectDestinationSystem>();
+        GetOrCreateAndAddSystem<PathfindingSystem>();
+
+        GetOrCreateAndAddSystem<GridMovementSystem>();
 
         GetOrCreateAndAddSystem<UpdateGridSystem>();
 
-        //AI Systems
         //GetOrCreateAndAddSystem<AINotifierSystem>();
-        GetOrCreateAndAddSystem<AIObserverSystem>();
         //GetOrCreateAndAddSystem<AIListenerSystem>();
-
-        GetOrCreateAndAddSystem<UpdatePreviousGridIndexSystem>();
-        //
-        GetOrCreateAndAddSystem<MovementReactionSystem>();
-        GetOrCreateAndAddSystem<CalculateMoveRangeSystem>();
-        //
 
         #region ViewSystems
         //View
         GetOrCreateAndAddSystem<MouseHoverViewSystem>();
-        GetOrCreateAndAddSystem<AttackTargetSelectionViewSystem>();
-        GetOrCreateAndAddSystem<PathfindingViewSystem>();
         GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
-        GetOrCreateAndAddSystem<MoveRangeViewSystem>();
 
         #endregion
     }

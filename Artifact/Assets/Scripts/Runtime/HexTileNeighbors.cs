@@ -56,7 +56,7 @@ public static class HexTileNeighbors
         new int2(0, 1)
     };
 
-    public static int2 GetNeighbor(int2 current, int2 direction)
+    public static int2 GetNeighborNode(int2 current, int2 direction)
     {
         return current + direction;
     }
@@ -65,7 +65,7 @@ public static class HexTileNeighbors
     {
         for (int i = 0; i < array.Length; i++)
         {
-            if (GetNeighbor(nodeA, array[i]).Equals(nodeB))
+            if (GetNeighborNode(nodeA, array[i]).Equals(nodeB))
             {
                 return true;
             }

@@ -31,8 +31,8 @@ public class LatiosBootstrap : ICustomBootstrap
         initializationSystemGroup.SortSystems();
         simulationSystemGroup.SortSystems();
         presentationSystemGroup.SortSystems();
-
-        ScriptBehaviourUpdateOrder.AddWorldToCurrentPlayerLoop(world);
+        
+        ScriptBehaviourUpdateOrder.AppendWorldToCurrentPlayerLoop(world);
         return true;
     }
 }

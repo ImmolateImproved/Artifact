@@ -1,7 +1,6 @@
-using Latios;
+﻿using Latios;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -11,29 +10,42 @@ public partial class PathfindingSystem : SubSystem
     {
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-        Entities.WithAll<ActionRequest>()
-            .ForEach((ref DynamicBuffer<UnitPath> unitPath, in IndexInGrid gridPosition, in PathfindingTarget pathfindingTarget) =>
-            {
-                var findPathData = new AStarPathfinding(grid);
+        var pathfinder = new AStarPathfinding(grid);
 
-                unitPath.Clear();
-                if (gridPosition.value.Equals(pathfindingTarget.node))
-                    return;
+        Entities.WithAll<Moving>()
+          .ForEach((ref DestinationNode destinationNode, ref IndexInGrid indexInGrid, ref WaypointsMovement waypointsMovement, ref DynamicBuffer<UnitPath> path,
+                    ref MoveDirection moveDirection, ref PathfindingTarget pathfindingTarget, in InDistance inDistance) =>
+                   {
+                       if (pathfindingTarget.pathNeeded)
+                       {
+                           pathfinder.FindPath(indexInGrid.value, pathfindingTarget.node, path.Reinterpret<int2>());
+                           waypointsMovement.currentWaypointIndex = 0;
 
-                var start = gridPosition.value;
-                var end = pathfindingTarget.node;
+                           pathfindingTarget.pathNeeded = false;
+                       }
 
-                var path = unitPath.Reinterpret<int2>();
+                       if (!inDistance.value || path.Length == 0)
+                           return;
 
-                findPathData.FindPath(start, end, path);
+                       destinationNode.node = path[waypointsMovement.currentWaypointIndex].nodeIndex;
+                       destinationNode.position = grid.GetNodePosition(destinationNode.node);
 
-            }).Run();
+                       waypointsMovement.currentWaypointIndex++;
+
+                       if (waypointsMovement.currentWaypointIndex == path.Length)
+                       {
+                           path.Length = 0;
+                       }
+
+                   }).Run();
     }
 
     public struct AStarPathfinding
     {
-        public readonly NativeArray<int2> neighbors;
+        [ReadOnly]
+        private readonly NativeArray<int2> neighbors;
 
+        [ReadOnly]
         private readonly Grid grid;
 
         private NativeHashMap<int2, int> costSoFar;
@@ -51,7 +63,7 @@ public partial class PathfindingSystem : SubSystem
 
             openSet = new NativeMinHeap(grid.NodeCount * grid.NodeCount * 5, Allocator.Temp);
 
-            this.neighbors = grid.neighbors;
+            neighbors = grid.neighbors;
         }
 
         public void Dispose()
@@ -95,7 +107,7 @@ public partial class PathfindingSystem : SubSystem
 
                 for (int i = 0; i < neighbors.Length; i++)
                 {
-                    var neighborIndex = HexTileNeighbors.GetNeighbor(currentNode, neighbors[i]);
+                    var neighborIndex = HexTileNeighbors.GetNeighborNode(currentNode, neighbors[i]);
 
                     if (!grid.HasNode(neighborIndex) && !neighborIndex.Equals(end))
                         continue;
@@ -109,7 +121,7 @@ public partial class PathfindingSystem : SubSystem
                     costSoFar[neighborIndex] = newCost;
                     pathTrack[neighborIndex] = currentNode;
 
-                    var expectedCost = newCost + Grid.GetDistance(neighborIndex, end);
+                    var expectedCost = newCost + Grid.Distance(neighborIndex, end);
 
                     openSet.Push(new MinHeapNode(neighborIndex, expectedCost));
                 }
