@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881f0b7a8cb3b1a4ba1002228eb6f98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDirection: 4
-  notificationRange: 1
+  initialDirection: 0
+  notificationRange: 3
 --- !u!114 &9115815950910697398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  moveRange: 0
 --- !u!114 &676950155842667334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7559b3d618dd6db4aaeedba036d6e0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacker: 0
   selectable: 0
   selectionPointer: {fileID: 0}
 --- !u!114 &6236823967976116978
