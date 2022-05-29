@@ -15,7 +15,9 @@ public partial class UnitSelectionSystem : SubSystem
 
     public override bool ShouldUpdateSystem()
     {
-        return Input.GetMouseButtonDown(0);
+        var shouldUpdate = Input.GetMouseButtonDown(0) && sceneBlackboardEntity.HasComponent<SelectedUnit>();
+
+        return shouldUpdate;
     }
 
     protected override void OnUpdate()

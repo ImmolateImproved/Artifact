@@ -7,21 +7,21 @@ public partial class MouseHoverViewSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var hoverColor = sceneBlackboardEntity.GetComponentData<HoverColor>();
-
-        Entities.WithAll<Hover>().WithNone<HoverInternal>()
-            .ForEach((ref GlowColorVector4Override color) =>
+        Entities.WithChangeFilter<HoverTile>()
+            .ForEach((in HoverTile hoverTile,in HoverColor hoverColor) =>
             {
-                color.Value = (Vector4)hoverColor.value;
+                if (hoverTile.current != hoverTile.previous)
+                {
+                    if (hoverTile.current != Entity.Null)
+                    { 
+                        SetComponent(hoverTile.current, new GlowColorVector4Override { Value = (Vector4)hoverColor.value });
+                    }
+                    if (hoverTile.previous != Entity.Null)
+                    {
+                        SetComponent(hoverTile.previous, new GlowColorVector4Override { Value = (Vector4)Color.black });
+                    }
+                }
 
             }).Run();
-
-        Entities.WithAll<HoverInternal>().WithNone<Hover>()
-            .ForEach((Entity e, ref GlowColorVector4Override color) =>
-            {
-                color.Value = (Vector4)Color.black;
-
-            }).Run();
-
     }
 }

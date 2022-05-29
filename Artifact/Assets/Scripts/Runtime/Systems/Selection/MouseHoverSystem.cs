@@ -7,11 +7,11 @@ public partial class MouseHoverSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        Entities.ForEach((in GridConfig gridConfig) =>
-        {
-            var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
+        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Entities.ForEach((Entity e, in GridConfig gridConfig) =>
+        {
             var plane = new Plane(Vector3.up, Vector3.zero);
 
             if (plane.Raycast(ray, out var rayDistance))
@@ -20,24 +20,16 @@ public partial class MouseHoverSystem : SubSystem
                 var node = gridConfig.PositionToNode(point);
                 var tile = grid.GetTile(node);
 
-                sceneBlackboardEntity.SetComponentData(new MousePosition { value = new float2(point.x, point.z) });
+                var hoverTile = GetComponent<HoverTile>(e);//HoverTile не в ForEach, чтобы правильно работал ChangeFilter 
 
-                var isHoverEntityExisting = TryGetSingletonEntity<Hover>(out var hoverEntity);
-
-                if (hoverEntity != tile)
+                if (tile != hoverTile.current)
                 {
-                    if (isHoverEntityExisting)
-                    {
-                        EntityManager.RemoveComponent<Hover>(hoverEntity);
-                    }
-
-                    if (tile != Entity.Null)
-                    {
-                        EntityManager.AddComponentData(tile, new Hover());
-                    }
+                    hoverTile.previous = hoverTile.current;
+                    hoverTile.current = tile;
+                    SetComponent(e, hoverTile);
                 }
             }
 
-        }).WithStructuralChanges().Run();
+        }).Run();
     }
 }

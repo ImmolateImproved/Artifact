@@ -8,16 +8,20 @@ using UnityEngine;
 
 public partial class UnitInitializationSystem : SubSystem
 {
+    public EntityQuery nonInitializedUnitsQuery;
+
     protected override void OnCreate()
     {
         RequireSingletonForUpdate<GridInitializedTag>();
+
+        RequireForUpdate(nonInitializedUnitsQuery);
     }
 
     protected override void OnUpdate()
     {
         var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
 
-        var gridConfig = GetSingleton<GridConfig>();
+        var gridConfig = sceneBlackboardEntity.GetComponentData<GridConfig>();
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
 
         var spawnECB = latiosWorld.syncPoint.CreateInstantiateCommandBuffer<Translation, MoveSpeed>();
@@ -27,6 +31,7 @@ public partial class UnitInitializationSystem : SubSystem
             var gridEnumerator = grid.GetAllNodePositions();
 
             var count = math.min(spawner.count, grid.NodeCount);
+            spawner.count = 0;
 
             while (gridEnumerator.MoveNext())
             {
@@ -43,8 +48,6 @@ public partial class UnitInitializationSystem : SubSystem
                 spawnECB.Add(spawner.prefab, new Translation { Value = position },
                                              new MoveSpeed { value = UnityEngine.Random.Range(spawner.minSpeed, spawner.maxSpeed) });
             }
-
-            ecb.DestroyEntity(e);
 
         }).Run();
 
@@ -68,7 +71,7 @@ public partial class UnitInitializationSystem : SubSystem
 
                 ecb.AddComponent<UnitInitialized>(entity);
 
-            }).Run();
+            }).WithStoreEntityQueryInField(ref nonInitializedUnitsQuery).Run();
 
         Entities.WithAll<UnitTag>().WithNone<UnitInitialized>()
             .ForEach((in UnitSelectionPointer selectionPointer) =>

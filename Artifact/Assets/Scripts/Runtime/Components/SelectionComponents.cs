@@ -7,19 +7,15 @@ public struct SelectedUnit : IComponentData
     public Entity value;
 }
 
-public struct SelectionFilter : IComponentData
-{
-    public CollisionFilter collisionFilter;
-}
-
 public struct UnitSelectionPointer : IComponentData
 {
     public Entity value;
 }
 
-public struct Hover : IComponentData
+public struct HoverTile : IComponentData
 {
-
+    public Entity current;
+    public Entity previous;
 }
 
 public struct Click : IComponentData

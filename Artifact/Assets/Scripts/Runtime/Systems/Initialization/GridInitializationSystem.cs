@@ -9,19 +9,22 @@ using UnityEngine;
 public struct GridSpawnerJob
 {
     public GridConfig config;
+    public GridSpawner gridSpawner;
 
     public int2[] neighbors;
 
     public EntityCommandBuffer spawnECB;
 
-    public GridSpawnerJob(GridConfig config, EntityCommandBuffer spawnECB) : this()
+    public GridSpawnerJob(GridConfig config, GridSpawner gridSpawner, EntityCommandBuffer spawnECB) : this()
     {
         this.config = config;
+        this.gridSpawner = gridSpawner;
         this.spawnECB = spawnECB;
+
         neighbors = HexTileNeighbors.Neighbors;
     }
 
-    public void Execute(GridSpawner gridSpawner)
+    public void Execute()
     {
         GenerateCircleGrid(gridSpawner.prefab);
     }
@@ -77,6 +80,7 @@ public struct GridSpawnerJob
     }
 }
 
+[AlwaysUpdateSystem]
 public partial class GridInitializationSystem : SubSystem
 {
     public override bool ShouldUpdateSystem()
@@ -86,16 +90,14 @@ public partial class GridInitializationSystem : SubSystem
 
     protected override void OnUpdate()
     {
-        if (!TryGetSingleton<GridConfig>(out var gridConfig))
-        {
-            return;
-        }
+        var gridConfig = sceneBlackboardEntity.GetComponentData<GridConfig>();
+        var gridSpawner = sceneBlackboardEntity.GetComponentData<GridSpawner>();
 
         var tileSpawnECB = new EntityCommandBuffer(Allocator.Temp);
 
-        var spawnGridJob = new GridSpawnerJob(gridConfig, tileSpawnECB);
+        var spawnGridJob = new GridSpawnerJob(gridConfig, gridSpawner, tileSpawnECB);
 
-        spawnGridJob.Execute(GetSingleton<GridSpawner>());
+        spawnGridJob.Execute();
 
         tileSpawnECB.Playback(EntityManager);
         #region Collection Components Initialization

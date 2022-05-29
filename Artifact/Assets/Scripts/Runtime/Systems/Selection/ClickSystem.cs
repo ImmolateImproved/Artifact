@@ -1,28 +1,21 @@
 using Latios;
 using Unity.Entities;
-using Unity.Physics;
-using Unity.Physics.Systems;
 
 public partial class ClickSystem : SubSystem
 {
-    private EndSimulationEntityCommandBufferSystem ecbSystem;
-
-    protected override void OnCreate()
-    {
-        ecbSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
-    }
-
     protected override void OnUpdate()
     {
-        Entities.WithAll<Hover>()
-            .ForEach((ref Entity e) =>
+        Entities.WithChangeFilter<HoverTile>()
+            .ForEach((ref Entity e, in HoverTile hoverTile) =>
             {
-                var ecb = ecbSystem.CreateCommandBuffer();
+                var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
 
-                EntityManager.AddComponentData(e, new Click());
-                ecb.RemoveComponent<Click>(e);
+                if (hoverTile.current == Entity.Null)
+                    return;
+
+                EntityManager.AddComponentData(hoverTile.current, new Click());
+                ecb.RemoveComponent<Click>(hoverTile.current);
 
             }).WithStructuralChanges().Run();
-
     }
 }

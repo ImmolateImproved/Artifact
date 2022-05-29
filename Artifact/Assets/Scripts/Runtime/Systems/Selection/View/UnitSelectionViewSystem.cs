@@ -8,7 +8,7 @@ public partial class UnitSelectionViewSystem : SubSystem
         var unitColors = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
         Entities.WithAll<Selected>().WithNone<SelectedInternal>()
-            .ForEach(( in UnitSelectionPointer selectionPointer) =>
+            .ForEach((in UnitSelectionPointer selectionPointer) =>
             {
                 EntityManager.SetEnabled(selectionPointer.value, true);
 
@@ -18,7 +18,6 @@ public partial class UnitSelectionViewSystem : SubSystem
             .ForEach((in UnitSelectionPointer selectionPointer) =>
             {
                 EntityManager.SetEnabled(selectionPointer.value, false);
-
 
             }).WithStructuralChanges().Run();
     }

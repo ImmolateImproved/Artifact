@@ -36,20 +36,17 @@ public class GridMovementPerFrameSuperSystem : SuperSystem
         //Initialization
         GetOrCreateAndAddSystem<GridInitializationSystem>();
         GetOrCreateAndAddSystem<UnitInitializationSystem>();
+
         //
+        //GetOrCreateAndAddSystem<PathfindingSystem>();
+
+        //GetOrCreateAndAddSystem<GridMovementSystem>();
+
+        //GetOrCreateAndAddSystem<UpdateGridSystem>();
 
         GetOrCreateAndAddSystem<MouseHoverSystem>();
-        GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
-
-        //
-        GetOrCreateAndAddSystem<PathfindingSystem>();
-
-        GetOrCreateAndAddSystem<GridMovementSystem>();
-
-        GetOrCreateAndAddSystem<UpdateGridSystem>();
-
         #region ViewSystems
-        //View
+        ////View
         GetOrCreateAndAddSystem<MouseHoverViewSystem>();
         GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
 
