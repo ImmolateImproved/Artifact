@@ -11,7 +11,7 @@ public class TileAuthoring : MonoBehaviour, IConvertGameObjectToEntity
         dstManager.AddComponentData(entity, new TileTag { });
         dstManager.AddComponentData(entity, new IndexInGrid
         {
-            value = indexInGrid
+            current = indexInGrid
         });
     }
 }

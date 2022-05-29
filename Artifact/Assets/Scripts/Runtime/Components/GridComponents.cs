@@ -79,24 +79,10 @@ public struct GridConfig : IComponentData
     }
 }
 
-public struct IndexInGrid : IComponentData, IEquatable<PreviousGridIndex>
+public struct IndexInGrid : IComponentData
 {
-    public int2 value;
-
-    public bool Equals(PreviousGridIndex other)
-    {
-        return value.Equals(other.value);
-    }
-}
-
-public struct PreviousGridIndex : IComponentData, IEquatable<IndexInGrid>
-{
-    public int2 value;
-
-    public bool Equals(IndexInGrid other)
-    {
-        return value.Equals(other.value);
-    }
+    public int2 current;
+    public int2 previous;
 }
 
 public struct GridInitializedTag : IComponentData

@@ -24,7 +24,7 @@ public partial class UnitInitializationSystem : SubSystem
         var gridConfig = sceneBlackboardEntity.GetComponentData<GridConfig>();
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
 
-        var spawnECB = latiosWorld.syncPoint.CreateInstantiateCommandBuffer<Translation, MoveSpeed>();
+        var spawnECB = latiosWorld.syncPoint.CreateInstantiateCommandBuffer<Translation>();
 
         Entities.ForEach((Entity e, ref AIUnitSpawner spawner) =>
         {
@@ -45,21 +45,20 @@ public partial class UnitInitializationSystem : SubSystem
 
                 var position = new float3(nodePos.x, 0.75f, nodePos.y);
 
-                spawnECB.Add(spawner.prefab, new Translation { Value = position },
-                                             new MoveSpeed { value = UnityEngine.Random.Range(spawner.minSpeed, spawner.maxSpeed) });
+                spawnECB.Add(spawner.prefab, new Translation { Value = position });
             }
 
         }).Run();
 
         Entities.WithNone<UnitInitialized>()
-            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex, ref PreviousGridIndex previousGridIndex) =>
+            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex) =>
             {
                 var node = gridConfig.PositionToNode(translation.Value);
 
                 if (grid.HasNode(node))
                 {
-                    gridIndex.value = node;
-                    previousGridIndex.value = node;
+                    gridIndex.current = node;
+                    gridIndex.previous = node;
 
                     grid.SetGridObjects(node, entity);
 

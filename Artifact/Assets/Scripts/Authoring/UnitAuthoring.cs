@@ -13,7 +13,6 @@ public class UnitAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclare
         dstManager.AddComponent<UnitTag>(entity);
 
         dstManager.AddComponent<IndexInGrid>(entity);
-        dstManager.AddComponent<PreviousGridIndex>(entity);
 
         if (selectable)
         {

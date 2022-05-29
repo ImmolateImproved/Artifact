@@ -11,27 +11,13 @@ public struct GridSpawnerJob
     public GridConfig config;
     public GridSpawner gridSpawner;
 
-    public int2[] neighbors;
-
-    public EntityCommandBuffer spawnECB;
-
-    public GridSpawnerJob(GridConfig config, GridSpawner gridSpawner, EntityCommandBuffer spawnECB) : this()
-    {
-        this.config = config;
-        this.gridSpawner = gridSpawner;
-        this.spawnECB = spawnECB;
-
-        neighbors = HexTileNeighbors.Neighbors;
-    }
+    public EntityManager entityManager;
 
     public void Execute()
     {
-        GenerateCircleGrid(gridSpawner.prefab);
-    }
-
-    private void GenerateCircleGrid(Entity prefab)
-    {
         var nodes = BuildGridBFSAxial();
+
+        var spawnECB = new InstantiateCommandBuffer<Translation, NonUniformScale, IndexInGrid>(Allocator.TempJob);
 
         foreach (var node in nodes)
         {
@@ -40,17 +26,23 @@ public struct GridSpawnerJob
 
             var tileSize = config.tileSize;
 
-            var tile = spawnECB.Instantiate(prefab);
-            spawnECB.SetComponent(tile, new Translation { Value = position });
-            spawnECB.AddComponent(tile, new NonUniformScale { Value = new Vector3(tileSize, 1, tileSize) });
-            spawnECB.SetComponent(tile, new IndexInGrid { value = node });
+            var translation = new Translation { Value = position };
+            var scale = new NonUniformScale { Value = new Vector3(tileSize, 1, tileSize) };
+            var gridIndex = new IndexInGrid { current = node };
+
+            spawnECB.Add(gridSpawner.prefab, translation, scale, gridIndex);
         }
 
         nodes.Dispose();
+
+        spawnECB.Playback(entityManager);
+        spawnECB.Dispose();
     }
 
     private NativeHashSet<int2> BuildGridBFSAxial()
     {
+        var neighbors = HexTileNeighbors.Neighbors;
+
         var tileInGridRadius = HexTileNeighbors.CalculateTilesCount(config.gridRadius);
 
         var queue = new NativeQueue<int2>(Allocator.Temp);
@@ -93,13 +85,15 @@ public partial class GridInitializationSystem : SubSystem
         var gridConfig = sceneBlackboardEntity.GetComponentData<GridConfig>();
         var gridSpawner = sceneBlackboardEntity.GetComponentData<GridSpawner>();
 
-        var tileSpawnECB = new EntityCommandBuffer(Allocator.Temp);
-
-        var spawnGridJob = new GridSpawnerJob(gridConfig, gridSpawner, tileSpawnECB);
+        var spawnGridJob = new GridSpawnerJob
+        {
+            config = gridConfig,
+            gridSpawner = gridSpawner,
+            entityManager = EntityManager
+        };
 
         spawnGridJob.Execute();
 
-        tileSpawnECB.Playback(EntityManager);
         #region Collection Components Initialization
 
         //Grid Collection Component
@@ -116,8 +110,8 @@ public partial class GridInitializationSystem : SubSystem
              {
                  var nodePosition = new float2(translation.Value.x, translation.Value.z);
 
-                 grid.SetNodePosition(indexInGrid.value, nodePosition);
-                 grid.InitTile(indexInGrid.value, entity);
+                 grid.SetNodePosition(indexInGrid.current, nodePosition);
+                 grid.InitTile(indexInGrid.current, entity);
 
                  initialized = true;
 

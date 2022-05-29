@@ -1,7 +1,6 @@
 ﻿using Latios;
 using Unity.Burst;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -12,12 +11,11 @@ public partial class GridMovementSystem : SubSystem
         var dt = Time.DeltaTime;
 
         Entities.WithAll<Moving>()
-            .ForEach((ref Translation translation, ref IndexInGrid indexInGrid, ref PreviousGridIndex previousGridIndex,
-                    ref InDistance inDistance, in DestinationNode destinationNode, in MoveSpeed moveSpeed) =>
+            .ForEach((ref Translation translation, ref IndexInGrid indexInGrid, ref InDistance inDistance, in DestinationNode destinationNode, in MoveSpeed moveSpeed) =>
                     {
                         if (inDistance.value)
                         {
-                            previousGridIndex.value = indexInGrid.value;
+                            indexInGrid.previous = indexInGrid.current;
                             inDistance.value = false;
                         }
 
@@ -28,7 +26,7 @@ public partial class GridMovementSystem : SubSystem
 
                         if (distance < 0.01f)
                         {
-                            indexInGrid.value = destinationNode.node;
+                            indexInGrid.current = destinationNode.node;
                             inDistance.value = true;
                         }
 

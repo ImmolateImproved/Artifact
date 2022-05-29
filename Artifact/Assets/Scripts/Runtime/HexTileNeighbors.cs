@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿using Latios;
+using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -11,41 +12,31 @@ public static class AxialDirectionsExtentions
 {
     public const int DIRECTIONS_COUNT = 6;
 
-    public static AxialDirections GetNextDirection(AxialDirections direction, bool prevDirection = false)
+    public static AxialDirections GetNextDirection(this AxialDirections direction, bool prevDirection = false)
     {
         var intDirection = (int)direction;
 
-        intDirection = prevDirection ? intDirection + 1 : intDirection - 1;
+        intDirection = prevDirection ? intDirection - 1 : intDirection + 1;
 
-        intDirection = intDirection < 0 
-                        ? DIRECTIONS_COUNT + intDirection
-                        : intDirection % DIRECTIONS_COUNT;
+        intDirection = intDirection > 0
+                        ? intDirection % DIRECTIONS_COUNT
+                        : intDirection + DIRECTIONS_COUNT;
 
         return (AxialDirections)intDirection;
     }
 
-    public static AxialDirections ReverseDirection(this AxialDirections direction)
+    public static AxialDirections GetReverseDirection(this AxialDirections direction)
     {
         var newDirection = ((int)direction + DIRECTIONS_COUNT / 2) % DIRECTIONS_COUNT;
 
         return (AxialDirections)newDirection;
     }
 
-    public static AxialDirections FromVector(int2 self, int2 target, NativeArray<int2> neighbors)
+    public static AxialDirections GetRandomDirection(Rng.RngSequence rngSequence)
     {
-        var dir = target - self;
+        var randomIndex = rngSequence.NextInt(0, DIRECTIONS_COUNT);
 
-        for (int i = 0; i < neighbors.Length; i++)
-        {
-            var direction = neighbors[i];
-
-            if (direction.Equals(dir))
-            {
-                return (AxialDirections)i;
-            }
-        }
-
-        return default;
+        return (AxialDirections)randomIndex;
     }
 }
 

@@ -1,13 +1,14 @@
-﻿using Latios;
-using System;
-using Unity.Collections;
-using Unity.Entities;
-using Unity.Jobs;
+﻿using Unity.Entities;
 using Unity.Mathematics;
 
 public struct MoveDirection : IComponentData
 {
     public AxialDirections value;
+
+    public AxialDirections GetNextDirection(bool prevDirection = false)
+    {
+        return value.GetNextDirection(prevDirection);
+    }
 }
 
 public struct Moving : IComponentData

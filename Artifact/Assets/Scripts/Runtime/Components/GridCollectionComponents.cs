@@ -65,7 +65,7 @@ public struct Grid : ICollectionComponent
         nodePositions[index] = position;
     }
 
-    public int2 GetNeighborNode(int2 currentNode, AxialDirections direction)
+    public int2 GetNeighborNodeFromDirection(int2 currentNode, AxialDirections direction)
     {
         var dir = neighbors[(int)direction];
 

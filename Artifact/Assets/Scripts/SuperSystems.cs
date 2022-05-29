@@ -40,9 +40,10 @@ public class GridMovementPerFrameSuperSystem : SuperSystem
         //
         //GetOrCreateAndAddSystem<PathfindingSystem>();
 
-        //GetOrCreateAndAddSystem<GridMovementSystem>();
+        GetOrCreateAndAddSystem<SelectDestinationSystem>();
+        GetOrCreateAndAddSystem<GridMovementSystem>();
 
-        //GetOrCreateAndAddSystem<UpdateGridSystem>();
+        GetOrCreateAndAddSystem<UpdateGridSystem>();
 
         GetOrCreateAndAddSystem<MouseHoverSystem>();
         #region ViewSystems

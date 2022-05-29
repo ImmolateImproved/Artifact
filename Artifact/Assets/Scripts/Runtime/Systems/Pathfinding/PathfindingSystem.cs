@@ -13,15 +13,15 @@ public partial class PathfindingSystem : SubSystem
         var pathfinder = new AStarPathfinding(grid);
 
         Entities.WithAll<Moving>()
-          .ForEach((ref DestinationNode destinationNode, ref IndexInGrid indexInGrid, ref WaypointsMovement waypointsMovement, ref DynamicBuffer<UnitPath> path,
-                    ref MoveDirection moveDirection, ref PathfindingTarget pathfindingTarget, in InDistance inDistance) =>
+          .ForEach((ref DestinationNode destinationNode, ref IndexInGrid indexInGrid, ref WaypointsMovement waypointsMovement,
+          ref DynamicBuffer<UnitPath> path, ref PathfindingTarget pathfindingTarget, in InDistance inDistance) =>
                    {
                        if (!inDistance.value)
                            return;
 
                        if (pathfindingTarget.pathNeeded)
                        {
-                           pathfinder.FindPath(indexInGrid.value, pathfindingTarget.node, path.Reinterpret<int2>());
+                           pathfinder.FindPath(indexInGrid.current, pathfindingTarget.node, path.Reinterpret<int2>());
                            waypointsMovement.currentWaypointIndex = 0;
 
                            pathfindingTarget.pathNeeded = false;
