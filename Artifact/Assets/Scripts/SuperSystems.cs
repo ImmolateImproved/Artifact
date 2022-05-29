@@ -8,27 +8,8 @@ public class GameplayRootSuperSystem : RootSuperSystem
 {
     protected override void CreateSystems()
     {
-        GetOrCreateAndAddSystem<NonGridSuperSystem>();
-        //GetOrCreateAndAddSystem<PlayerInputSuperSystem>();
-        //GetOrCreateAndAddSystem<GridMovementPerFrameSuperSystem>();
-    }
-}
-
-public class NonGridSuperSystem : SuperSystem
-{
-    protected override void CreateSystems()
-    {
-        GetOrCreateAndAddSystem<UnitSpawnerSystem>();
-
-        GetOrCreateAndAddSystem<MovementSystem>();
-
-        GetOrCreateAndAddSystem<FindNeighborObjectsSystem>();
-        GetOrCreateAndAddSystem<FindNeighborUnitsSystem>();
-        //GetOrCreateAndAddSystem<UnityPhysicsFindNeighborUnitsSystem>();
-
-        GetOrCreateAndAddSystem<ResourceSeekerSystem>();
-        GetOrCreateAndAddSystem<AINotifierSystem>();
-        GetOrCreateAndAddSystem<ListenerSystem>();
+        GetOrCreateAndAddSystem<PlayerInputSuperSystem>();
+        GetOrCreateAndAddSystem<GridMovementPerFrameSuperSystem>();
     }
 }
 
@@ -54,18 +35,13 @@ public class GridMovementPerFrameSuperSystem : SuperSystem
     {
         //Initialization
         GetOrCreateAndAddSystem<GridInitializationSystem>();
-        GetOrCreateAndAddSystem<GridRuntime.UnitInitializationSystem>();
+        GetOrCreateAndAddSystem<UnitInitializationSystem>();
         //
 
         GetOrCreateAndAddSystem<MouseHoverSystem>();
         GetOrCreateAndAddSystem<MouseHoverReactiveSystem>();
 
         //
-        GetOrCreateAndAddSystem<NeighborsFinderSystem>();
-        GetOrCreateAndAddSystem<GridAINotifierSystem>();
-        GetOrCreateAndAddSystem<GridAIListenerSystem>();
-
-        GetOrCreateAndAddSystem<SelectDestinationSystem>();
         GetOrCreateAndAddSystem<PathfindingSystem>();
 
         GetOrCreateAndAddSystem<GridMovementSystem>();
