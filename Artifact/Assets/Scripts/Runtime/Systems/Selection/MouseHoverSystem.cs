@@ -7,7 +7,7 @@ public partial class MouseHoverSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
+        var tileGridData = sceneBlackboardEntity.GetCollectionComponent<TileGridData>();
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         Entities.ForEach((Entity e, in GridConfig gridConfig) =>
@@ -18,7 +18,7 @@ public partial class MouseHoverSystem : SubSystem
             {
                 var point = ray.GetPoint(rayDistance);
                 var node = gridConfig.PositionToNode(point);
-                var tile = grid.GetTile(node);
+                var tile = tileGridData.GetTile(node);
 
                 var hoverTile = GetComponent<HoverTile>(e);//HoverTile не в ForEach, чтобы правильно работал ChangeFilter 
 

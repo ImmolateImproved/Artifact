@@ -1,16 +1,23 @@
-﻿using Latios;
-using System;
-using Unity.Collections;
-using Unity.Entities;
-using Unity.Jobs;
+﻿using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
+public static class GridUtils
+{
+    public static int Distance(int2 nodeA, int2 nodeB)
+    {
+        var result = (math.abs(nodeA.x - nodeB.x) + math.abs(nodeA.x + nodeA.y - nodeB.x - nodeB.y) + math.abs(nodeA.y - nodeB.y)) / 2;
+
+        return result;
+    }
+}
+
 public struct GridConfig : IComponentData
 {
-    public int gridRadius;
-    public float tileSlotRadius;
-    public float tileSize;
+    public int GridRadius { get; private set; }
+    public float TileSlotRadius { get; private set; }
+    public float TileSize { get; private set; }
+    public int NodesCount { get; private set; }
 
     public static readonly float2x2 NodeToPositionMatrix = new float2x2
     {
@@ -20,9 +27,18 @@ public struct GridConfig : IComponentData
 
     public static readonly float2x2 PositionToNodeMatrix = math.inverse(NodeToPositionMatrix);
 
+    public GridConfig(int gridRadius, float tileSize, float tileSlotRadius)
+    {
+        NodesCount = HexTileNeighbors.CalculateTilesCount(gridRadius);
+
+        GridRadius = gridRadius;
+        TileSlotRadius = tileSlotRadius;
+        TileSize = tileSize;
+    }
+
     public int2 PositionToNode(float3 position)
     {
-        return PositionToNode(position, tileSlotRadius);
+        return PositionToNode(position, TileSlotRadius);
     }
 
     public static int2 PositionToNode(float3 position, float tileSlotRadius)
@@ -34,7 +50,7 @@ public struct GridConfig : IComponentData
 
     public float3 NodeToPosition(int2 node)
     {
-        return NodeToPosition(node, tileSlotRadius);
+        return NodeToPosition(node, TileSlotRadius);
     }
 
     public static float3 NodeToPosition(int2 node, float tileSlotRadius)

@@ -124,7 +124,7 @@ public partial class PathfindingSystem : SubSystem
                     costSoFar[neighborIndex] = newCost;
                     pathTrack[neighborIndex] = currentNode;
 
-                    var expectedCost = newCost + Grid.Distance(neighborIndex, end);
+                    var expectedCost = newCost + GridUtils.Distance(neighborIndex, end);
 
                     openSet.Push(new MinHeapNode(neighborIndex, expectedCost));
                 }

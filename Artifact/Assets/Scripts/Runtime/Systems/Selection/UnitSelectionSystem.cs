@@ -27,10 +27,7 @@ public partial class UnitSelectionSystem : SubSystem
             {
                 var grid = latiosWorld.sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
-                var objectsIterator = grid.GetGridObjects(gridPosition.current);
-                objectsIterator.MoveNext();
-
-                var unit = objectsIterator.Current;
+                var unit = grid.GetGridObject(gridPosition.current);
 
                 sceneBlackboardEntity.SetComponentData(new SelectedUnit { value = unit });
 

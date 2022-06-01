@@ -60,7 +60,7 @@ public partial class UnitInitializationSystem : SubSystem
                     gridIndex.current = node;
                     gridIndex.previous = node;
 
-                    grid.SetGridObjects(node, entity);
+                    grid.SetGridObject(node, entity);
 
                     var position = grid.GetNodePosition(node);
                     position.y = translation.Value.y;

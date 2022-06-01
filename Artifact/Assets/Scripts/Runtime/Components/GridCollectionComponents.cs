@@ -14,19 +14,17 @@ public struct Grid : ICollectionComponent
 
     private NativeMultiHashMap<int2, Entity> objects;
 
-    private NativeHashMap<int2, Entity> nodeToTile;
-
     public readonly NativeArray<int2> neighbors;
 
     public int NodeCount { get; private set; }
 
-    public Grid(GridConfig gridConfig)
+    public Grid(int nodeCount)
     {
-        NodeCount = HexTileNeighbors.CalculateTilesCount(gridConfig.gridRadius);
+        NodeCount = nodeCount;
 
         nodePositions = new NativeHashMap<int2, float2>(NodeCount, Allocator.Persistent);
         objects = new NativeMultiHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
-        nodeToTile = new NativeHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
+
 
         neighbors = new NativeArray<int2>(HexTileNeighbors.Neighbors, Allocator.Persistent);
     }
@@ -37,8 +35,7 @@ public struct Grid : ICollectionComponent
         {
             [0] = objects.Dispose(inputDeps),
             [1] = nodePositions.Dispose(inputDeps),
-            [2] = nodeToTile.Dispose(inputDeps),
-            [3] = neighbors.Dispose(inputDeps)
+            [2] = neighbors.Dispose(inputDeps)
         };
 
         return JobHandle.CombineDependencies(disposeDependencies);
@@ -74,17 +71,7 @@ public struct Grid : ICollectionComponent
         return nextNode;
     }
 
-    public void InitTile(int2 nodeIndex, Entity tile)
-    {
-        nodeToTile.Add(nodeIndex, tile);
-    }
-
-    public Entity GetTile(int2 nodeIndex)
-    {
-        return nodeToTile.TryGetValue(nodeIndex, out var tile) ? tile : Entity.Null;
-    }
-
-    public void SetGridObjects(int2 nodeIndex, Entity gridObject)
+    public void SetGridObject(int2 nodeIndex, Entity gridObject)
     {
         if (CompareObjects(nodeIndex, gridObject))
             return;
@@ -92,31 +79,24 @@ public struct Grid : ICollectionComponent
         objects.Add(nodeIndex, gridObject);
     }
 
-    public NativeMultiHashMap<int2, Entity>.Enumerator GetGridObjects(int2 nodeIndex)
+    public Entity GetGridObject(int2 nodeIndex)
     {
+        var gridObject = Entity.Null;
+
         var iterator = objects.GetValuesForKey(nodeIndex);
 
-        return iterator;
+        if (HasGridOject(nodeIndex))
+        {
+            iterator.MoveNext();
+            gridObject = iterator.Current;
+        }
+
+        return gridObject;
     }
 
     public void RemoveGridObject(int2 nodeIndex, Entity gridObject)
     {
         objects.Remove(nodeIndex, gridObject);
-    }
-
-    public bool CompareObjects(int2 objectANode, Entity ojbectB)
-    {
-        var objectsOnTile = GetGridObjects(objectANode);
-
-        foreach (var item in objectsOnTile)
-        {
-            var objectsAreSame = item == ojbectB;
-
-            if (objectsAreSame)
-                return true;
-        }
-
-        return false;
     }
 
     public bool HasGridOject(int2 nodeIndex)
@@ -134,13 +114,6 @@ public struct Grid : ICollectionComponent
     public bool IsWalkable(int2 nodeIndex)
     {
         return HasNode(nodeIndex) && !HasGridOject(nodeIndex);
-    }
-
-    public static int Distance(int2 nodeA, int2 nodeB)
-    {
-        var result = (math.abs(nodeA.x - nodeB.x) + math.abs(nodeA.x + nodeA.y - nodeB.x - nodeB.y) + math.abs(nodeA.y - nodeB.y)) / 2;
-
-        return result;
     }
 
     public void FindGridObjects(int2 start, int findRange, NativeList<int2> gridObjectsInRange)
@@ -177,5 +150,47 @@ public struct Grid : ICollectionComponent
 
         visited.Dispose();
         queue.Dispose();
+    }
+
+    private bool CompareObjects(int2 objectANode, Entity ojbectB)
+    {
+        var objectsOnTile = objects.GetValuesForKey(objectANode);
+
+        foreach (var item in objectsOnTile)
+        {
+            var objectsAreSame = item == ojbectB;
+
+            if (objectsAreSame)
+                return true;
+        }
+
+        return false;
+    }
+}
+
+public struct TileGridData : ICollectionComponent
+{
+    private NativeHashMap<int2, Entity> nodeToTile;
+
+    public TileGridData(int nodeCount)
+    {
+        nodeToTile = new NativeHashMap<int2, Entity>(nodeCount, Allocator.Persistent);
+    }
+
+    public Type AssociatedComponentType => typeof(GridTag);
+
+    public JobHandle Dispose(JobHandle inputDeps)
+    {
+        return nodeToTile.Dispose(inputDeps);
+    }
+
+    public void InitTile(int2 nodeIndex, Entity tile)
+    {
+        nodeToTile.Add(nodeIndex, tile);
+    }
+
+    public Entity GetTile(int2 nodeIndex)
+    {
+        return nodeToTile.TryGetValue(nodeIndex, out var tile) ? tile : Entity.Null;
     }
 }

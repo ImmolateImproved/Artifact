@@ -29,18 +29,12 @@ public class GridAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        dstManager.AddComponentData(entity, new GridConfig
-        {
-            gridRadius = gridRadius,
-            tileSlotRadius = TileSlotRadius,
-            tileSize = tileSize
-        });
+        dstManager.AddComponentData(entity, new GridConfig(gridRadius, tileSize, TileSlotRadius));
     }
 
     public void GenerateGrid()
     {
         GenerateCircleGrid();
-
         SpawnTileText();
     }
 

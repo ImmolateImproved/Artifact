@@ -14,7 +14,7 @@ public partial class UpdateGridSystem : SubSystem
                 if (!inDistance.value) return;
 
                 grid.RemoveGridObject(indexInGrid.previous, e);
-                grid.SetGridObjects(indexInGrid.current, e);
+                grid.SetGridObject(indexInGrid.current, e);
 
             }).Run();
     }

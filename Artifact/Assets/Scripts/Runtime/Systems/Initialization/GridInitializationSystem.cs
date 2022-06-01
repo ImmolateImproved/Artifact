@@ -21,10 +21,10 @@ public struct GridSpawnerJob
 
         foreach (var node in nodes)
         {
-            var position = GridConfig.NodeToPosition(node, config.tileSlotRadius);
+            var position = GridConfig.NodeToPosition(node, config.TileSlotRadius);
             position.y = -1;
 
-            var tileSize = config.tileSize;
+            var tileSize = config.TileSize;
 
             var translation = new Translation { Value = position };
             var scale = new NonUniformScale { Value = new Vector3(tileSize, 1, tileSize) };
@@ -43,7 +43,7 @@ public struct GridSpawnerJob
     {
         var neighbors = HexTileNeighbors.Neighbors;
 
-        var tileInGridRadius = HexTileNeighbors.CalculateTilesCount(config.gridRadius);
+        var tileInGridRadius = HexTileNeighbors.CalculateTilesCount(config.GridRadius);
 
         var queue = new NativeQueue<int2>(Allocator.Temp);
         var visited = new NativeHashSet<int2>(tileInGridRadius, Allocator.Temp);
@@ -77,7 +77,9 @@ public partial class GridInitializationSystem : SubSystem
 {
     public override bool ShouldUpdateSystem()
     {
-        return !sceneBlackboardEntity.HasComponent<GridInitializedTag>();
+        var shouldUpdate = sceneBlackboardEntity.HasComponent<GridConfig>() && !sceneBlackboardEntity.HasComponent<GridInitializedTag>();
+
+        return shouldUpdate;
     }
 
     protected override void OnUpdate()
@@ -97,9 +99,12 @@ public partial class GridInitializationSystem : SubSystem
         #region Collection Components Initialization
 
         //Grid Collection Component
-        var grid = new Grid(gridConfig);
+
+        var grid = new Grid(gridConfig.NodesCount);
         sceneBlackboardEntity.AddCollectionComponent(grid);
 
+        var tileGridData = new TileGridData(gridConfig.NodesCount);
+        sceneBlackboardEntity.AddCollectionComponent(tileGridData);
         #endregion
 
         var initialized = false;
@@ -111,7 +116,7 @@ public partial class GridInitializationSystem : SubSystem
                  var nodePosition = new float2(translation.Value.x, translation.Value.z);
 
                  grid.SetNodePosition(indexInGrid.current, nodePosition);
-                 grid.InitTile(indexInGrid.current, entity);
+                 tileGridData.InitTile(indexInGrid.current, entity);
 
                  initialized = true;
 
