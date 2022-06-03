@@ -10,6 +10,7 @@ public struct SelectedUnit : IComponentData
 public struct UnitSelectionPointer : IComponentData
 {
     public Entity value;
+    public float yPosition;
 }
 
 public struct HoverTile : IComponentData

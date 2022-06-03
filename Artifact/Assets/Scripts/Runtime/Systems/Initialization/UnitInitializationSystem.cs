@@ -1,10 +1,7 @@
 using Latios;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 public partial class UnitInitializationSystem : SubSystem
 {
@@ -24,41 +21,31 @@ public partial class UnitInitializationSystem : SubSystem
         var gridConfig = sceneBlackboardEntity.GetComponentData<GridConfig>();
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
 
-        var spawnECB = latiosWorld.syncPoint.CreateInstantiateCommandBuffer<Translation>();
+        var settings = sceneBlackboardEntity.GetComponentData<Settings>();
 
-        Entities.ForEach((Entity e, ref AIUnitSpawner spawner) =>
+        Entities.ForEach((in UnitSelectionPointer unitSelectionPointer) =>
         {
-            var gridEnumerator = grid.GetAllNodePositions();
+            var selectionPointerPosition = EntityManager.GetComponentData<Translation>(unitSelectionPointer.value);
+            selectionPointerPosition.Value.y = -0.5f;
 
-            var count = math.min(spawner.count, grid.NodeCount);
-            spawner.count = 0;
+            EntityManager.SetEnabled(unitSelectionPointer.value, false);
 
-            while (gridEnumerator.MoveNext())
-            {
-                if (count-- <= 0)
-                    break;
+        }).WithStructuralChanges().Run();
 
-                if (!grid.IsWalkable(gridEnumerator.Current.Key))
-                    continue;
-
-                var nodePos = gridEnumerator.Current.Value;
-
-                var position = new float3(nodePos.x, 0.75f, nodePos.y);
-
-                spawnECB.Add(spawner.prefab, new Translation { Value = position });
-            }
+        Entities.WithAll<Sun>().ForEach((ref IndexInGrid indexInGrid, in Translation translation) =>
+        {
+            indexInGrid.current = gridConfig.PositionToNode(translation.Value);
 
         }).Run();
 
-        Entities.WithNone<UnitInitialized>()
-            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex) =>
+        Entities.WithAll<UnitTag>().WithNone<UnitInitialized>()
+            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex, ref Energy energy) =>
             {
                 var node = gridConfig.PositionToNode(translation.Value);
 
-                if (grid.HasNode(node))
+                if (grid.IsWalkable(node))
                 {
                     gridIndex.current = node;
-                    gridIndex.previous = node;
 
                     grid.SetGridObject(node, entity);
 
@@ -66,17 +53,14 @@ public partial class UnitInitializationSystem : SubSystem
                     position.y = translation.Value.y;
 
                     translation.Value = position;
+
+                    energy.energy = settings.initialEnergy;
+                    energy.maxEnergy = settings.maxEnergy;
+                    energy.digestibility = settings.digestibility;
+
+                    ecb.AddComponent<UnitInitialized>(entity);
                 }
 
-                ecb.AddComponent<UnitInitialized>(entity);
-
             }).WithStoreEntityQueryInField(ref nonInitializedUnitsQuery).Run();
-
-        Entities.WithAll<UnitTag>().WithNone<UnitInitialized>()
-            .ForEach((in UnitSelectionPointer selectionPointer) =>
-            {
-                ecb.AddComponent<Disabled>(selectionPointer.value);
-
-            }).Run();
     }
 }

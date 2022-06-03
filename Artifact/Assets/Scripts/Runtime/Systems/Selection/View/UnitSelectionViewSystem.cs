@@ -1,5 +1,8 @@
 using Unity.Entities;
 using Latios;
+using UnityEngine;
+using Unity.Transforms;
+using Unity.Mathematics;
 
 public partial class UnitSelectionViewSystem : SubSystem
 {
@@ -7,17 +10,24 @@ public partial class UnitSelectionViewSystem : SubSystem
     {
         var unitColors = sceneBlackboardEntity.GetComponentData<HoverColor>();
 
-        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
-            .ForEach((in UnitSelectionPointer selectionPointer) =>
+        var selectionPointer = sceneBlackboardEntity.GetComponentData<UnitSelectionPointer>();
+
+        Entities.WithAll<SelectedInternal>().WithNone<Selected>()
+            .ForEach(() =>
             {
-                EntityManager.SetEnabled(selectionPointer.value, true);
+                EntityManager.SetEnabled(selectionPointer.value, false);
 
             }).WithStructuralChanges().Run();
 
-        Entities.WithAll<SelectedInternal>().WithNone<Selected>()
-            .ForEach((in UnitSelectionPointer selectionPointer) =>
+        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
+            .ForEach((Entity e) =>
             {
-                EntityManager.SetEnabled(selectionPointer.value, false);
+                var selectedUnitPosition = float3.zero;
+                selectedUnitPosition.y = selectionPointer.yPosition;
+
+                EntityManager.SetComponentData(selectionPointer.value, new Parent { Value = e });
+                EntityManager.SetComponentData(selectionPointer.value, new Translation { Value = selectedUnitPosition });
+                EntityManager.SetEnabled(selectionPointer.value, true);
 
             }).WithStructuralChanges().Run();
     }

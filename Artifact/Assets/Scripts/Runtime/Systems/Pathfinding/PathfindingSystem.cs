@@ -14,11 +14,8 @@ public partial class PathfindingSystem : SubSystem
 
         Entities.WithAll<Moving>()
           .ForEach((ref DestinationNode destinationNode, ref IndexInGrid indexInGrid, ref WaypointsMovement waypointsMovement,
-          ref DynamicBuffer<UnitPath> path, ref PathfindingTarget pathfindingTarget, in InDistance inDistance) =>
+          ref DynamicBuffer<UnitPath> path, ref PathfindingTarget pathfindingTarget) =>
                    {
-                       if (!inDistance.value)
-                           return;
-
                        if (pathfindingTarget.pathNeeded)
                        {
                            pathfinder.FindPath(indexInGrid.current, pathfindingTarget.node, path.Reinterpret<int2>());

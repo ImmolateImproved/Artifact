@@ -2,6 +2,7 @@ using Latios;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Rendering;
+using Unity.Transforms;
 using UnityEngine;
 
 public partial class UnitSelectionSystem : SubSystem
@@ -35,7 +36,7 @@ public partial class UnitSelectionSystem : SubSystem
 
                 if (EntityManager.HasComponent<Selectable>(unit))
                 {
-                    EntityManager.AddComponentData(unit, new Selected());
+                    EntityManager.AddComponent<Selected>(unit);
                 }
 
             }).WithStructuralChanges().Run();

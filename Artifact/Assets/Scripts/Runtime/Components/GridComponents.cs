@@ -95,10 +95,14 @@ public struct GridConfig : IComponentData
     }
 }
 
+public struct GridSpawner : IComponentData
+{
+    public Entity prefab;
+}
+
 public struct IndexInGrid : IComponentData
 {
     public int2 current;
-    public int2 previous;
 }
 
 public struct GridInitializedTag : IComponentData

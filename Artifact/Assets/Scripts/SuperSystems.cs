@@ -9,7 +9,8 @@ public class GameplayRootSuperSystem : RootSuperSystem
     protected override void CreateSystems()
     {
         GetOrCreateAndAddSystem<PlayerInputSuperSystem>();
-        GetOrCreateAndAddSystem<GridMovementPerFrameSuperSystem>();
+        GetOrCreateAndAddSystem<PerFrameSuperSystem>();
+        GetOrCreateAndAddSystem<SimulationTickSuperSystem>();
     }
 }
 
@@ -26,24 +27,41 @@ public class PlayerInputSuperSystem : SuperSystem
 
         GetOrCreateAndAddSystem<UnitSelectionSystem>();
         GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
+        GetOrCreateAndAddSystem<RangeViewSystem>();
     }
 }
 
-public class GridMovementPerFrameSuperSystem : SuperSystem
+public class SimulationTickSuperSystem : SuperSystem
+{
+    public override bool ShouldUpdateSystem()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+
+    protected override void CreateSystems()
+    {
+        GetOrCreateAndAddSystem<AttackSystem>();
+
+        //Movement
+        GetOrCreateAndAddSystem<SelectDestinationSystem>();
+        GetOrCreateAndAddSystem<GridMovementSystem>();
+        //
+
+        GetOrCreateAndAddSystem<EnergySystem>();
+        GetOrCreateAndAddSystem<ReproductionSystem>();
+
+        GetOrCreateAndAddSystem<RemoveDeadSystem>();
+    }
+}
+
+public class PerFrameSuperSystem : SuperSystem
 {
     protected override void CreateSystems()
     {
         //Initialization
         GetOrCreateAndAddSystem<GridInitializationSystem>();
+        GetOrCreateAndAddSystem<UnitSpawnerSystem>();
         GetOrCreateAndAddSystem<UnitInitializationSystem>();
-
-        //
-        //GetOrCreateAndAddSystem<PathfindingSystem>();
-
-        GetOrCreateAndAddSystem<SelectDestinationSystem>();
-        GetOrCreateAndAddSystem<GridMovementSystem>();
-
-        GetOrCreateAndAddSystem<UpdateGridSystem>();
 
         GetOrCreateAndAddSystem<MouseHoverSystem>();
         #region ViewSystems

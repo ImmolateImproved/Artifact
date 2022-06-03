@@ -12,7 +12,7 @@ public struct Grid : ICollectionComponent
 {
     private NativeHashMap<int2, float2> nodePositions;
 
-    private NativeMultiHashMap<int2, Entity> objects;
+    private NativeHashMap<int2, Entity> objects;
 
     public readonly NativeArray<int2> neighbors;
 
@@ -23,7 +23,7 @@ public struct Grid : ICollectionComponent
         NodeCount = nodeCount;
 
         nodePositions = new NativeHashMap<int2, float2>(NodeCount, Allocator.Persistent);
-        objects = new NativeMultiHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
+        objects = new NativeHashMap<int2, Entity>(NodeCount, Allocator.Persistent);
 
 
         neighbors = new NativeArray<int2>(HexTileNeighbors.Neighbors, Allocator.Persistent);
@@ -62,7 +62,7 @@ public struct Grid : ICollectionComponent
         nodePositions[index] = position;
     }
 
-    public int2 GetNeighborNodeFromDirection(int2 currentNode, AxialDirections direction)
+    public int2 GetNeighborNodeFromDirection(int2 currentNode, HexDirections direction)
     {
         var dir = neighbors[(int)direction];
 
@@ -73,37 +73,25 @@ public struct Grid : ICollectionComponent
 
     public void SetGridObject(int2 nodeIndex, Entity gridObject)
     {
-        if (CompareObjects(nodeIndex, gridObject))
-            return;
-
         objects.Add(nodeIndex, gridObject);
     }
 
     public Entity GetGridObject(int2 nodeIndex)
     {
-        var gridObject = Entity.Null;
-
-        var iterator = objects.GetValuesForKey(nodeIndex);
-
-        if (HasGridOject(nodeIndex))
-        {
-            iterator.MoveNext();
-            gridObject = iterator.Current;
-        }
+        objects.TryGetValue(nodeIndex, out var gridObject);
 
         return gridObject;
     }
 
-    public void RemoveGridObject(int2 nodeIndex, Entity gridObject)
+    public void RemoveGridObject(int2 nodeIndex)
     {
-        objects.Remove(nodeIndex, gridObject);
+        objects.Remove(nodeIndex);
     }
 
     public bool HasGridOject(int2 nodeIndex)
     {
-        var count = objects.CountValuesForKey(nodeIndex);
-
-        return count > 0;
+        var hasObject = objects.ContainsKey(nodeIndex);
+        return hasObject;
     }
 
     public bool HasNode(int2 nodeIndex)
@@ -116,8 +104,10 @@ public struct Grid : ICollectionComponent
         return HasNode(nodeIndex) && !HasGridOject(nodeIndex);
     }
 
-    public void FindGridObjects(int2 start, int findRange, NativeList<int2> gridObjectsInRange)
+    public NativeList<int2> GetNeighborsInRange(int2 start, int findRange)
     {
+        var neighborsInRange = new NativeList<int2>(6, Allocator.Temp);
+
         var nodesInRange = HexTileNeighbors.CalculateTilesCount(findRange);
 
         var queue = new NativeQueue<int2>(Allocator.Temp);
@@ -126,7 +116,7 @@ public struct Grid : ICollectionComponent
         queue.Enqueue(start);
         visited.Add(start);
 
-        while (visited.Count() <= nodesInRange)
+        while (visited.Count() < nodesInRange)
         {
             var currentNode = queue.Dequeue();
 
@@ -141,30 +131,31 @@ public struct Grid : ICollectionComponent
 
                 queue.Enqueue(neighborNode);
 
-                if (!HasGridOject(neighborNode))
-                    continue;
-
-                gridObjectsInRange.Add(neighborNode);
+                neighborsInRange.Add(neighborNode);
             }
         }
 
         visited.Dispose();
         queue.Dispose();
+
+        return neighborsInRange;
     }
 
-    private bool CompareObjects(int2 objectANode, Entity ojbectB)
+    public NativeList<int2> FindGridObjects(int2 start, int findRange)
     {
-        var objectsOnTile = objects.GetValuesForKey(objectANode);
+        var neighborsInRange = GetNeighborsInRange(start, findRange);
 
-        foreach (var item in objectsOnTile)
+        var gridObjectsInRange = new NativeList<int2>(6, Allocator.Temp);
+
+        foreach (var node in neighborsInRange)
         {
-            var objectsAreSame = item == ojbectB;
-
-            if (objectsAreSame)
-                return true;
+            if (HasGridOject(node))
+            {
+                gridObjectsInRange.Add(node);
+            }
         }
 
-        return false;
+        return gridObjectsInRange;
     }
 }
 

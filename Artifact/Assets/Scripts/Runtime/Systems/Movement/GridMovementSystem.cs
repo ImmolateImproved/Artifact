@@ -8,27 +8,18 @@ public partial class GridMovementSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        var dt = Time.DeltaTime;
-
         Entities.WithAll<Moving>()
-            .ForEach((ref Translation translation, ref IndexInGrid indexInGrid, ref InDistance inDistance, in DestinationNode destinationNode, in MoveSpeed moveSpeed) =>
+            .ForEach((ref Translation translation, ref IndexInGrid indexInGrid, in DestinationNode destinationNode, in AliveStatus aliveStatus) =>
                     {
-                        if (inDistance.value)
-                        {
-                            indexInGrid.previous = indexInGrid.current;
-                            inDistance.value = false;
-                        }
+                        if (!aliveStatus.isAlive)
+                            return;
+
+                        indexInGrid.current = destinationNode.node;
 
                         var position = destinationNode.position;
                         position.y = translation.Value.y;
 
-                        translation.Value = MovementUtils.MoveTowards(translation.Value, position, moveSpeed.value * dt, out var distance);
-
-                        if (distance < 0.01f)
-                        {
-                            indexInGrid.current = destinationNode.node;
-                            inDistance.value = true;
-                        }
+                        translation.Value = position;
 
                     }).Run();
     }

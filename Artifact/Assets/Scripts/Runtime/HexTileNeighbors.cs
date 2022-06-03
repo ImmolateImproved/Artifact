@@ -3,16 +3,16 @@ using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
-public enum AxialDirections
+public enum HexDirections
 {
     Right, BottomRight, BottomLeft, Left, TopLeft, TopRight
 }
 
-public static class AxialDirectionsExtentions
+public static class HexDirectionsExtentions
 {
     public const int DIRECTIONS_COUNT = 6;
 
-    public static AxialDirections GetNextDirection(this AxialDirections direction, bool prevDirection = false)
+    public static HexDirections GetNextDirection(this HexDirections direction, bool prevDirection = false)
     {
         var intDirection = (int)direction;
 
@@ -22,21 +22,21 @@ public static class AxialDirectionsExtentions
                         ? intDirection % DIRECTIONS_COUNT
                         : intDirection + DIRECTIONS_COUNT;
 
-        return (AxialDirections)intDirection;
+        return (HexDirections)intDirection;
     }
 
-    public static AxialDirections GetReverseDirection(this AxialDirections direction)
+    public static HexDirections GetReverseDirection(this HexDirections direction)
     {
         var newDirection = ((int)direction + DIRECTIONS_COUNT / 2) % DIRECTIONS_COUNT;
 
-        return (AxialDirections)newDirection;
+        return (HexDirections)newDirection;
     }
 
-    public static AxialDirections GetRandomDirection(Rng.RngSequence rngSequence)
+    public static HexDirections GetRandomDirection(ref Rng.RngSequence rngSequence)
     {
         var randomIndex = rngSequence.NextInt(0, DIRECTIONS_COUNT);
 
-        return (AxialDirections)randomIndex;
+        return (HexDirections)randomIndex;
     }
 }
 
