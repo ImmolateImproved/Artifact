@@ -12,10 +12,8 @@ GameObject:
   - component: {fileID: 5389921635451283293}
   - component: {fileID: 4841872760157003831}
   - component: {fileID: 1730644358682313109}
-  - component: {fileID: 5507556856783345086}
   - component: {fileID: 1217628883027382410}
   - component: {fileID: 3597532906746514923}
-  - component: {fileID: 6306286299925958141}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -107,19 +105,6 @@ MonoBehaviour:
     type: 0
     value: {x: 0.23866946, y: 0.8773585, z: 0.21933962, w: 1}
     instanceOverride: 0
---- !u!114 &5507556856783345086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943935801606489530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881f0b7a8cb3b1a4ba1002228eb6f98f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialDirection: 0
 --- !u!114 &1217628883027382410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,8 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7559b3d618dd6db4aaeedba036d6e0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitType: 0
   selectable: 1
-  selectionPointer: {fileID: 5459842120788319182, guid: c8aacaab8833c4145890901d64c6e1ca, type: 3}
 --- !u!114 &3597532906746514923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,15 +132,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 55
---- !u!114 &6306286299925958141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943935801606489530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcde954449644324c975b4d76913b90e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -11,7 +11,7 @@ public partial class AttackSystem : SubSystem
 
         var energyCDFE = GetComponentDataFromEntity<Energy>();
 
-        Entities.WithAll<UnitTag>().ForEach((Entity e, ref IndexInGrid indexInGrid) =>
+        Entities.WithAll<UnitTag>().ForEach((Entity e, ref IndexInGrid indexInGrid, in Destination destination) =>
         {
             var myEnergy = energyCDFE[e];
 
@@ -20,24 +20,18 @@ public partial class AttackSystem : SubSystem
                 return;
             }
 
-            var neighbors = grid.FindGridObjects(indexInGrid.current, 1);
-
-            if (neighbors.Length == 0)
-                return;
-
-            var enemyNode = neighbors[0];
-
-            if (enemyNode.Equals(indexInGrid.current))
-                return;
+            var enemyNode = destination.node;
 
             var enemy = grid.GetGridObject(enemyNode);
 
-            var enemyEnergy = energyCDFE[enemy];
-
-            if (GetComponent<UnitType>(enemy).value == UnitTypes.Coprse)
+            if (enemy == Entity.Null)
                 return;
 
-            if (!GetComponent<AliveStatus>(enemy).isAlive)
+            var enemyEnergy = energyCDFE[enemy];
+
+            var enemyIsValid = GetComponent<AliveStatus>(enemy).isAlive && GetComponent<UnitType>(enemy).value != UnitTypes.Coprse;
+
+            if (!enemyIsValid)
                 return;
 
             if (myEnergy.energy >= enemyEnergy.energy)
@@ -56,6 +50,6 @@ public partial class AttackSystem : SubSystem
             energyCDFE[e] = myEnergy;
             energyCDFE[enemy] = enemyEnergy;
 
-        }).WithoutBurst().Run();
+        }).Run();
     }
 }

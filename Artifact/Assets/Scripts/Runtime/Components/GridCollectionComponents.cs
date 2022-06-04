@@ -104,7 +104,27 @@ public struct Grid : ICollectionComponent
         return HasNode(nodeIndex) && !HasGridOject(nodeIndex);
     }
 
-    public NativeList<int2> GetNeighborsInRange(int2 start, int findRange)
+    public NativeList<int2> GetNeighborNodes(int2 startNode)
+    {
+        var neighbors = new NativeList<int2>(6, Allocator.Temp);
+
+        var direction = HexDirections.BottomLeft;
+
+        for (int i = 0; i < HexDirectionsExtentions.DIRECTIONS_COUNT; i++)
+        {
+            var nextNode = GetNeighborNodeFromDirection(startNode, direction);
+            direction = direction.GetNextDirection();
+
+            if (HasNode(nextNode))
+            {
+                neighbors.Add(nextNode);
+            }
+        }
+
+        return neighbors;
+    }
+
+    public NativeList<int2> GetNeighborNodesInRange(int2 startNode, int findRange)
     {
         var neighborsInRange = new NativeList<int2>(6, Allocator.Temp);
 
@@ -113,8 +133,8 @@ public struct Grid : ICollectionComponent
         var queue = new NativeQueue<int2>(Allocator.Temp);
         var visited = new NativeHashSet<int2>(nodesInRange, Allocator.Temp);
 
-        queue.Enqueue(start);
-        visited.Add(start);
+        queue.Enqueue(startNode);
+        visited.Add(startNode);
 
         while (visited.Count() < nodesInRange)
         {
@@ -141,9 +161,9 @@ public struct Grid : ICollectionComponent
         return neighborsInRange;
     }
 
-    public NativeList<int2> FindGridObjects(int2 start, int findRange)
+    public NativeList<int2> FindGridObjects(int2 startNode, int findRange)
     {
-        var neighborsInRange = GetNeighborsInRange(start, findRange);
+        var neighborsInRange = GetNeighborNodesInRange(startNode, findRange);
 
         var gridObjectsInRange = new NativeList<int2>(6, Allocator.Temp);
 

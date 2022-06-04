@@ -5,6 +5,11 @@ using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
+public struct SelectedReactive : ISystemStateComponentData
+{
+
+}
+
 public partial class UnitSelectionSystem : SubSystem
 {
     private EntityQuery selectedQuery;
@@ -40,5 +45,23 @@ public partial class UnitSelectionSystem : SubSystem
                 }
 
             }).WithStructuralChanges().Run();
+
+
+        //reactive
+        var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
+
+        Entities.WithAll<SelectedReactive>().WithNone<Selected>()
+            .ForEach((Entity e) =>
+            {
+                ecb.RemoveComponent<SelectedReactive>(e);
+
+            }).Run();
+
+        Entities.WithAll<Selected>().WithNone<SelectedReactive>()
+            .ForEach((Entity e) =>
+            {
+                ecb.AddComponent<SelectedReactive>(e);
+
+            }).Run();
     }
 }

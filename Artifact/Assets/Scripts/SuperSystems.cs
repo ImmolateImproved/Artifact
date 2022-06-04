@@ -18,7 +18,7 @@ public class PlayerInputSuperSystem : SuperSystem
 {
     public override bool ShouldUpdateSystem()
     {
-        return Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1);
+        return Input.GetMouseButtonDown(0);
     }
 
     protected override void CreateSystems()
@@ -26,29 +26,41 @@ public class PlayerInputSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<ClickSystem>();
 
         GetOrCreateAndAddSystem<UnitSelectionSystem>();
-        GetOrCreateAndAddSystem<UnitSelectionReactiveSystem>();
+        GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
         GetOrCreateAndAddSystem<RangeViewSystem>();
     }
 }
 
 public class SimulationTickSuperSystem : SuperSystem
 {
+    public float timer;
+
     public override bool ShouldUpdateSystem()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        var simulationRate = GetSingleton<SimulationRate>().value;//sceneBlackboardEntity.GetComponentData<SimulationRate>();
+
+        timer += Time.DeltaTime;
+
+        var doTick = timer >= 1f / simulationRate;
+
+        if (doTick)
+        {
+            timer = 0;
+        }
+
+        return doTick || Input.GetKeyDown(KeyCode.Space);
     }
 
     protected override void CreateSystems()
     {
-        GetOrCreateAndAddSystem<AttackSystem>();
-
-        //Movement
+        GetOrCreateAndAddSystem<LookAroundSystem>();
         GetOrCreateAndAddSystem<SelectDestinationSystem>();
-        GetOrCreateAndAddSystem<GridMovementSystem>();
-        //
 
-        GetOrCreateAndAddSystem<EnergySystem>();
-        GetOrCreateAndAddSystem<ReproductionSystem>();
+        GetOrCreateAndAddSystem<AttackSystem>();
+        GetOrCreateAndAddSystem<GridMovementSystem>();
+
+        //GetOrCreateAndAddSystem<EnergySystem>();
+        //GetOrCreateAndAddSystem<ReproductionSystem>();
 
         GetOrCreateAndAddSystem<RemoveDeadSystem>();
     }
@@ -64,11 +76,6 @@ public class PerFrameSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<UnitInitializationSystem>();
 
         GetOrCreateAndAddSystem<MouseHoverSystem>();
-        #region ViewSystems
-        ////View
         GetOrCreateAndAddSystem<MouseHoverViewSystem>();
-        GetOrCreateAndAddSystem<UnitSelectionViewSystem>();
-
-        #endregion
     }
 }

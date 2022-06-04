@@ -11,16 +11,18 @@ public partial class ReproductionSystem : SubSystem
 
         var ecb = latiosWorld.syncPoint.CreateInstantiateCommandBuffer<Translation, IndexInGrid, Energy>();
 
-        Entities.ForEach((Entity e, ref Energy energy, ref MoveDirection moveDirection, in IndexInGrid indexInGrid, in Translation translation) =>
+        Entities.ForEach((Entity e, ref Energy energy, in IndexInGrid indexInGrid, in Translation translation) =>
         {
             if (energy.energy < settings.energyForReproduction)
                 return;
 
+            var direction = HexDirections.BottomLeft;
+
             while (true)
             {
-                moveDirection.value = HexDirectionsExtentions.GetNextDirection(moveDirection.value);
+                direction = HexDirectionsExtentions.GetNextDirection(direction);
 
-                var nextNode = grid.GetNeighborNodeFromDirection(indexInGrid.current, moveDirection.value);
+                var nextNode = grid.GetNeighborNodeFromDirection(indexInGrid.current, direction);
 
                 if (grid.IsWalkable(nextNode))
                 {

@@ -20,7 +20,7 @@ public partial class MouseHoverSystem : SubSystem
                 var node = gridConfig.PositionToNode(point);
                 var tile = tileGridData.GetTile(node);
 
-                var hoverTile = GetComponent<HoverTile>(e);//HoverTile не в ForEach, чтобы правильно работал ChangeFilter 
+                var hoverTile = GetComponent<HoverTile>(e);//HoverTile не в ForEach, чтобы ChangeFilter сработал когда нужно
 
                 if (tile != hoverTile.current)
                 {

@@ -5,25 +5,16 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 
-public struct MoveDirection : IComponentData
+public struct Destination : IComponentData
 {
-    public HexDirections value;
-
-    public HexDirections GetNextDirection(bool prevDirection = false)
-    {
-        return value.GetNextDirection(prevDirection);
-    }
-}
-
-public struct Moving : IComponentData
-{
-
-}
-
-public struct DestinationNode : IComponentData
-{
-    public float3 position;
     public int2 node;
+    public float3 position;
+
+    public void Set(int2 node, in Grid grid)
+    {
+        this.node = node;
+        position = grid.GetNodePosition(node);
+    }
 }
 
 public struct MoveSpeed : IComponentData

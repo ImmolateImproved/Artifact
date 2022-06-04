@@ -36,7 +36,7 @@ public partial class EnergySystem : SubSystem
                 unitColor.Value = (Vector4)settings.deathColor;
                 unitType.value = UnitTypes.Coprse;
 
-                ecb.RemoveComponent<DestinationNode>(e);
+                ecb.RemoveComponent<Destination>(e);
             }
 
         }).Run();

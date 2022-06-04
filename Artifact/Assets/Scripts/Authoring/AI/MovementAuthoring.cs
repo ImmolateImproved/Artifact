@@ -7,8 +7,7 @@ public class MovementAuthoring : MonoBehaviour, IConvertGameObjectToEntity
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        dstManager.AddComponent<Moving>(entity);
-        dstManager.AddComponentData(entity, new DestinationNode());
+        dstManager.AddComponentData(entity, new Destination());
         dstManager.AddComponentData(entity, new MoveSpeed { value = moveSpeed });
     }
 }

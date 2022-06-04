@@ -12,14 +12,14 @@ public partial class UnitSelectionViewSystem : SubSystem
 
         var selectionPointer = sceneBlackboardEntity.GetComponentData<UnitSelectionPointer>();
 
-        Entities.WithAll<SelectedInternal>().WithNone<Selected>()
+        Entities.WithAll<SelectedReactive>().WithNone<Selected>()
             .ForEach(() =>
             {
                 EntityManager.SetEnabled(selectionPointer.value, false);
 
             }).WithStructuralChanges().Run();
 
-        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
+        Entities.WithAll<Selected>().WithNone<SelectedReactive>()
             .ForEach((Entity e) =>
             {
                 var selectedUnitPosition = float3.zero;

@@ -20,14 +20,14 @@ public partial class RangeViewSystem : SubSystem
 
         var spawnECB = latiosWorld.syncPoint.CreateInstantiateCommandBuffer<Translation>();
 
-        Entities.WithAll<SelectedInternal>().WithNone<Selected>()
+        Entities.WithAll<SelectedReactive>().WithNone<Selected>()
             .ForEach(() =>
             {
                 EntityManager.DestroyEntity(moveRangeTileQuery);
 
             }).WithStructuralChanges().Run();
 
-        Entities.WithAll<Selected>().WithNone<SelectedInternal>()
+        Entities.WithAll<Selected>().WithNone<SelectedReactive>()
             .ForEach((in IndexInGrid indexInGrid) =>
             {
                 EntityManager.DestroyEntity(moveRangeTileQuery);
@@ -36,7 +36,7 @@ public partial class RangeViewSystem : SubSystem
 
                 var pathPrefab = sceneBlackboardEntity.GetComponentData<RangeTilePrefabRef>().prefab;
 
-                var neighborsInRange = grid.GetNeighborsInRange(indexInGrid.current, settings.visionRange);
+                var neighborsInRange = grid.GetNeighborNodesInRange(indexInGrid.current, settings.visionRange);
 
                 for (int i = 0; i < neighborsInRange.Length; i++)
                 {

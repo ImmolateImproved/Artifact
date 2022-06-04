@@ -6,7 +6,7 @@ public partial class ClickSystem : SubSystem
     protected override void OnUpdate()
     {
         Entities.WithChangeFilter<HoverTile>()
-            .ForEach((ref Entity e, in HoverTile hoverTile) =>
+            .ForEach((in HoverTile hoverTile) =>
             {
                 var ecb = latiosWorld.syncPoint.CreateEntityCommandBuffer();
 

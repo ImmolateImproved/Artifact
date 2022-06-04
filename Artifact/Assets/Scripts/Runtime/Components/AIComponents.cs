@@ -79,3 +79,8 @@ public struct TargetData
     public int2 node;
     public GenomeData genomeData;
 }
+
+public struct NeighborNode : IBufferElementData
+{
+    public int2 value;
+}
