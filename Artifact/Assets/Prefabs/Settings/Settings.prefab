@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 7492072686085034069}
   - component: {fileID: 8538586415379982685}
   - component: {fileID: 7492072686085034067}
-  - component: {fileID: 1949885874}
-  - component: {fileID: 1598449957046149508}
   - component: {fileID: 7492072686085034065}
   m_Layer: 0
   m_Name: Settings
@@ -79,39 +77,6 @@ MonoBehaviour:
   selectionPointer: {fileID: 0}
   selectionPointerYPosition: -0.5
   hoverColor: {r: 0, g: 0.7689938, b: 0.8, a: 1}
---- !u!114 &1949885874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7492072686085034064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4c2408c85a6cd649afc652c9c55c027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialUnitEnergy: 5
-  unitsDigestibility: 1
-  maxEnergy: 25
-  visionRange: 1
-  moveEnergyPrice: 1
-  attackEnergyPrice: 1
-  energyForReproduction: 10
-  deathColor: {r: 0.6226415, g: 0.6020826, b: 0.6020826, a: 1}
---- !u!114 &1598449957046149508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7492072686085034064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7922a96a21344214a87bb0328b65c952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  simulationRate: 2
 --- !u!114 &7492072686085034065
 MonoBehaviour:
   m_ObjectHideFlags: 0

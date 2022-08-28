@@ -31,8 +31,3 @@ public struct RangeTilePrefabRef : IComponentData
 {
     public Entity prefab;
 }
-
-public struct SimulationRate : IComponentData
-{
-    public int value;
-}

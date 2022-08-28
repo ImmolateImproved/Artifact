@@ -11,8 +11,8 @@ public partial class PathfindingSystem : SubSystem
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>(true);
 
         var pathfinder = new AStarPathfinding(grid);
-
-        Entities.ForEach((ref Destination destinationNode, ref IndexInGrid indexInGrid, ref WaypointsMovement waypointsMovement,
+        
+        Entities.ForEach((ref MoveTarget destinationNode, ref IndexInGrid indexInGrid, ref WaypointsMovement waypointsMovement,
                    ref DynamicBuffer<UnitPath> path, ref PathfindingTarget pathfindingTarget) =>
                    {
                        if (pathfindingTarget.pathNeeded)

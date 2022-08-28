@@ -2,6 +2,7 @@ using Latios;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Transforms;
+using UnityEngine;
 
 public partial class UnitInitializationSystem : SubSystem
 {
@@ -21,8 +22,6 @@ public partial class UnitInitializationSystem : SubSystem
         var gridConfig = sceneBlackboardEntity.GetComponentData<GridConfig>();
         var grid = sceneBlackboardEntity.GetCollectionComponent<Grid>();
 
-        var settings = sceneBlackboardEntity.GetComponentData<Settings>();
-
         Entities.ForEach((in UnitSelectionPointer unitSelectionPointer) =>
         {
             var selectionPointerPosition = EntityManager.GetComponentData<Translation>(unitSelectionPointer.value);
@@ -32,14 +31,8 @@ public partial class UnitInitializationSystem : SubSystem
 
         }).WithStructuralChanges().Run();
 
-        Entities.WithAll<Sun>().ForEach((ref IndexInGrid indexInGrid, in Translation translation) =>
-        {
-            indexInGrid.current = gridConfig.PositionToNode(translation.Value);
-
-        }).Run();
-
         Entities.WithAll<UnitTag>().WithNone<UnitInitialized>()
-            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex, ref Energy energy) =>
+            .ForEach((Entity entity, ref Translation translation, ref IndexInGrid gridIndex) =>
             {
                 var node = gridConfig.PositionToNode(translation.Value);
 
@@ -53,10 +46,6 @@ public partial class UnitInitializationSystem : SubSystem
                     position.y = translation.Value.y;
 
                     translation.Value = position;
-
-                    energy.energy = settings.initialEnergy;
-                    energy.maxEnergy = settings.maxEnergy;
-                    energy.digestibility = settings.digestibility;
 
                     ecb.AddComponent<UnitInitialized>(entity);
                 }

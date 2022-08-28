@@ -12,7 +12,7 @@ public partial class UnitSpawnerSystem : SubSystem
 
         var spawnECB = latiosWorld.syncPoint.CreateInstantiateCommandBuffer<Translation>();
 
-        Entities.ForEach((Entity e, ref AIUnitSpawner spawner) =>
+        Entities.ForEach((Entity e, ref UnitSpawner spawner) =>
         {
             var gridEnumerator = grid.GetAllNodePositions();
 

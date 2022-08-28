@@ -10,7 +10,6 @@ public class GameplayRootSuperSystem : RootSuperSystem
     {
         GetOrCreateAndAddSystem<PlayerInputSuperSystem>();
         GetOrCreateAndAddSystem<PerFrameSuperSystem>();
-        GetOrCreateAndAddSystem<SimulationTickSuperSystem>();
     }
 }
 
@@ -31,41 +30,6 @@ public class PlayerInputSuperSystem : SuperSystem
     }
 }
 
-public class SimulationTickSuperSystem : SuperSystem
-{
-    public float timer;
-
-    public override bool ShouldUpdateSystem()
-    {
-        var simulationRate = GetSingleton<SimulationRate>().value;//sceneBlackboardEntity.GetComponentData<SimulationRate>();
-
-        timer += Time.DeltaTime;
-
-        var doTick = timer >= 1f / simulationRate;
-
-        if (doTick)
-        {
-            timer = 0;
-        }
-
-        return doTick || Input.GetKeyDown(KeyCode.Space);
-    }
-
-    protected override void CreateSystems()
-    {
-        GetOrCreateAndAddSystem<LookAroundSystem>();
-        GetOrCreateAndAddSystem<SelectDestinationSystem>();
-
-        GetOrCreateAndAddSystem<AttackSystem>();
-        GetOrCreateAndAddSystem<GridMovementSystem>();
-
-        //GetOrCreateAndAddSystem<EnergySystem>();
-        //GetOrCreateAndAddSystem<ReproductionSystem>();
-
-        GetOrCreateAndAddSystem<RemoveDeadSystem>();
-    }
-}
-
 public class PerFrameSuperSystem : SuperSystem
 {
     protected override void CreateSystems()
@@ -74,6 +38,8 @@ public class PerFrameSuperSystem : SuperSystem
         GetOrCreateAndAddSystem<GridInitializationSystem>();
         GetOrCreateAndAddSystem<UnitSpawnerSystem>();
         GetOrCreateAndAddSystem<UnitInitializationSystem>();
+
+        //GetOrCreateAndAddSystem<GridMovementSystem>();
 
         GetOrCreateAndAddSystem<MouseHoverSystem>();
         GetOrCreateAndAddSystem<MouseHoverViewSystem>();

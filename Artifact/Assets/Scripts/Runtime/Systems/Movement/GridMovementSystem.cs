@@ -8,11 +8,8 @@ public partial class GridMovementSystem : SubSystem
 {
     protected override void OnUpdate()
     {
-        Entities.ForEach((ref Translation translation, ref IndexInGrid indexInGrid, in Destination destinationNode, in AliveStatus aliveStatus) =>
+        Entities.ForEach((ref Translation translation, ref IndexInGrid indexInGrid, in MoveTarget destinationNode) =>
         {
-            if (!aliveStatus.isAlive)
-                return;
-
             indexInGrid.current = destinationNode.node;
 
             var position = destinationNode.position;

@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 public struct GridTag : IComponentData { }
@@ -150,6 +151,9 @@ public struct Grid : ICollectionComponent
                 }
 
                 queue.Enqueue(neighborNode);
+
+                if (!HasNode(neighborNode))
+                    continue;
 
                 neighborsInRange.Add(neighborNode);
             }

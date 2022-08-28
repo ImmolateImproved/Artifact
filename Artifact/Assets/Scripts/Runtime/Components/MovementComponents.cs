@@ -5,7 +5,17 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 
-public struct Destination : IComponentData
+public struct MoveSpeed : IComponentData
+{
+    public float value;
+}
+
+public struct WaypointsMovement : IComponentData
+{
+    public int currentWaypointIndex;
+}
+
+public struct MoveTarget : IComponentData
 {
     public int2 node;
     public float3 position;
@@ -17,12 +27,7 @@ public struct Destination : IComponentData
     }
 }
 
-public struct MoveSpeed : IComponentData
+public struct MovementRange : IComponentData
 {
-    public float value;
-}
-
-public struct WaypointsMovement : IComponentData
-{
-    public int currentWaypointIndex;
+    public int value;
 }
